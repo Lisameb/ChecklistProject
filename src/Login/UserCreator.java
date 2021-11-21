@@ -8,13 +8,11 @@ public class UserCreator implements ILogin{
 	private int userID;
 	private String name;
 	private String password;
-	private ArrayList<UserVo> users;
 	
 	
-	public boolean existName(String name) {
-		for(UserVo user: users) {
+	public boolean existName(ArrayList<IUser> users) {
+		for(IUser user: users) {
 			if(user.getUsername().equals(name)) {
-			
 				return true;
 			}
 		}
@@ -31,14 +29,14 @@ public class UserCreator implements ILogin{
 	}
 
 	@Override
-	public UserVo getUserVo() {
+	public UserVo getUserVo(ArrayList<IUser> users) {
 		
-		if(!this.existName(this.name)) {
+		if(!this.existName(users)) {
 			if(this.validatePassword(password)) {
 				this.user = new UserVo(userID,name, password);				
 			}
 		}
-			
+		
 		return this.user;
 	}
 
@@ -66,13 +64,5 @@ public class UserCreator implements ILogin{
 		this.password = password;
 	}
 
-	public ArrayList<UserVo> getUsers() {
-		return users;
-	}
-
-	public void setUsers(ArrayList<UserVo> users) {
-		this.users = users;
-	}
-	
 
 }

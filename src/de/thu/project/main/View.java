@@ -1,16 +1,15 @@
 package de.thu.project.main;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
+
+import Login.LoginController;
+
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Color;
@@ -21,6 +20,8 @@ public class View {
 	private JTextField txtUserName;
 	private JPasswordField txtPassword;
 	private final JPanel panel = new JPanel();
+	private LoginController logcon;
+
 
 
 
@@ -35,6 +36,9 @@ public class View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		logcon = new LoginController(this);
+		
 		setFrame(new JFrame());
 		getFrame().getContentPane().setBackground(SystemColor.activeCaption);
 		getFrame().getContentPane().setLayout(null);
@@ -65,16 +69,7 @@ public class View {
 		btnLogin.setForeground(new Color(0, 0, 0));
 		btnLogin.setBackground(new Color(255, 204, 153));
 		btnLogin.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//get text from user
-				//get text from password
-				
-				String un = txtUserName.getText();
-				String pas = txtPassword.getText();
-				
-			}
-		});
+		btnLogin.addActionListener(logcon);
 		
 		JLabel lblUserLogin = new JLabel("User LOGIN");
 		lblUserLogin.setForeground(SystemColor.control);
@@ -104,5 +99,15 @@ public class View {
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
+
+	
+	public JTextField getTxtUserName() {
+		return txtUserName;
+	}
+	
+	public JPasswordField getTxtPassword() {
+		return txtPassword;
+	}
+	
 }
 

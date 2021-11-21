@@ -1,26 +1,16 @@
 package Login;
 
-public class UserVo {
+public class UserVo implements IUser{
 	
 	private int userID;
 	private String username;
 	private String password;
-	private boolean role;
-	private String email;
 	
-	public UserVo(int userID, String username, String password, boolean role, String email) {
-		this.setUserID(userID);
-		this.setUsername(username);
-		this.setPassword(password);
-		this.setRole(role);
-		this.setEmail(email);
-	}
 	
 	public UserVo(int userID, String username, String password) {
 		this.setUserID(userID);
 		this.setUsername(username);
 		this.setPassword(password);
-		this.setRole(false);
 	}
 
 	public int getUserID() {
@@ -47,22 +37,8 @@ public class UserVo {
 		this.password = password;
 	}
 
-	public boolean isRole() {
-		return role;
-	}
 
-	public void setRole(boolean role) {
-		this.role = role;
+	public UserVo getUserVo() {
+		return this;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
-
 }
