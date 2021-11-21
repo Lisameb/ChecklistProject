@@ -22,21 +22,7 @@ public class View {
 	private JPasswordField txtPassword;
 	private final JPanel panel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					View window = new View();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
@@ -49,31 +35,31 @@ public class View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(SystemColor.activeCaption);
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().getContentPane().setBackground(SystemColor.activeCaption);
+		getFrame().getContentPane().setLayout(null);
 		
 		txtUserName = new JTextField();
 		txtUserName.setBounds(335, 199, 205, 34);
-		frame.getContentPane().add(txtUserName);
+		getFrame().getContentPane().add(txtUserName);
 		txtUserName.setColumns(10);
 		
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(335, 257, 205, 34);
-		frame.getContentPane().add(txtPassword);
+		getFrame().getContentPane().add(txtPassword);
 		
 		JLabel lblUsername = new JLabel("Password");
 		lblUsername.setForeground(SystemColor.textHighlightText);
 		lblUsername.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblUsername.setBounds(214, 262, 117, 20);
-		frame.getContentPane().add(lblUsername);
+		getFrame().getContentPane().add(lblUsername);
 		
 		JLabel lblUserName = new JLabel("Username");
 		lblUserName.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblUserName.setForeground(SystemColor.textHighlightText);
 		lblUserName.setBackground(SystemColor.window);
 		lblUserName.setBounds(214, 200, 130, 29);
-		frame.getContentPane().add(lblUserName);
+		getFrame().getContentPane().add(lblUserName);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setForeground(new Color(0, 0, 0));
@@ -95,20 +81,28 @@ public class View {
 		lblUserLogin.setFont(new Font("Verdana", Font.BOLD, 29));
 		lblUserLogin.setBackground(SystemColor.scrollbar);
 		lblUserLogin.setBounds(265, 72, 213, 71);
-		frame.getContentPane().add(lblUserLogin);
+		getFrame().getContentPane().add(lblUserLogin);
 		btnLogin.setBounds(301, 358, 183, 34);
-		frame.getContentPane().add(btnLogin);
+		getFrame().getContentPane().add(btnLogin);
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBounds(0, 0, 146, 480);
-		frame.getContentPane().add(panel);
+		getFrame().getContentPane().add(panel);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(-305, 0, 928, 480);
-		frame.getContentPane().add(label);
+		getFrame().getContentPane().add(label);
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/checklist1.png"));
 		label.setIcon(icon);
-		frame.setBounds(100, 100, 631, 536);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().setBounds(100, 100, 631, 536);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }
 
