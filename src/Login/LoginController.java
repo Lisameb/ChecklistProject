@@ -55,13 +55,17 @@ public class LoginController implements ActionListener{
 			
 			if(login != null) {
 				JOptionPane.showMessageDialog(null,"Login Successful");
-				view.getTxtUserName().setText("yes <3");
+				view.getTxtUserName().setText("");
+				view.getTxtPassword().setText("");
 				System.out.println(login.getUsername());
 				System.out.println(login.getPassword());
+				
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"Invalid Username or Password");
-				view.getTxtUserName().setText("no </3");
+				view.getTxtUserName().setText("");
+				view.getTxtPassword().setText("");
+
 			}
 			
 		
