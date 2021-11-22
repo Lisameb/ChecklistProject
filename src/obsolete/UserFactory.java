@@ -34,7 +34,7 @@ public class UserFactory {
 		}
 		
 			try {
-				user = (UserVo) Class.forName(className).getDeclaredConstructor().newInstance((users.size()-1),username, password);
+				user = (UserVo) Class.forName(className).getDeclaredConstructor().newInstance((users.size()),username, password);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
