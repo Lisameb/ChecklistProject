@@ -1,25 +1,27 @@
-package Login;
+package obsolete;
 
 import java.util.ArrayList;
+
+import model.UserVo;
 
 public class UserFactory {
 	private static UserFactory instance;
 	private int option;
-	private static ArrayList<IUser> users;
+	private static ArrayList<UserVo> users;
 	
 	public static synchronized UserFactory getInstance() {
 		if (instance == null) {
 			instance = new UserFactory();
-			users = new ArrayList<IUser>();
+			users = new ArrayList<UserVo>();
 		}
 		
 		return instance;
 	}
 	
 	
-	public IUser getIUser(String username, String password) {
+	public UserVo getUserVo(String username, String password) {
 		
-		IUser user = null;
+		UserVo user = null;
 		UserCreator creator = new UserCreator();
 		creator.setName(username);
 		if(creator.existName(users)) {
@@ -32,7 +34,7 @@ public class UserFactory {
 		}
 		
 			try {
-				user = (IUser) Class.forName(className).getDeclaredConstructor().newInstance((users.size()-1),username, password);
+				user = (UserVo) Class.forName(className).getDeclaredConstructor().newInstance((users.size()-1),username, password);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -53,11 +55,11 @@ public class UserFactory {
 		this.option = option;
 	}
 
-	public ArrayList<IUser> getUsers() {
+	public ArrayList<UserVo> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(ArrayList<IUser> users) {
+	public void setUsers(ArrayList<UserVo> users) {
 		this.users = users;
 	}
 

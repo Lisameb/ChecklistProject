@@ -1,10 +1,10 @@
-package de.thu.project.main;
+package view;
 
 import javax.swing.JFrame;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 
-import Login.LoginController;
+import control.LoginController;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;

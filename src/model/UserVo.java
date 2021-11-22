@@ -1,16 +1,23 @@
-package Login;
+package model;
 
-public class UserVo implements IUser{
+public class UserVo{
 	
 	private int userID;
 	private String username;
 	private String password;
+	private int role;
 	
 	
-	public UserVo(int userID, String username, String password) {
-		this.setUserID(userID);
+	public UserVo(String username, String password) {
 		this.setUsername(username);
 		this.setPassword(password);
+	}
+	
+	public UserVo() {
+	}
+	
+	public UserVo(int userID) {
+		this.setUserID(userID);
 	}
 
 	public int getUserID() {
@@ -40,5 +47,13 @@ public class UserVo implements IUser{
 
 	public UserVo getUserVo() {
 		return this;
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 }

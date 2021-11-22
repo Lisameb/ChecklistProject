@@ -1,6 +1,8 @@
-package Login;
+package obsolete;
 
 import java.util.ArrayList;
+
+import model.UserVo;
 
 public class UserCreator implements ILogin{
 	
@@ -10,8 +12,8 @@ public class UserCreator implements ILogin{
 	private String password;
 	
 	
-	public boolean existName(ArrayList<IUser> users) {
-		for(IUser user: users) {
+	public boolean existName(ArrayList<UserVo> users) {
+		for(UserVo user: users) {
 			if(user.getUsername().equals(name)) {
 				return true;
 			}
@@ -29,11 +31,11 @@ public class UserCreator implements ILogin{
 	}
 
 	@Override
-	public UserVo getUserVo(ArrayList<IUser> users) {
+	public UserVo getUserVo(ArrayList<UserVo> users) {
 		
 		if(!this.existName(users)) {
 			if(this.validatePassword(password)) {
-				this.user = new UserVo(userID,name, password);				
+				this.user = new UserVo(name, password);				
 			}
 		}
 		

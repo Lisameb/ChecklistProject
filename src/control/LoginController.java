@@ -1,4 +1,4 @@
-package Login;
+package control;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import de.thu.project.main.View;
+import model.UserVo;
+import obsolete.UserFactory;
+import obsolete.UserLogin;
+import view.View;
 
 public class LoginController implements ActionListener{
 	
@@ -23,8 +26,8 @@ public class LoginController implements ActionListener{
 		
 		UserFactory userfac = UserFactory.getInstance();
 		UserLogin log = new UserLogin();
-		UserVo testUser = new UserVo(0, "admin", "123456");
-		userfac.getUsers().add((IUser) testUser);
+		UserVo testUser = new UserVo("admin", "123456");
+		userfac.getUsers().add((UserVo) testUser);
 		log.setName(un);
 		log.setPassword(pas);
 		if(log.checkLoginData(userfac.getUsers()))
@@ -38,7 +41,7 @@ public class LoginController implements ActionListener{
 	public UserVo createUser() {
 		
 		UserFactory userfac = UserFactory.getInstance();
-		UserVo newUser = (UserVo) userfac.getIUser(un,pas);
+		UserVo newUser = (UserVo) userfac.getUserVo(un,pas);
 		
 		return newUser;
 	}

@@ -1,6 +1,8 @@
-package Login;
+package obsolete;
 
 import java.util.ArrayList;
+
+import model.UserVo;
 
 public class UserLogin implements ILogin{
 	
@@ -10,9 +12,9 @@ public class UserLogin implements ILogin{
 	
 	
 	
-	public boolean checkLoginData(ArrayList<IUser> users) {
+	public boolean checkLoginData(ArrayList<UserVo> users) {
 		
-		for(IUser user: users) {
+		for(UserVo user: users) {
 			if(user.getUsername().equals(name) && user.getPassword().equals(password)) {
 				this.setMatchedUser((UserVo) user);
 				return true;
@@ -43,7 +45,7 @@ public class UserLogin implements ILogin{
 	
 
 	@Override
-	public UserVo getUserVo(ArrayList<IUser> users) {
+	public UserVo getUserVo(ArrayList<UserVo> users) {
 		
 		if(this.checkLoginData(users)) {
 			return this.getMatchedUser();			
