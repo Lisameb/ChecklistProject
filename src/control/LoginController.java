@@ -39,11 +39,11 @@ public class LoginController implements ActionListener{
 		if(userDao.checkUsername(un) == true) {
 			UserVo logUser = new UserVo(un, pas);
 			if (userDao.validatePassword(logUser) == true) {
-				JOptionPane.showMessageDialog(null,"Registration successful");
+				JOptionPane.showMessageDialog(null,"Registration successful :)");
 				userDao.insert(logUser);
 				return logUser;
 			}
-		}else JOptionPane.showMessageDialog(null,"Username is already taken");
+		}else JOptionPane.showMessageDialog(null,"Oh no :( Username is already taken");
 		return null;
 	}
 
@@ -55,12 +55,12 @@ public class LoginController implements ActionListener{
 
 		if (src == view.btnLogin) {
 			if(this.loginUser()) {
-				JOptionPane.showMessageDialog(null,"Login Successful");
+				JOptionPane.showMessageDialog(null,"Login Successful :)");
 				view.setTxtUsername("");
 				view.setTxtPassword("");
 			}
 			else {
-				JOptionPane.showMessageDialog(null,"Invalid Username or Password");
+				JOptionPane.showMessageDialog(null,"Invalid Username or Password :(");
 				view.setTxtUsername("");
 				view.setTxtPassword("");
 
