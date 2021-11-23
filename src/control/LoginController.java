@@ -1,77 +1,79 @@
 package control;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import model.UserDao_DB;
 import model.UserVo;
-import obsolete.UserFactory;
-import obsolete.UserLogin;
 import view.View;
 
 public class LoginController implements ActionListener{
-	
+
 	View view;
 	private String un;
 	private String pas;
-	
+	private UserDao_DB userDao = new UserDao_DB();
+
+
+
 	public LoginController(View view) {
 		this.view = view;
 	}
-	
 
-	public UserVo loginUser() {
-		
-		UserFactory userfac = UserFactory.getInstance();
-		UserLogin log = new UserLogin();
-		UserVo testUser = new UserVo("admin", "123456");
-		userfac.getUsers().add((UserVo) testUser);
-		log.setName(un);
-		log.setPassword(pas);
-		if(log.checkLoginData(userfac.getUsers()))
-		{
-			return log.getMatchedUser();
+	public boolean loginUser() {
+		pas = view.getTxtPassword();
+		un = view.getTxtUserName();
+		UserVo logUser = new UserVo(un, pas);
+		if(userDao.checkPassword(logUser)) {
+			return true;
 		}
-		
+		return false;
+	}
+
+	public UserVo createUser() {
+		un = view.getTxtUserName();
+		pas = view.getTxtPassword();
+		if(userDao.checkUsername(un) == true) {
+			UserVo logUser = new UserVo(un, pas);
+			if (userDao.validatePassword(logUser) == true) {
+				JOptionPane.showMessageDialog(null,"Registration successful");
+				userDao.insert(logUser);
+				return logUser;
+			}
+		}else JOptionPane.showMessageDialog(null,"Username is already taken");
 		return null;
 	}
-	
-	public UserVo createUser() {
-		
-		UserFactory userfac = UserFactory.getInstance();
-		UserVo newUser = (UserVo) userfac.getUserVo(un,pas);
-		
-		return newUser;
-	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-			//get text from user
-			//get text from password
-			
-			un = view.getTxtUserName().getText();
-			pas = view.getTxtPassword().getText();
-			
-			UserVo login = loginUser();
-			
-			if(login != null) {
+		Object src = e.getSource();
+		un = view.getTxtUserName();
+		pas = view.getTxtPassword();
+		UserVo login = new UserVo(un, pas);
+
+		if (src == view.btnLogin) {
+			if(this.loginUser()) {
 				JOptionPane.showMessageDialog(null,"Login Successful");
-				view.getTxtUserName().setText("");
-				view.getTxtPassword().setText("");
-				System.out.println(login.getUsername());
-				System.out.println(login.getPassword());
-				
+				view.setTxtUsername("");
+				view.setTxtPassword("");
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"Invalid Username or Password");
-				view.getTxtUserName().setText("");
-				view.getTxtPassword().setText("");
+				view.setTxtUsername("");
+				view.setTxtPassword("");
 
 			}
-			
+		}
 		
+		if (src == view.btnReg) {
+			createUser();
+			view.setTxtUsername("");
+			view.setTxtPassword("");
+		}
+
 	}
-	
+
+
 }

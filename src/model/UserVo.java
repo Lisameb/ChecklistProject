@@ -13,6 +13,7 @@ public class UserVo{
 		this.setPassword(password);
 	}
 	
+	
 	public UserVo() {
 	}
 	

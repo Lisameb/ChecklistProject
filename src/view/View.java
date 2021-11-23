@@ -21,6 +21,8 @@ public class View {
 	private JPasswordField txtPassword;
 	private final JPanel panel = new JPanel();
 	private LoginController logcon;
+	public JButton btnLogin;
+	public JButton btnReg;
 
 
 
@@ -65,11 +67,17 @@ public class View {
 		lblUserName.setBounds(214, 200, 130, 29);
 		getFrame().getContentPane().add(lblUserName);
 		
-		JButton btnLogin = new JButton("Login");
+		btnLogin = new JButton("Login");
 		btnLogin.setForeground(new Color(0, 0, 0));
 		btnLogin.setBackground(new Color(255, 204, 153));
 		btnLogin.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnLogin.addActionListener(logcon);
+		
+		btnReg = new JButton("Registrate");
+		btnReg.setForeground(new Color(0, 0, 0));
+		btnReg.setBackground(new Color(255, 204, 153));
+		btnReg.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReg.addActionListener(logcon);
 		
 		JLabel lblUserLogin = new JLabel("User LOGIN");
 		lblUserLogin.setForeground(SystemColor.control);
@@ -77,8 +85,10 @@ public class View {
 		lblUserLogin.setBackground(SystemColor.scrollbar);
 		lblUserLogin.setBounds(265, 72, 213, 71);
 		getFrame().getContentPane().add(lblUserLogin);
-		btnLogin.setBounds(301, 358, 183, 34);
+		btnLogin.setBounds(200, 358, 183, 34);
 		getFrame().getContentPane().add(btnLogin);
+		btnReg.setBounds(400, 358, 183, 34);
+		getFrame().getContentPane().add(btnReg);
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBounds(0, 0, 146, 480);
 		getFrame().getContentPane().add(panel);
@@ -101,13 +111,20 @@ public class View {
 	}
 
 	
-	public JTextField getTxtUserName() {
-		return txtUserName;
+	public String getTxtUserName() {
+		return txtUserName.getText();
 	}
 	
-	public JPasswordField getTxtPassword() {
-		return txtPassword;
+	public String getTxtPassword() {
+		return txtPassword.getText();
 	}
 	
+	public void setTxtUsername(String userName) {
+		txtUserName.setText(userName);
+	}
+	
+	public void setTxtPassword(String password) {
+		txtPassword.setText(password);
+	}
 }
 
