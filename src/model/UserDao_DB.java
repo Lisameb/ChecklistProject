@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -8,26 +9,62 @@ public class UserDao_DB implements IDaoUser{
 	
 	//to test the code until we have a connection to the db
 	private ArrayList<UserVo> users = new ArrayList<UserVo>();
+	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	@Override
 	public void insert(UserVo user) {
-		users.add(user);
+		
+		String query = "INSERT INTO user (name, password) VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "')";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			stmt.execute(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Insert fehlgeschlagen!");
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
-		// calls method from Database Abstraction Layer -> JDBC
 		
 	}
 
 	@Override
 	public void update(UserVo user) {
+		
+		String query = "UPDATE user SET password = '" + user.getPassword() + "' WHERE name = '" + user.getUsername() + "'";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			stmt.execute(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Update fehlgeschlagen!");
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 		// calls method from Database Abstraction Layer -> JDBC
+		// not tested yet
 		
 	}
 
 	@Override
 	public void delete(UserVo user) {
+	
+		String query = "DELETE FROM user WHERE name = '" + user.getUsername() + "'";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			Boolean b = stmt.execute(query);
+			stmt.close();
+			if(b) {
+				//TODO more gui windows 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Delete fehlgeschlagen!");
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
-		// calls method from Database Abstraction Layer -> JDBC
+		// not tested yet
 		
 	}
 
@@ -40,14 +77,27 @@ public class UserDao_DB implements IDaoUser{
 	}
 	
 	public boolean checkPassword(UserVo user) {
-		for(UserVo u: users) {
-			if((u.getUsername().equals(user.getUsername())) && (u.getPassword().equals(user.getPassword()))) {
+		
+		String query = "SELECT password FROM user WHERE name = '" + user.getUsername() + "'";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			String pw = "";
+			if(resultset.next()) {
+				pw = resultset.getString("password");
+				
+			}
+			if(user.getPassword().equals(pw)) {
 				return true;
 			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("checkPassword fehlgeschlagen!");
+			e.printStackTrace();
 		}
+		
 		return false;
-		//will be changed after db connection
-		//TODO when we can connect to database to get saved password + check username
 	}
 	
 	
@@ -59,11 +109,21 @@ public class UserDao_DB implements IDaoUser{
 	}
 	
 	public boolean checkUsername(String username) {
-		for(UserVo u: users) {
-			if(u.getUsername().equals(username)) {
+		
+		String query = "SELECT name FROM user WHERE name='" + username + "';";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			Boolean b = stmt.execute(query);
+			stmt.close();
+			if(b) {
 				return false;
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("checkUsername fehlgeschlagen!");
+			e.printStackTrace();
 		}
+		
 		return true;
 	}
 
