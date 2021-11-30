@@ -1,3 +1,4 @@
 /.classpath
 .DS_Store
 src/util/Config.java
+bin/
