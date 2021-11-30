@@ -108,23 +108,36 @@ public class UserDao_DB implements IDaoUser{
 		return false;
 	}
 	
-	public boolean checkUsername(String username) {
+	/*
+	 * Returns false unless the SELECT statement returns a dataset.
+	 * */
+	
+	public boolean checkUsernameExists(String username) {
+		
+		Boolean foundUser = false;
+		String resultString = "";
 		
 		String query = "SELECT name FROM user WHERE name='" + username + "';";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
-			Boolean b = stmt.execute(query);
-			stmt.close();
-			if(b) {
-				return false;
+			stmt.execute(query);
+			ResultSet result = stmt.getResultSet();
+			
+			if(result.next()) {
+				resultString = result.getString("name");
 			}
+			if(!resultString.equals("")) {
+				foundUser = true;
+			}
+			stmt.close();
+			return foundUser;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.err.println("checkUsername fehlgeschlagen!");
+			System.err.println("checkUsernameExists fehlgeschlagen!");
 			e.printStackTrace();
 		}
 		
-		return true;
+		return foundUser;
 	}
 
 }

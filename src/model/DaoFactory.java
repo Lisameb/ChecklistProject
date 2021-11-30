@@ -1,14 +1,15 @@
 package model;
 
 import java.sql.Connection;
+import util.Config;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DaoFactory {
 	private static DaoFactory instance;
-	private String url = "jdbc:mysql://i-intra-03.informatik.hs-ulm.de:3306/dsm_proj_01";
-	private String user = "dsm_proj_01";
-	private String pass = "Holy_Spirit01";
+	private String url = Config.URL;
+	private String user = Config.USER;
+	private String pass = Config.PASSWORD;
 	private Connection con = null;
 	
 	public DaoFactory() {
