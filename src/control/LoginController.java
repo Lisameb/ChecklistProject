@@ -36,7 +36,7 @@ public class LoginController implements ActionListener{
 	public UserVo createUser() {
 		un = view.getTxtUserName();
 		pas = view.getTxtPassword();
-		if(userDao.checkUsername(un) == true) {
+		if(userDao.checkUsernameExists(un) == false) {
 			UserVo logUser = new UserVo(un, pas);
 			if (userDao.validatePassword(logUser) == true) {
 				JOptionPane.showMessageDialog(null,"Registration successful :)");
