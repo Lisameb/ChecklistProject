@@ -2,3 +2,17 @@
 .DS_Store
 src/util/Config.java
 bin/
+
+
+.classpath
+.project
+.settings/
+
+.idea/
+*.iml
+*.iws
+
+.DS_Store
+
+log/
+target/
