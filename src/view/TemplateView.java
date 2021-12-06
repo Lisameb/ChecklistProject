@@ -9,10 +9,10 @@ public class TemplateView extends JFrame {
 
 	private JPanel contentPane;	
 	
-	private Image img_white = new ImageIcon(this.getClass().getResource("weisss.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_dest = new ImageIcon(this.getClass().getResource("destinations.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_groc = new ImageIcon(this.getClass().getResource("grocery.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_vaca = new ImageIcon(this.getClass().getResource("vacation.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+	private Image img_white = new ImageIcon(this.getClass().getResource("/weisss.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+	private Image img_dest = new ImageIcon(this.getClass().getResource("/destinations.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+	private Image img_groc = new ImageIcon(this.getClass().getResource("/grocery.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+	private Image img_vaca = new ImageIcon(this.getClass().getResource("/vacation.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
 
 	
 	public static void main(String[] args) {
