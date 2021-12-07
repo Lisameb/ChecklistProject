@@ -9,6 +9,10 @@ public class TemplateVo {
 	public TemplateVo(String templateName) {
 		this.setTemplateName(templateName);
 	}
+	public TemplateVo(int templateID, String templateName) {
+		this.setTemplateID(templateID);
+		this.setTemplateName(templateName);
+	}
 	
 	public int getTemplateID() {
 		return templateID;
@@ -20,6 +24,9 @@ public class TemplateVo {
 
 	public void setTemplateName(String templateName) {
 		this.templateName = templateName;
+	}
+	public void setTemplateID(int setTemplateID) {
+		this.templateID = templateID;
 	}
 
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TemplateDao_DB implements IDaoTemplate {
 	
@@ -38,6 +39,25 @@ public class TemplateDao_DB implements IDaoTemplate {
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public ArrayList<String> getAllTemplate() {
+		String query = "SELECT * FROM template";
+		ArrayList<String> allTemp = new ArrayList<>();
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			while(resultset.next()) {
+				allTemp.add(resultset.getString("name"));	
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("getAll fehlgeschlagen!");
+			e.printStackTrace();
+		}
+		return allTemp;
 		
 	}
 	
