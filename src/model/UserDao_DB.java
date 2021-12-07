@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 public class UserDao_DB implements IDaoUser{
 	
 	//to test the code until we have a connection to the db
-	private ArrayList<UserVo> users = new ArrayList<UserVo>();
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	@Override
@@ -56,7 +55,7 @@ public class UserDao_DB implements IDaoUser{
 			Boolean b = stmt.execute(query);
 			stmt.close();
 			if(b) {
-				//TODO more gui windows 
+				//TODO more gui windows -> shows that delete was successful
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
