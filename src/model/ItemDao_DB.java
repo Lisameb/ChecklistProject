@@ -3,6 +3,7 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ItemDao_DB implements IDaoItem {
 
@@ -75,6 +76,42 @@ public class ItemDao_DB implements IDaoItem {
 		}
 		return 0;
 	}
-
+	
+	public ArrayList<String> getCategoryItems(CategoryVo category) {
+		String query = "SELECT * FROM item WHERE category = '" + category.getCategoryName() + "'";
+		ArrayList<String> allItems = new ArrayList<>();
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			while(resultset.next()) {
+				allItems.add(resultset.getString("name"));	
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("getAll fehlgeschlagen!");
+			e.printStackTrace();
+		}
+		return allItems;
+		
+	}
+	
+	public ArrayList<CategoryVo> getAllCategories() {
+		String query = "SELECT * FROM category";
+		ArrayList<CategoryVo> allCat = new ArrayList<>();
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			while(resultset.next()) {
+				allCat.add(new CategoryVo(resultset.getString("name")));	
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("getAll fehlgeschlagen!");
+			e.printStackTrace();
+		}
+		return allCat;
+	}	
 	
 }

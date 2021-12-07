@@ -146,5 +146,4 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	
 	
 	
-	
 }
