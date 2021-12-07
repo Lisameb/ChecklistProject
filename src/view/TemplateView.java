@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
 
 
 public class TemplateView extends JFrame {
@@ -35,6 +36,14 @@ public class TemplateView extends JFrame {
 	private Image img_groc = new ImageIcon(this.getClass().getResource("/shopping.jpg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
 	private Image img_vaca = new ImageIcon(this.getClass().getResource("/vacation.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
 	private Image img_cake = new ImageIcon(this.getClass().getResource("/cake.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+	
+	public JLabel lblEmpty;
+	public JLabel lblDest;
+	public JLabel lblGroc;
+	public JLabel lblParty;
+	public JLabel lblVaca;
+	public JButton btnSelect;
+	public JTextArea taPreview;
 
 	
 	public static void main(String[] args) {
@@ -78,7 +87,7 @@ public class TemplateView extends JFrame {
 		panel.add(panEmpty);
 		panEmpty.setLayout(null);
 		
-		JLabel lblEmpty = new JLabel("");
+		lblEmpty = new JLabel("");
 		lblEmpty.addMouseListener(tempcon);
 		lblEmpty.setBounds(0, 0, 90, 90);
 		lblEmpty.setIcon(new ImageIcon(img_white));
@@ -90,7 +99,7 @@ public class TemplateView extends JFrame {
 		panel.add(panDest);
 		panDest.setLayout(null);
 		
-		JLabel lblDest = new JLabel("");
+		lblDest = new JLabel("");
 		lblDest.addMouseListener(tempcon);
 		lblDest.setBounds(0, 0, 90, 90);
 		lblDest.setIcon(new ImageIcon(img_dest));
@@ -102,7 +111,7 @@ public class TemplateView extends JFrame {
 		panel.add(panGroc);
 		panGroc.setLayout(null);
 		
-		JLabel lblGroc = new JLabel("");
+		lblGroc = new JLabel("");
 		lblGroc.addMouseListener(tempcon);
 		lblGroc.setBounds(0, 0, 90, 90);
 		lblGroc.setIcon(new ImageIcon(img_groc));
@@ -114,12 +123,8 @@ public class TemplateView extends JFrame {
 		panParty.setBounds(37, 344, 90, 90);
 		panel.add(panParty);
 		
-		JLabel lblParty = new JLabel("");
-		lblParty.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-		});
+		lblParty = new JLabel("");
+		lblParty.addMouseListener(tempcon);
 		lblParty.setBounds(0, 0, 87, 87);
 		lblParty.setIcon(new ImageIcon(img_cake));
 		panParty.add(lblParty);
@@ -130,8 +135,8 @@ public class TemplateView extends JFrame {
 		panel.add(panVaca);
 		panVaca.setLayout(null);
 		
-		JLabel lblVaca = new JLabel("");
-		lblVaca.addMouseListener(tempcon);;
+		lblVaca = new JLabel("");
+		lblVaca.addMouseListener(tempcon);
 		lblVaca.setBounds(0, 0, 90, 90);
 		lblVaca.setIcon(new ImageIcon(img_vaca));
 		panVaca.add(lblVaca);
@@ -177,7 +182,7 @@ public class TemplateView extends JFrame {
 		lblFU.setIcon(blue);
 		panel.add(lblFU);
 		
-		JButton btnSelect = new JButton("Select");
+		btnSelect = new JButton("Select");
 		btnSelect.addActionListener(tempcon);
 		btnSelect.setBackground(SystemColor.text);
 		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
@@ -199,6 +204,17 @@ public class TemplateView extends JFrame {
 		lblSmallBack.setBounds(0, 0, 381, 80);
 		lblSmallBack.setIcon(blue);
 		panel_2.add(lblSmallBack);
+		
+		JPanel panel_test = new JPanel();
+		panel_test.setBackground(SystemColor.inactiveCaption);
+		panel_test.setBounds(400, 0, 350, 578);
+		contentPane.add(panel_test);
+		panel_test.setLayout(null);
+		
+		taPreview = new JTextArea();
+		taPreview.setBounds(10, 10, 250, 400);
+		taPreview.setEditable(false);
+		panel_test.add(taPreview);
 		
 	}
 }
