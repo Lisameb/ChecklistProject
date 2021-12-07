@@ -33,6 +33,18 @@ public class DaoFactory {
 		return new UserDao_DB();
 	}
 	
+	public IDaoTemplate getTemplateDao() {
+		return new TemplateDao_DB();
+	}
+	
+	public IDaoItem getItemDao() {
+		return new ItemDao_DB();
+	}
+	
+	public IDaoItem_temp getItem_tempDao() {
+		return new Item_tempDao_DB();
+	}
+	
 	public Connection getCon() {
 		return con;
 	}
