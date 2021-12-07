@@ -27,6 +27,7 @@ public class TemplateController implements MouseListener,ActionListener {
 		int temp_id;
 		ArrayList<String> list = new ArrayList<String>();
 		
+		tempview.taPreview.setText("");
 		
 		if(src == tempview.lblEmpty) {
 			template = new TemplateVo("empty");
