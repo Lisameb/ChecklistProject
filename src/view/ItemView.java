@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import control.ItemController;
+import controller.ItemController;
 
 import javax.swing.JLabel;
 import java.awt.Font;

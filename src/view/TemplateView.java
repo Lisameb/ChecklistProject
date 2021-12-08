@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import control.TemplateController;
+import controller.TemplateController;
 
 import java.awt.event.*;
 
@@ -89,7 +89,7 @@ public class TemplateView extends JFrame {
 		
 		lblEmpty = new JLabel("");
 		lblEmpty.addMouseListener(tempcon);
-		lblEmpty.setBounds(0, 0, 90, 90);
+		lblEmpty.setBounds(0, 0, 87, 87);
 		lblEmpty.setIcon(new ImageIcon(img_white));
 		panEmpty.add(lblEmpty);
 		
@@ -101,7 +101,7 @@ public class TemplateView extends JFrame {
 		
 		lblDest = new JLabel("");
 		lblDest.addMouseListener(tempcon);
-		lblDest.setBounds(0, 0, 90, 90);
+		lblDest.setBounds(0, 0, 87, 87);
 		lblDest.setIcon(new ImageIcon(img_dest));
 		panDest.add(lblDest);
 		
@@ -113,7 +113,7 @@ public class TemplateView extends JFrame {
 		
 		lblGroc = new JLabel("");
 		lblGroc.addMouseListener(tempcon);
-		lblGroc.setBounds(0, 0, 90, 90);
+		lblGroc.setBounds(0, 0, 87, 87);
 		lblGroc.setIcon(new ImageIcon(img_groc));
 		panGroc.add(lblGroc);
 		
@@ -137,7 +137,7 @@ public class TemplateView extends JFrame {
 		
 		lblVaca = new JLabel("");
 		lblVaca.addMouseListener(tempcon);
-		lblVaca.setBounds(0, 0, 90, 90);
+		lblVaca.setBounds(0, 0, 87, 87);
 		lblVaca.setIcon(new ImageIcon(img_vaca));
 		panVaca.add(lblVaca);
 		ImageIcon blue = new ImageIcon(this.getClass().getResource("/blue.jpg"));
@@ -185,6 +185,7 @@ public class TemplateView extends JFrame {
 		btnSelect = new JButton("Select");
 		btnSelect.addActionListener(tempcon);
 		btnSelect.setBackground(SystemColor.text);
+		btnSelect.setBounds(396, 480, 124, 42);
 		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
 		contentPane.add(btnSelect);
 		
@@ -205,16 +206,10 @@ public class TemplateView extends JFrame {
 		lblSmallBack.setIcon(blue);
 		panel_2.add(lblSmallBack);
 		
-		JPanel panel_test = new JPanel();
-		panel_test.setBackground(SystemColor.inactiveCaption);
-		panel_test.setBounds(400, 0, 350, 578);
-		contentPane.add(panel_test);
-		panel_test.setLayout(null);
-		
 		taPreview = new JTextArea();
-		taPreview.setBounds(10, 10, 250, 400);
+		taPreview.setBounds(396, 16, 317, 440);
 		taPreview.setEditable(false);
-		panel_test.add(taPreview);
+		contentPane.add(taPreview);
 		
 	}
 }

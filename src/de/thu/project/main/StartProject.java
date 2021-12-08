@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import view.View;
+import view.LoginView;
 
 public class StartProject {
 
@@ -14,7 +14,7 @@ public class StartProject {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					View window = new View();
+					LoginView window = new LoginView();
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
