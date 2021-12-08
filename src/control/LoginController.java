@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.UserDao_DB;
 import model.UserVo;
+import view.ChangeTemplateView;
 import view.View;
 
 public class LoginController implements ActionListener{
@@ -58,6 +59,9 @@ public class LoginController implements ActionListener{
 				JOptionPane.showMessageDialog(null,"Login Successful :)");
 				view.setTxtUsername("");
 				view.setTxtPassword("");
+				ChangeTemplateView viewChangeTemp = new ChangeTemplateView();
+				viewChangeTemp.setVisible(true);
+				view.getFrame().dispose();
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"Invalid Username or Password :(");
