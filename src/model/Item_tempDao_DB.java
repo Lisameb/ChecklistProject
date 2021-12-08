@@ -12,7 +12,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	@Override
 	public int getAmount(Item_tempVo item_temp) {
 		// TODO Auto-generated method stub
-		String query = "SELECT amount FROM item_temp WHERE temp_id = '" + item_temp.getTemplate_id() + "' AND item_id = '" + item_temp.getItem_id() + "'";
+		String query = "SELECT amount FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			ResultSet resultset = stmt.executeQuery(query);
@@ -33,7 +33,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	@Override
 	public boolean checkCombo(Item_tempVo item_temp) {
 		// TODO Auto-generated method stub
-		String query = "SELECT temp_id FROM item_temp WHERE temp_id = '" + item_temp.getTemplate_id() + "' AND item_id = '" + item_temp.getItem_id() + "'";
+		String query = "SELECT template_ID FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			ResultSet resultset = stmt.executeQuery(query);
@@ -53,10 +53,10 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	public void addItem(Item_tempVo item_temp, int amountAdd) {
 		// TODO Auto-generated method stub
 		if(this.checkCombo(item_temp)) {
-			int amount = this.getAmount(item_temp);
-			amount++;
+			//int amount = this.getAmount(item_temp);
+			//amount++;
 			
-			String query = "UPDATE item_temp SET amount = " + amount + " WHERE template_id = '" + item_temp.getTemplate_id() + "' AND item_id = '" + item_temp.getItem_id() + "'";
+			String query = "UPDATE item_temp SET amount = " + amountAdd + " WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 			try {
 				Statement stmt = daofactory.getCon().createStatement();
 				stmt.execute(query);
@@ -69,7 +69,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 		} else {
 			
 			
-			String query = "INSERT INTO item_temp (template_id, item_id, amount) VALUES ('" + item_temp.getTemplate_id() + "', '" + item_temp.getItem_id() + "', " + amountAdd + ")";
+			String query = "INSERT INTO item_temp (item_ID, amount, template_ID) VALUES (" + item_temp.getItem_id() + ", " + amountAdd + "," + item_temp.getTemplate_id() + ")";
 			try {
 				Statement stmt = daofactory.getCon().createStatement();
 				stmt.execute(query);
@@ -91,7 +91,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			int amount = this.getAmount(item_temp);
 			amount--;
 			if(amount > 0) {
-				String query = "UPDATE item_temp SET amount = " + amount + " WHERE template_id = '" + item_temp.getTemplate_id() + "' AND item_id = '" + item_temp.getItem_id() + "'";
+				String query = "UPDATE item_temp SET amount = " + amount + " WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id() + "";
 				try {
 					Statement stmt = daofactory.getCon().createStatement();
 					stmt.execute(query);
@@ -102,7 +102,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 					e.printStackTrace();
 				}
 			} else {
-				String query = "DELETE FROM item_temp WHERE template_id = '" + item_temp.getTemplate_id() + "' AND item_id = '" + item_temp.getItem_id() + "'";
+				String query = "DELETE FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_id = " + item_temp.getItem_id();
 				try {
 					Statement stmt = daofactory.getCon().createStatement();
 					stmt.execute(query);
@@ -124,7 +124,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	@Override
 	public ArrayList<String> getItemsT(int temp_id) {
 		// TODO Auto-generated method stub
-		String query = "SELECT i.name FROM item AS i INNER JOIN item_temp AS it ON i.item_id = it.item_id WHERE it.template_id = " + temp_id + "";
+		String query = "SELECT i.name FROM item AS i INNER JOIN item_temp AS it ON i.item_ID = it.item_ID WHERE it.template_ID = " + temp_id;
 		String itemname = "";
 		ArrayList<String> itemnames = new ArrayList<String>(); 
 		try {

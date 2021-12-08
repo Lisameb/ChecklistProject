@@ -77,8 +77,8 @@ public class ItemDao_DB implements IDaoItem {
 		return 0;
 	}
 	
-	public ArrayList<String> getCategoryItems(CategoryVo category) {
-		String query = "SELECT * FROM item WHERE category = '" + category.getCategoryName() + "'";
+	public ArrayList<String> getCategoryItems(String category) {
+		String query = "SELECT * FROM item WHERE category = '" + category + "'";
 		ArrayList<String> allItems = new ArrayList<>();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();

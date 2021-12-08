@@ -26,7 +26,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 	@Override
 	public void delete(TemplateVo template) {
 		// TODO Auto-generated method stub
-		String query = "DELETE FROM user WHERE name = '" + template.getTemplateName() + "'";
+		String query = "DELETE FROM template WHERE name = '" + template.getTemplateName() + "'";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			Boolean b = stmt.execute(query);
