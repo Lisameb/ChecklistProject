@@ -28,4 +28,7 @@ public class ItemVo {
 	public int getItemID() {
 		return itemID;
 	}
+	public void setItemID(int itemID) {
+		this.itemID = itemID;
+	}
 }

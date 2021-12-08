@@ -25,7 +25,7 @@ public class TemplateVo {
 	public void setTemplateName(String templateName) {
 		this.templateName = templateName;
 	}
-	public void setTemplateID(int setTemplateID) {
+	public void setTemplateID(int templateID) {
 		this.templateID = templateID;
 	}
 
