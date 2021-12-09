@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,18 +9,18 @@ import javax.swing.JOptionPane;
 import model.UserDao_DB;
 import model.UserVo;
 import view.ChangeTemplateView;
-import view.View;
+import view.LoginView;
 
 public class LoginController implements ActionListener{
 
-	View view;
+	LoginView view;
 	private String un;
 	private String pas;
 	private UserDao_DB userDao = new UserDao_DB();
 
 
 
-	public LoginController(View view) {
+	public LoginController(LoginView view) {
 		this.view = view;
 	}
 

@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 
-import control.LoginController;
+import controller.LoginController;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Color;
 
-public class View {
+public class LoginView {
 
 	private JFrame frame;
 	private JTextField txtUserName;
@@ -30,7 +30,7 @@ public class View {
 	/**
 	 * Create the application.
 	 */
-	public View() {
+	public LoginView() {
 		initialize();
 	}
 
