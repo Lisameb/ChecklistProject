@@ -15,7 +15,7 @@ public class ItemDao_DB implements IDaoItem {
 		String query = "INSERT INTO item (name, category) VALUES ('" + item.getItemName() + "', '" + item.getCategory() + "')";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
-			stmt.executeQuery(query);
+			stmt.execute(query);
 			stmt.close();
 			
 		} catch(SQLException e) {

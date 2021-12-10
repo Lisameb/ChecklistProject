@@ -13,7 +13,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 		String query = "INSERT INTO template (name) VALUES ('" + template.getTemplateName() + "')";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
-			stmt.executeQuery(query);
+			stmt.execute(query);
 			stmt.close();
 			
 		} catch(SQLException e) {
