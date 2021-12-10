@@ -14,6 +14,7 @@ import model.Item_tempVo;
 import model.TemplateDao_DB;
 import model.TemplateVo;
 import view.ChangeTemplateView;
+import view.CreateTemplateView;
 import view.ItemView;
 
 public class ChangeTemplateController implements  ActionListener {
@@ -22,6 +23,7 @@ public class ChangeTemplateController implements  ActionListener {
 	private TemplateDao_DB tempDao;
 	private ItemDao_DB itemDao;
 	private Item_tempDao_DB itemTempDao;
+	private CreateTemplateView createView;
 	
 	public ChangeTemplateController (ChangeTemplateView view) {
 		this.view = view;
@@ -115,7 +117,21 @@ public class ChangeTemplateController implements  ActionListener {
 			view.setVisible(true);
 		}
 		if(src == view.btnNewTemp) {
-			// TODO create new template
+			createView = new CreateTemplateView(this);
+			createView.setVisible(true);
+			
+		}
+		if(createView!=null && src == createView.btnNew) {
+			TemplateVo temp = new TemplateVo(createView.tfName.getText());
+			if(tempDao.getTemplateID(temp) == 0) {
+				tempDao.insert(temp);
+				setComboBoxTemp();
+				createView.dispose();
+			} else {
+				createView.tfNameExists.setText("Name already exists!");
+			}
+			view.comboBoxTemp.setSelectedItem(temp.getTemplateName());
+			updateTextArea(temp.getTemplateName());
 		}
 		if(src == view.btnDeleteTemp) {
 			TemplateVo temp = new TemplateVo(view.comboBoxTemp.getSelectedItem().toString());
@@ -143,6 +159,7 @@ public class ChangeTemplateController implements  ActionListener {
 			deleteItemFromTemp(temp, item);
 			updateTextArea(temp);
 		}
+		
 		
 	}
 

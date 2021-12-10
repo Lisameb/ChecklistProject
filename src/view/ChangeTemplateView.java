@@ -167,11 +167,9 @@ public class  ChangeTemplateView extends JFrame {
 		panel_1.add(btnDeleteItemTo);
 		
 		itemList = new JTextArea();
-		itemList.setText("test");
+		itemList.setText("Choose template");
 		itemList.setBounds(36, 42, 335, 149);
 		panel_1.add(itemList);
-		
-		//contro.updateTextArea();
 	}
 	
 }
