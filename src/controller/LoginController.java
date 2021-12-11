@@ -56,7 +56,7 @@ public class LoginController implements ActionListener{
 
 		if (src == view.btnLogin) {
 			if(this.loginUser()) {
-				JOptionPane.showMessageDialog(null,"Login Successful :)");
+				//JOptionPane.showMessageDialog(null,"Login Successful :)");
 				view.setTxtUsername("");
 				view.setTxtPassword("");
 				ChangeTemplateView viewChangeTemp = new ChangeTemplateView();

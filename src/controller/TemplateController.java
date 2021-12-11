@@ -42,7 +42,7 @@ public class TemplateController implements MouseListener,ActionListener {
 			temp_id = templateDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(list.get(i) + "\n");
+				tempview.taPreview.append(" - " + list.get(i) + "\n");
 			}
 		}
 		if(src == tempview.lblGroc) {
@@ -50,7 +50,7 @@ public class TemplateController implements MouseListener,ActionListener {
 			temp_id = templateDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(list.get(i) + "\n");
+				tempview.taPreview.append(" - " + list.get(i) + "\n");
 			}
 		}
 		if(src == tempview.lblParty) {
@@ -58,7 +58,7 @@ public class TemplateController implements MouseListener,ActionListener {
 			temp_id = templateDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(list.get(i) + "\n");
+				tempview.taPreview.append(" - " + list.get(i) + "\n");
 			}
 		}
 		if(src == tempview.lblVaca) {
@@ -66,7 +66,7 @@ public class TemplateController implements MouseListener,ActionListener {
 			temp_id = templateDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(list.get(i) + "\n");
+				tempview.taPreview.append(" - " + list.get(i) + "\n");
 			}
 		}
 		
