@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import model.DaoFactory;
 import model.UserDao_DB;
 import model.UserVo;
 import view.ChangeTemplateView;
@@ -16,12 +17,14 @@ public class LoginController implements ActionListener{
 	LoginView view;
 	private String un;
 	private String pas;
-	private UserDao_DB userDao = new UserDao_DB();
+	private DaoFactory daofactory = DaoFactory.getInstance();
+	private UserDao_DB userDao;
 
 
 
 	public LoginController(LoginView view) {
 		this.view = view;
+		this.userDao = (UserDao_DB) daofactory.getUserDao();
 	}
 
 	public boolean loginUser() {
@@ -29,6 +32,8 @@ public class LoginController implements ActionListener{
 		un = view.getTxtUserName();
 		UserVo logUser = new UserVo(un, pas);
 		if(userDao.checkPassword(logUser)) {
+			daofactory.setCurrent_user(un);
+			System.out.println(daofactory.getCurrent_user());
 			return true;
 		}
 		return false;
@@ -56,7 +61,6 @@ public class LoginController implements ActionListener{
 
 		if (src == view.btnLogin) {
 			if(this.loginUser()) {
-				//JOptionPane.showMessageDialog(null,"Login Successful :)");
 				view.setTxtUsername("");
 				view.setTxtPassword("");
 				ChangeTemplateView viewChangeTemp = new ChangeTemplateView();
