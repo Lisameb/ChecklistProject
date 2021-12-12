@@ -4,7 +4,7 @@ public class Item_tempVo {
 
 	private int template_id;
 	private int item_id;
-	private int amount; // please help ; getAmount()-Methode
+	private int amount;
 	
 	public Item_tempVo(TemplateVo template, ItemVo item) {
 		template_id = template.getTemplateID();

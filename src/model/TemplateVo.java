@@ -4,7 +4,6 @@ public class TemplateVo {
 	
 	private int templateID;
 	private String templateName;
-	// item?
 	
 	public TemplateVo(String templateName) {
 		this.setTemplateName(templateName);

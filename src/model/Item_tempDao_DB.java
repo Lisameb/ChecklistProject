@@ -115,7 +115,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			}
 			
 		} else {
-			System.out.println("Du dumm");
+			System.out.println("The item is not in the list in the first place!!!");
 			
 		}
 		
