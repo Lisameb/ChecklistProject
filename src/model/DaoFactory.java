@@ -10,6 +10,7 @@ public class DaoFactory {
 	private String url = Config.URL;
 	private String user = Config.USER;
 	private String pass = Config.PASSWORD;
+	private String current_user;
 	private Connection con = null;
 	
 	public DaoFactory() {
@@ -49,5 +50,20 @@ public class DaoFactory {
 		return con;
 	}
 	
+	public IDaoChecklist getChecklistDao() {
+		return new ChecklistDao_DB();
+	}
+	
+	public IDaoChecklist_item getChecklist_itemDao() {
+		return new Checklist_itemDao_DB();
+	}
+
+	public String getCurrent_user() {
+		return current_user;
+	}
+
+	public void setCurrent_user(String current_user) {
+		this.current_user = current_user;
+	}
 	
 }
