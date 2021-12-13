@@ -17,5 +17,5 @@ The project starts at de.thu.project.main/StartProject.java.
 >  public static final String PASSWORD = *insert db password*;      
 >}
 
-
+(the values for the variables can be found in our other readme in our WorkProducts folder)
 ### Authors: JS, MC, LL, LE, KS, JK
