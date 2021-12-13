@@ -163,4 +163,10 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 		return null;
 	}
 
+	@Override
+	public void changeAmount(Checklist_itemVo checklist_item) {
+		// TODO write changeAmount and change deleteItem method
+		
+	}
+
 }
