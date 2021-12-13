@@ -143,6 +143,12 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 		}
 		return null;
 	}
+
+	@Override
+	public void changeAmount(Item_tempVo item_temp) {
+		// TODO write change amount and change deleteItem method.
+		
+	}
 	
 	
 	

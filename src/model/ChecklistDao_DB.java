@@ -27,21 +27,22 @@ public class ChecklistDao_DB implements IDaoChecklist {
 	}
 
 	@Override
-	public void delete(ChecklistVo checklist) {
+	public boolean delete(ChecklistVo checklist) {
 		String query = "DELETE FROM checklist WHERE checklist_ID = " + checklist.getChecklistID();
+		Boolean b = false;
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
-			Boolean b = stmt.execute(query);
+			b = stmt.execute(query);
 			stmt.close();
-			if(b) {
-				//TODO more gui windows -> shows that delete was successful 
-			}
+			return b;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
 		}
 		
+		return b;
 	}
 
 	@Override
