@@ -2,24 +2,18 @@ package view;
 
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JToolBar;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
+
+import controller.CreateChecklistController;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JComboBox;
+import java.awt.SystemColor;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -30,12 +24,13 @@ public class CreateChecklistView extends JFrame {
 	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
 	private Image img_icon = new ImageIcon(this.getClass().getResource("/new.png")).getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
 
-	public JTextField txtTypeItem;
+	public JTextField tfName;
 	public JTextField tfAmount;
 	public JTextField tfUnit;
 	public JLabel lblMenTemp;
 	public JLabel lblMenCheck;
 	public JLabel lblMenBack;
+	public JLabel lblName;
 	
 	public JPanel panMenTemp; //besser wäre hierdrauf der ActionListener, nicht die labels
 	public JPanel panMenCheck;
@@ -43,22 +38,28 @@ public class CreateChecklistView extends JFrame {
 	
 	
 	public JTextArea taChecklist;
-	public JComboBox ComboBoxCat;
-	public JComboBox ComboBoxItems;
+	public JComboBox<String> comboBoxCat;
+	public JComboBox<String> comboBoxItems;
 	public JButton btnSave;
 	public JButton btnDelete;
 	public JButton btnReset;
 	public JButton btnAdd;
+	public JButton btnShowItems;
 
-	
+	public CreateChecklistController createCon;
+	public int temp_id;
 
 	public CreateChecklistView() { 
+		initialize();
+	}
+	
+	public CreateChecklistView(CreateChecklistController createCon) {
+		this.createCon = createCon;
 		initialize();
 	}
 
 	
 	private void initialize() {
-		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 585);
@@ -127,40 +128,37 @@ public class CreateChecklistView extends JFrame {
 		panel.add(lblBack);
 		
 		taChecklist = new JTextArea();
+		taChecklist.setEditable(false);
 		taChecklist.setBounds(489, 67, 259, 401);
 		contentPane.add(taChecklist);
 		
 		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 18));
-//		btnSave.addActionListener();
+		btnSave.addActionListener(createCon);
 		btnSave.setForeground(SystemColor.windowText);
 		btnSave.setBounds(633, 484, 115, 29);
 		contentPane.add(btnSave);
 		
-		ComboBoxCat = new JComboBox();
-//		ComboBoxCat.addActionListener();
-		ComboBoxCat.setBounds(245, 247, 220, 26);
-		contentPane.add(ComboBoxCat);
+		comboBoxCat = new JComboBox<String>();
+		comboBoxCat.addActionListener(createCon);
+		comboBoxCat.setBounds(245, 177, 220, 26);
+		createCon.setComboBoxCat();
+		contentPane.add(comboBoxCat);
 		
-		ComboBoxItems = new JComboBox();
-//		ComboBoxItems.addActionListener();
-		ComboBoxItems.setBounds(245, 177, 220, 26);
-		contentPane.add(ComboBoxItems);
+		comboBoxItems = new JComboBox<String>();
+		comboBoxItems.addActionListener(createCon);
+		comboBoxItems.setBounds(245, 247, 220, 26);
+		contentPane.add(comboBoxItems);
 		
 		JLabel lblCategory = new JLabel("Category");
 		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCategory.setBounds(245, 217, 103, 20);
+		lblCategory.setBounds(245, 147, 103, 20);
 		contentPane.add(lblCategory);
 		
 		JLabel lblListOfItems = new JLabel("List of items");
 		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblListOfItems.setBounds(245, 147, 115, 20);
+		lblListOfItems.setBounds(245, 217, 115, 20);
 		contentPane.add(lblListOfItems);
-		
-		txtTypeItem = new JTextField();
-		txtTypeItem.setBounds(245, 97, 220, 26);
-		contentPane.add(txtTypeItem);
-		txtTypeItem.setColumns(10);
 		
 		JLabel lblAmount = new JLabel("Amount");
 		lblAmount.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -189,19 +187,20 @@ public class CreateChecklistView extends JFrame {
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
-//		btnAdd.addActionListener();
+		btnAdd.addActionListener(createCon);
 		btnAdd.setBounds(245, 439, 100, 29);
 		contentPane.add(btnAdd);
 		
 		btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 18));
-//		btnDelete.addActionListener();
+		btnDelete.addActionListener(createCon);
 		btnDelete.setBounds(365, 439, 100, 29);
 		contentPane.add(btnDelete);
 		
-		JLabel lblName = new JLabel("Name");
-//		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblName.setBounds(245, 67, 69, 20);
+		lblName = new JLabel();
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblName.setBounds(245, 67, 220, 20);
 		contentPane.add(lblName);
+
 	}
 }

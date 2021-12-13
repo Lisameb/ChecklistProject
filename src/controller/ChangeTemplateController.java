@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import model.CategoryVo;
+import model.Checklist_itemVo;
 import model.ItemDao_DB;
 import model.ItemVo;
 import model.Item_tempDao_DB;
@@ -91,12 +92,20 @@ public class ChangeTemplateController implements  ActionListener {
 		
 		view.itemList.setText("");		
 		ArrayList<String> list = new ArrayList<String>();
+		int amount;
 		
 		TemplateVo temp = new TemplateVo(template);
-		int temp_id = tempDao.getTemplateID(temp);
-		list = itemTempDao.getItemsT(temp_id); 
+		temp.setTemplateID(tempDao.getTemplateID(temp));
+	
+		list = itemTempDao.getItemsT(temp.getTemplateID()); 
+		
 		for(int i = 0; i < list.size(); i++) {
-			view.itemList.append(list.get(i) + "\n");
+			ItemVo item  = new ItemVo(list.get(i));
+			item.setItemID(itemDao.getItemID(item));
+			Item_tempVo tempItem = new Item_tempVo(temp, item);
+			amount = itemTempDao.getAmount(tempItem);
+			
+			view.itemList.append(amount + " " + list.get(i) + "\n");
 		}
 	}
 	

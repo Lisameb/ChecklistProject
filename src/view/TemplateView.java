@@ -46,18 +46,18 @@ public class TemplateView extends JFrame {
 	public JTextArea taPreview;
 
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TemplateView frame = new TemplateView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TemplateView frame = new TemplateView();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -183,7 +183,8 @@ public class TemplateView extends JFrame {
 		panel.add(lblFU);
 		
 		btnSelect = new JButton("Select");
-		btnSelect.addActionListener(tempcon);
+		//btnSelect.addActionListener(tempcon);
+		btnSelect.addMouseListener(tempcon);
 		btnSelect.setBackground(SystemColor.text);
 		btnSelect.setBounds(396, 480, 124, 42);
 		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));

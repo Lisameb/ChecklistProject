@@ -74,10 +74,27 @@ public class TemplateDao_DB implements IDaoTemplate {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.err.println("Delete fehlgeschlagen!");
+			System.err.println("Get ID fehlgeschlagen!");
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	public String getTemplateName(int temp_id) {
+		String query = "SELECT name FROM template WHERE template_ID = " + temp_id;
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			String name;
+			if(resultset.next()) {
+				name = resultset.getString("name");
+				return name;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Get Name fehlgeschlagen!");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
