@@ -187,6 +187,7 @@ public class CreateChecklistView extends JFrame {
 		lblTitle.setBounds(307, 16, 357, 20);
 		contentPane.add(lblTitle);
 		
+		btnAdd = new JButton("Add");
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
 //		btnAdd.addActionListener();
 		btnAdd.setBounds(245, 439, 100, 29);
@@ -199,7 +200,7 @@ public class CreateChecklistView extends JFrame {
 		contentPane.add(btnDelete);
 		
 		JLabel lblName = new JLabel("Name");
-		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
+//		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblName.setBounds(245, 67, 69, 20);
 		contentPane.add(lblName);
 	}
