@@ -35,13 +35,11 @@ public class ChecklistDao_DB implements IDaoChecklist {
 			b = stmt.execute(query);
 			stmt.close();
 			return b;
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
 		}
-		
 		return b;
 	}
 
@@ -74,7 +72,8 @@ public class ChecklistDao_DB implements IDaoChecklist {
 			Statement stmt = daofactory.getCon().createStatement();
 			ResultSet resultset = stmt.executeQuery(query);
 			while(resultset.next()) {
-				allChecklist.add(resultset.getString("name"));	
+				allChecklist.add(resultset.getString("name"));
+				System.out.println(resultset.getString("name"));
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -88,7 +87,7 @@ public class ChecklistDao_DB implements IDaoChecklist {
 	
 	public void changeChecklistName(ChecklistVo old, String newName) {
 		String query = "UPDATE checklist SET name = '" + newName + "' WHERE checklist_ID = "
-						+ old.getChecklistID();
+						+ this.getChecklistID(old);
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			stmt.execute(query);

@@ -95,22 +95,6 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 	@Override
 	public void deleteItem(Checklist_itemVo checklist_item) {
 		if(this.checkCombo(checklist_item)) {
-			int amount = this.getAmount(checklist_item);
-			amount -= checklist_item.getAmount();
-			if(amount > 0) {
-				String query = "UPDATE checklist_item SET amount = "
-								+ amount + " WHERE checklist_ID = "
-								+ checklist_item.getChecklist_id() + " AND item_ID = "
-								+ checklist_item.getItem_id() + "";
-				try {
-					Statement stmt = daofactory.getCon().createStatement();
-					stmt.execute(query);
-					stmt.close();
-				} catch (SQLException e) {
-					System.err.println("deleteItem fehlgeschlagen!");
-					e.printStackTrace();
-				}
-			} else {
 				String query = "DELETE FROM checklist_item WHERE checklist_ID = "
 								+ checklist_item.getChecklist_id() + " AND item_id = "
 								+ checklist_item.getItem_id();
@@ -122,7 +106,6 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 					System.err.println("deleteItem fehlgeschlagen!");
 					e.printStackTrace();
 				}
-			}
 			
 		} else {
 			System.out.println("The item was not in the list in the first place!!!");
