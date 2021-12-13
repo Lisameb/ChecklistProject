@@ -152,4 +152,38 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 		
 	}
 
+	@Override
+	public void toggleCheck(Checklist_itemVo checklist_item) {
+		if(checklist_item.isChecked()) {
+			
+			String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = "
+							+ checklist_item.getChecklist_id() + " AND item_ID = "
+							+ checklist_item.getItem_id();
+			try {
+				Statement stmt = daofactory.getCon().createStatement();
+				stmt.execute(query);
+				stmt.close();
+			} catch (SQLException e) {
+				System.err.println("AddItem fehlgeschlagen!");
+				e.printStackTrace();
+			}
+		} else {
+			
+			
+			String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = "
+					+ checklist_item.getChecklist_id() + " AND item_ID = "
+					+ checklist_item.getItem_id();
+			try {
+				Statement stmt = daofactory.getCon().createStatement();
+				stmt.execute(query);
+				stmt.close();
+			} catch (SQLException e) {
+				System.err.println("ToggleItem fehlgeschlagen!");
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+
 }

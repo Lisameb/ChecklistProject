@@ -10,4 +10,5 @@ public abstract interface IDaoChecklist_item {
 	public abstract void deleteItem(Checklist_itemVo checklist_item);
 	public abstract void changeAmount(Checklist_itemVo checklist_item);
 	public abstract ArrayList<String> getItemsC(int checklist_id);
+	public abstract void toggleCheck(Checklist_itemVo checklist_item);
 }
