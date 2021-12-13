@@ -1,9 +1,11 @@
-package model;
+package model.item_template;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import model.DaoFactory;
 
 public class Item_tempDao_DB implements IDaoItem_temp {
 	

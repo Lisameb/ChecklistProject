@@ -1,4 +1,4 @@
-package model;
+package model.checklist;
 
 import java.util.ArrayList;
 

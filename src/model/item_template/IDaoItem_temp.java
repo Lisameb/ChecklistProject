@@ -1,4 +1,4 @@
-package model;
+package model.item_template;
 
 import java.util.ArrayList;
 

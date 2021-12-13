@@ -3,16 +3,16 @@ package controller;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-import model.CategoryVo;
-import model.ChecklistDao_DB;
-import model.ChecklistVo;
-import model.Checklist_itemDao_DB;
-import model.Checklist_itemVo;
 import model.DaoFactory;
-import model.ItemDao_DB;
-import model.ItemVo;
-import model.Item_tempVo;
-import model.TemplateVo;
+import model.checklist.ChecklistDao_DB;
+import model.checklist.ChecklistVo;
+import model.checklist_item.Checklist_itemDao_DB;
+import model.checklist_item.Checklist_itemVo;
+import model.item.CategoryVo;
+import model.item.ItemDao_DB;
+import model.item.ItemVo;
+import model.item_template.Item_tempVo;
+import model.template.TemplateVo;
 import view.ChangeChecklistView;
 import view.ItemView;
 

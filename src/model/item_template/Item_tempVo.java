@@ -1,4 +1,7 @@
-package model;
+package model.item_template;
+
+import model.item.ItemVo;
+import model.template.TemplateVo;
 
 public class Item_tempVo {
 

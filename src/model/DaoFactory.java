@@ -5,6 +5,19 @@ import util.Config;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import model.checklist.ChecklistDao_DB;
+import model.checklist.IDaoChecklist;
+import model.checklist_item.Checklist_itemDao_DB;
+import model.checklist_item.IDaoChecklist_item;
+import model.item.IDaoItem;
+import model.item.ItemDao_DB;
+import model.item_template.IDaoItem_temp;
+import model.item_template.Item_tempDao_DB;
+import model.template.IDaoTemplate;
+import model.template.TemplateDao_DB;
+import model.user.IDaoUser;
+import model.user.UserDao_DB;
+
 public class DaoFactory {
 	private static DaoFactory instance;
 	private String url = Config.URL;

@@ -167,6 +167,7 @@ public class CreateChecklistView extends JFrame {
 		contentPane.add(lblUnit);
 		
 		tfUnit = new JTextField();
+		tfUnit.setEditable(false);
 		tfUnit.setBounds(353, 325, 112, 26);
 		contentPane.add(tfUnit);
 		tfUnit.setColumns(10);

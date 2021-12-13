@@ -7,6 +7,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import model.*;
+import model.item_template.Item_tempDao_DB;
+import model.template.TemplateDao_DB;
+import model.template.TemplateVo;
 import view.ChangeChecklistView;
 import view.CreateChecklistView;
 import view.CreateNewChecklistView;

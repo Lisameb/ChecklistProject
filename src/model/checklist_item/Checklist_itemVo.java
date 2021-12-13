@@ -1,4 +1,4 @@
-package model;
+package model.checklist_item;
 
 public class Checklist_itemVo {
 	private int checklist_id;

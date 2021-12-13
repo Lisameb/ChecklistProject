@@ -1,9 +1,11 @@
-package model;
+package model.checklist_item;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import model.DaoFactory;
 
 public class Checklist_itemDao_DB implements IDaoChecklist_item {
 	

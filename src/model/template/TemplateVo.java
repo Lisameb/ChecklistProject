@@ -1,4 +1,4 @@
-package model;
+package model.template;
 
 public class TemplateVo {
 	

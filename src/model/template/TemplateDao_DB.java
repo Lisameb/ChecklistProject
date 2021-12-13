@@ -1,7 +1,9 @@
-package model;
+package model.template;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import model.DaoFactory;
 
 public class TemplateDao_DB implements IDaoTemplate {
 	

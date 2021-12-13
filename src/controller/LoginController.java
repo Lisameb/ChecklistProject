@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.DaoFactory;
-import model.UserDao_DB;
-import model.UserVo;
+import model.user.UserDao_DB;
+import model.user.UserVo;
 import view.LoginView;
 import view.TemplateView;
 
