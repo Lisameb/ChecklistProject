@@ -84,5 +84,19 @@ public class ChecklistDao_DB implements IDaoChecklist {
 		return allChecklist;
 		
 	}
+	
+	public void changeChecklistName(ChecklistVo old, String newName) {
+		String query = "UPDATE checklist SET name = '" + newName + "' WHERE checklist_ID = "
+						+ old.getChecklistID();
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			stmt.execute(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("changeChecklistName fehlgeschlagen!");
+			e.printStackTrace();
+		}
+	}
 
 }
