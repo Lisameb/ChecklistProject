@@ -88,20 +88,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	public void deleteItem(Item_tempVo item_temp) {
 		// TODO Auto-generated method stub
 		if(this.checkCombo(item_temp)) {
-			int amount = this.getAmount(item_temp);
-			amount--;
-			if(amount > 0) {
-				String query = "UPDATE item_temp SET amount = " + amount + " WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id() + "";
-				try {
-					Statement stmt = daofactory.getCon().createStatement();
-					stmt.execute(query);
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					System.err.println("deleteItem fehlgeschlagen!");
-					e.printStackTrace();
-				}
-			} else {
 				String query = "DELETE FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_id = " + item_temp.getItem_id();
 				try {
 					Statement stmt = daofactory.getCon().createStatement();
@@ -112,7 +98,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 					System.err.println("deleteItem fehlgeschlagen!");
 					e.printStackTrace();
 				}
-			}
+			
 			
 		} else {
 			System.out.println("The item is not in the list in the first place!!!");
