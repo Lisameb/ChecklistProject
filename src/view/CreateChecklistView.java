@@ -36,6 +36,12 @@ public class CreateChecklistView extends JFrame {
 	public JLabel lblMenTemp;
 	public JLabel lblMenCheck;
 	public JLabel lblMenBack;
+	
+	public JPanel panMenTemp; //besser wäre hierdrauf der ActionListener, nicht die labels
+	public JPanel panMenCheck;
+	public JPanel panMenBack; 
+	
+	
 	public JTextArea taChecklist;
 	public JComboBox ComboBoxCat;
 	public JComboBox ComboBoxItems;
@@ -43,6 +49,7 @@ public class CreateChecklistView extends JFrame {
 	public JButton btnDelete;
 	public JButton btnReset;
 	public JButton btnAdd;
+
 	
 
 	public CreateChecklistView() { 
@@ -55,7 +62,7 @@ public class CreateChecklistView extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 585);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		setExtendedState(JFrame.);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,7 +74,7 @@ public class CreateChecklistView extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panMenTemp = new JPanel();
+		panMenTemp = new JPanel();
 		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panMenTemp.setBackground(SystemColor.inactiveCaptionBorder);
 		panMenTemp.setBounds(0, 183, 219, 60);
@@ -76,22 +83,22 @@ public class CreateChecklistView extends JFrame {
 		
 		lblMenTemp = new JLabel("templates");
 		lblMenTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblMenTemp.setBounds(15, 16, 112, 20);
+		lblMenTemp.setBounds(15, 21, 112, 20);
 		panMenTemp.add(lblMenTemp);
 		
-		JPanel panMenCheck = new JPanel();
+		panMenCheck = new JPanel();
 		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
 		panMenCheck.setBackground(SystemColor.inactiveCaptionBorder);
 		panMenCheck.setBounds(0, 243, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
 		
-		JLabel lblMenCheck = new JLabel("your checklists");
-		lblMenCheck.setBounds(15, 16, 134, 20);
+		lblMenCheck = new JLabel("your checklists");
+		lblMenCheck.setBounds(15, 21, 134, 20);
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JPanel panMenBack = new JPanel();
+		panMenBack = new JPanel();
 		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
 		panMenBack.setBounds(0, 303, 219, 60);
@@ -99,7 +106,7 @@ public class CreateChecklistView extends JFrame {
 		panMenBack.setLayout(null);
 		
 		lblMenBack = new JLabel("back to menu");
-		lblMenBack.setBounds(15, 24, 136, 20);
+		lblMenBack.setBounds(15, 21, 136, 20);
 		panMenBack.add(lblMenBack);
 		lblMenBack.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
@@ -125,53 +132,53 @@ public class CreateChecklistView extends JFrame {
 		
 		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 18));
+//		btnSave.addActionListener();
 		btnSave.setForeground(SystemColor.windowText);
 		btnSave.setBounds(633, 484, 115, 29);
 		contentPane.add(btnSave);
 		
 		ComboBoxCat = new JComboBox();
 //		ComboBoxCat.addActionListener();
-		ComboBoxCat.setBounds(245, 95, 220, 26);
+		ComboBoxCat.setBounds(245, 247, 220, 26);
 		contentPane.add(ComboBoxCat);
 		
 		ComboBoxItems = new JComboBox();
 //		ComboBoxItems.addActionListener();
-		ComboBoxItems.setBounds(245, 170, 220, 26);
+		ComboBoxItems.setBounds(245, 177, 220, 26);
 		contentPane.add(ComboBoxItems);
 		
 		JLabel lblCategory = new JLabel("Category");
 		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCategory.setBounds(245, 67, 103, 20);
+		lblCategory.setBounds(245, 217, 103, 20);
 		contentPane.add(lblCategory);
 		
 		JLabel lblListOfItems = new JLabel("List of items");
 		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblListOfItems.setBounds(245, 142, 115, 20);
+		lblListOfItems.setBounds(245, 147, 115, 20);
 		contentPane.add(lblListOfItems);
 		
 		txtTypeItem = new JTextField();
-		txtTypeItem.setText("or type in an item here");
-		txtTypeItem.setBounds(245, 229, 220, 26);
+		txtTypeItem.setBounds(245, 97, 220, 26);
 		contentPane.add(txtTypeItem);
 		txtTypeItem.setColumns(10);
 		
 		JLabel lblAmount = new JLabel("Amount");
 		lblAmount.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAmount.setBounds(245, 287, 85, 20);
+		lblAmount.setBounds(245, 295, 85, 20);
 		contentPane.add(lblAmount);
 		
 		tfAmount = new JTextField();
-		tfAmount.setBounds(245, 315, 69, 26);
+		tfAmount.setBounds(245, 325, 69, 26);
 		contentPane.add(tfAmount);
 		tfAmount.setColumns(10);
 		
 		JLabel lblUnit = new JLabel("Unit");
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblUnit.setBounds(353, 287, 69, 20);
+		lblUnit.setBounds(353, 295, 69, 20);
 		contentPane.add(lblUnit);
 		
 		tfUnit = new JTextField();
-		tfUnit.setBounds(353, 315, 112, 26);
+		tfUnit.setBounds(353, 325, 112, 26);
 		contentPane.add(tfUnit);
 		tfUnit.setColumns(10);
 		
@@ -180,22 +187,21 @@ public class CreateChecklistView extends JFrame {
 		lblTitle.setBounds(307, 16, 357, 20);
 		contentPane.add(lblTitle);
 		
-		btnReset = new JButton("Reset");
-//		btnReset.addActionListener();
-		btnReset.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnReset.setBounds(245, 439, 220, 29);
-		contentPane.add(btnReset);
-		
 		btnAdd = new JButton("Add");
-//		btnAdd.addActionListener();
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnAdd.setBounds(245, 378, 100, 29);
+//		btnAdd.addActionListener();
+		btnAdd.setBounds(245, 439, 100, 29);
 		contentPane.add(btnAdd);
 		
 		btnDelete = new JButton("Delete");
-//		btnDelete.addActionListener();
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnDelete.setBounds(365, 378, 100, 29);
+//		btnDelete.addActionListener();
+		btnDelete.setBounds(365, 439, 100, 29);
 		contentPane.add(btnDelete);
+		
+		JLabel lblName = new JLabel("Name");
+//		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblName.setBounds(245, 67, 69, 20);
+		contentPane.add(lblName);
 	}
 }
