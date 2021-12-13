@@ -161,6 +161,7 @@ public class ChangeTemplateController implements  ActionListener {
 			}
 			addItemtoTemp(temp, item, amount);
 			updateTextArea(temp);
+			view.textFieldAmount.setText("");
 		}
 		if(src == view.btnDeleteItemTo) {
 			String temp = (String)view.comboBoxTemp.getSelectedItem();

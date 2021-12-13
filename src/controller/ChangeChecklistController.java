@@ -141,6 +141,7 @@ public class ChangeChecklistController implements ActionListener{
 			}
 			addItemtoChecklist(checklist, item, amount);
 			updateTextArea(checklist);
+			view.tfAmount.setText("");
 		}
 		
 		if(src == view.btnDelete) {

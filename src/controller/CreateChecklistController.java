@@ -143,7 +143,7 @@ public class CreateChecklistController implements ActionListener {
 			view.setVisible(true);
 			newView.dispose();
 			saveAllTempItems(temp_id);
-
+			setComboBoxCat();
 			updateTextArea(name);
 		}
 		if(src == view.comboBoxCat) {
@@ -163,6 +163,7 @@ public class CreateChecklistController implements ActionListener {
 			}
 			addItemtoChecklist(checklist, item, amount);
 			updateTextArea(checklist);
+			view.tfAmount.setText("");
 		}
 		
 		if(src == view.btnDelete) {

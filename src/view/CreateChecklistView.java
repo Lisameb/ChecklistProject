@@ -40,7 +40,6 @@ public class CreateChecklistView extends JFrame {
 	public JTextArea taChecklist;
 	public JComboBox<String> comboBoxCat;
 	public JComboBox<String> comboBoxItems;
-	public JButton btnSave;
 	public JButton btnDelete;
 	public JButton btnReset;
 	public JButton btnAdd;
@@ -132,17 +131,9 @@ public class CreateChecklistView extends JFrame {
 		taChecklist.setBounds(489, 67, 259, 401);
 		contentPane.add(taChecklist);
 		
-		btnSave = new JButton("Save");
-		btnSave.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnSave.addActionListener(createCon);
-		btnSave.setForeground(SystemColor.windowText);
-		btnSave.setBounds(633, 484, 115, 29);
-		contentPane.add(btnSave);
-		
 		comboBoxCat = new JComboBox<String>();
 		comboBoxCat.addActionListener(createCon);
 		comboBoxCat.setBounds(245, 177, 220, 26);
-		createCon.setComboBoxCat();
 		contentPane.add(comboBoxCat);
 		
 		comboBoxItems = new JComboBox<String>();

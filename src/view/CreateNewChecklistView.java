@@ -21,7 +21,6 @@ public class CreateNewChecklistView extends JFrame{
 	public JPanel contentPane;
 	public JButton btnNew;
 	public JTextField tfName;
-	public JTextField tfNameExists;
 	public CreateChecklistController contro;
 	
 
@@ -70,12 +69,6 @@ public class CreateNewChecklistView extends JFrame{
 		lblCreateANew.setBounds(22, 13, 206, 16);
 		panel.add(lblCreateANew);
 		
-		tfNameExists = new JTextField();
-		tfNameExists.setForeground(Color.RED);
-		tfNameExists.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		tfNameExists.setBounds(88, 90, 139, 16);
-		tfNameExists.setBackground(new Color(176, 224, 230));
-		panel.add(tfNameExists);
-		tfNameExists.setColumns(10);
+
 	}
 }
