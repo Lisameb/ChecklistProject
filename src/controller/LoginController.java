@@ -2,15 +2,12 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import model.DaoFactory;
 import model.UserDao_DB;
 import model.UserVo;
-import view.ChangeTemplateView;
 import view.LoginView;
+import view.TemplateView;
 
 public class LoginController implements ActionListener{
 
@@ -63,8 +60,8 @@ public class LoginController implements ActionListener{
 			if(this.loginUser()) {
 				view.setTxtUsername("");
 				view.setTxtPassword("");
-				ChangeTemplateView viewChangeTemp = new ChangeTemplateView();
-				viewChangeTemp.setVisible(true);
+				TemplateView templateview = new TemplateView();
+				templateview.setVisible(true);
 				view.getFrame().dispose();
 			}
 			else {

@@ -17,7 +17,7 @@ import view.ChangeChecklistView;
 import view.ItemView;
 
 
-public class ChangeChecklistControllor implements ActionListener{
+public class ChangeChecklistController implements ActionListener{
 
 	private ChangeChecklistView view;
 	private ChecklistDao_DB checklistDao;
@@ -25,7 +25,7 @@ public class ChangeChecklistControllor implements ActionListener{
 	private Checklist_itemDao_DB checklistItemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
-	public ChangeChecklistControllor(ChangeChecklistView view) {
+	public ChangeChecklistController(ChangeChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		this.itemDao = (ItemDao_DB) daofactory.getItemDao();

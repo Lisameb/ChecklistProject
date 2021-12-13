@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
-import controller.ChangeChecklistControllor;
+import controller.ChangeChecklistController;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -42,7 +42,7 @@ public class ChangeChecklistView extends JFrame{
 	public JButton btnDeleteChecklist;
 	private String chosenChecklist;
 	
-	private ChangeChecklistControllor changeCo;
+	private ChangeChecklistController changeCo;
 	
 	public ChangeChecklistView() {
 		initialize();
@@ -54,7 +54,7 @@ public class ChangeChecklistView extends JFrame{
 	}
 
 private void initialize() {
-		changeCo = new ChangeChecklistControllor(this);
+		changeCo = new ChangeChecklistController(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 585);
