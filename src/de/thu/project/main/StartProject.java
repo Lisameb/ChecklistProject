@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import view.ChangeChecklistView;
 import view.ChangeTemplateView;
 import view.ItemView;
-import view.LoginView;
-
+//import view.LoginView;
+import view.LoginViewTest;
 public class StartProject {
 
 	public static void main(String[] args) {
@@ -22,7 +22,8 @@ public class StartProject {
 					 * For login and checklist creation GUI (true start of application):
 					 */
 					
-					LoginView window = new LoginView();
+//					LoginView window = new LoginView();
+					LoginViewTest window = new LoginViewTest();
 					window.getFrame().setVisible(true);
 					
 					/*
