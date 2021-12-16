@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import model.DaoFactory;
@@ -18,8 +20,10 @@ import model.template.TemplateDao_DB;
 import model.template.TemplateVo;
 import view.CreateChecklistView;
 import view.CreateNewChecklistView;
+import view.TemplateView;
+import view.UseChecklistView;
 
-public class CreateChecklistController implements ActionListener {
+public class CreateChecklistController implements ActionListener,MouseListener {
 
 	int temp_id;
 	private DaoFactory daofactory = DaoFactory.getInstance();
@@ -174,6 +178,51 @@ public class CreateChecklistController implements ActionListener {
 			updateTextArea(checklist);
 			
 		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		Object src = e.getSource();
+		
+		if(src == view.lblMenTemp) {
+			TemplateView tView = new TemplateView();
+			tView.setVisible(true);
+			view.dispose();
+		}
+		
+		if(src == view.lblMenCheck) {
+			UseChecklistView uclView = new UseChecklistView();
+			uclView.getFrame().setVisible(true);
+			view.dispose();
+		}
+		if(src == view.lblMenBack) {
+			//TODO create link to menuView
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

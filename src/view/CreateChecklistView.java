@@ -6,7 +6,19 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+
 import controller.CreateChecklistController;
+
+import controller.UseChecklistController;
+
+import javax.swing.JToolBar;
+import java.awt.SystemColor;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -32,7 +44,7 @@ public class CreateChecklistView extends JFrame {
 	public JLabel lblMenBack;
 	public JLabel lblName;
 	
-	public JPanel panMenTemp; //besser wäre hierdrauf der ActionListener, nicht die labels
+	public JPanel panMenTemp; 
 	public JPanel panMenCheck;
 	public JPanel panMenBack; 
 	
@@ -45,15 +57,11 @@ public class CreateChecklistView extends JFrame {
 	public JButton btnAdd;
 	public JButton btnShowItems;
 
-	public CreateChecklistController createCon;
+	public CreateChecklistController clController;
 	public int temp_id;
-
-	public CreateChecklistView() { 
-		initialize();
-	}
 	
 	public CreateChecklistView(CreateChecklistController createCon) {
-		this.createCon = createCon;
+		this.clController = createCon;
 		initialize();
 	}
 
@@ -82,6 +90,7 @@ public class CreateChecklistView extends JFrame {
 		panMenTemp.setLayout(null);
 		
 		lblMenTemp = new JLabel("templates");
+		lblMenTemp.addMouseListener(clController);
 		lblMenTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMenTemp.setBounds(15, 21, 112, 20);
 		panMenTemp.add(lblMenTemp);
@@ -94,6 +103,7 @@ public class CreateChecklistView extends JFrame {
 		panMenCheck.setLayout(null);
 		
 		lblMenCheck = new JLabel("your checklists");
+		lblMenCheck.addMouseListener(clController);
 		lblMenCheck.setBounds(15, 21, 134, 20);
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -106,6 +116,7 @@ public class CreateChecklistView extends JFrame {
 		panMenBack.setLayout(null);
 		
 		lblMenBack = new JLabel("back to menu");
+		lblMenBack.addMouseListener(clController);
 		lblMenBack.setBounds(15, 21, 136, 20);
 		panMenBack.add(lblMenBack);
 		lblMenBack.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -132,12 +143,12 @@ public class CreateChecklistView extends JFrame {
 		contentPane.add(taChecklist);
 		
 		comboBoxCat = new JComboBox<String>();
-		comboBoxCat.addActionListener(createCon);
+		comboBoxCat.addActionListener(clController);
 		comboBoxCat.setBounds(245, 177, 220, 26);
 		contentPane.add(comboBoxCat);
 		
 		comboBoxItems = new JComboBox<String>();
-		comboBoxItems.addActionListener(createCon);
+		comboBoxItems.addActionListener(clController);
 		comboBoxItems.setBounds(245, 247, 220, 26);
 		contentPane.add(comboBoxItems);
 		
@@ -179,13 +190,13 @@ public class CreateChecklistView extends JFrame {
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnAdd.addActionListener(createCon);
+		btnAdd.addActionListener(clController);
 		btnAdd.setBounds(245, 439, 100, 29);
 		contentPane.add(btnAdd);
 		
 		btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnDelete.addActionListener(createCon);
+		btnDelete.addActionListener(clController);
 		btnDelete.setBounds(365, 439, 100, 29);
 		contentPane.add(btnDelete);
 		
