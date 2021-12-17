@@ -1,10 +1,12 @@
 package controller;
 
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 
 import model.DaoFactory;
 import model.checklist.*;
@@ -82,7 +84,19 @@ public class UseChecklistController implements ActionListener {
 			
 		}
 		if(src == view.exportButton) {
-			// TODO call methode to create XML file --> Jonas, Lea, Lisa
+			// TODO call method to create XML file --> Jonas, Lea, Lisa
+			
+			// open PDF
+			JFileChooser file = new JFileChooser();
+			int returnVal = file.showSaveDialog(null);
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	            File fileToSave = file.getSelectedFile();
+	            fileToSave.getAbsolutePath();
+	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+	        } else {
+	        	// TODO window "path not found"
+	        }
+	        
 		}
 		
 		if(src == view.panel_2) {

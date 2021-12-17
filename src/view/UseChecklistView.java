@@ -15,6 +15,7 @@ import model.checklist.ChecklistVo;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JCheckBox;
@@ -138,7 +139,6 @@ public class UseChecklistView {
 		JLabel lblNewLabel = new JLabel("Checklist");
 		lblNewLabel.setBounds(91, 6, 113, 16);
 		panel_1.add(lblNewLabel);
-				
 	}
 	
 	public void createrCheckBox(int i, ArrayList<String> list)
