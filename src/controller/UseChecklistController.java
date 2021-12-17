@@ -81,6 +81,9 @@ public class UseChecklistController implements ActionListener {
 			}
 			
 		}
+		if(src == view.exportButton) {
+			// TODO call methode to create XML file --> Jonas, Lea, Lisa
+		}
 		
 		if(src == view.panel_2) {
 			tview = new TemplateView();

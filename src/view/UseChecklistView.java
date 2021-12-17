@@ -36,6 +36,7 @@ public class UseChecklistView {
 	public JComboBox<String> comboBox_check;
 	public JButton modifyButton;
 	public JButton openButton;
+	public JButton exportButton;
 	public JCheckBox checkBox_check;
 	private JCheckBox item = new JCheckBox();
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
@@ -73,7 +74,7 @@ public class UseChecklistView {
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBounds(0, 0, 155, 272);
+		panel.setBounds(0, 0, 155, 253);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -99,13 +100,13 @@ public class UseChecklistView {
 		
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(39, 133, 78, 16);
+		lblGoTo.setBounds(6, 164, 143, 16);
 		panel.add(lblGoTo);
 		
 		panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(6, 154, 143, 27);
+		panel_2.setBounds(6, 186, 143, 27);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -116,7 +117,7 @@ public class UseChecklistView {
 		panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(6, 180, 143, 27);
+		panel_3.setBounds(6, 213, 143, 27);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -124,8 +125,13 @@ public class UseChecklistView {
 		lblBackToMenu.setBounds(6, 6, 86, 16);
 		panel_3.add(lblBackToMenu);
 		
+		exportButton = new JButton("Export");
+		exportButton.addActionListener(clcon);
+		exportButton.setBounds(32, 126, 97, 25);
+		panel.add(exportButton);
+		
 		panel_1 = new JPanel();
-		panel_1.setBounds(154, 0, 296, 272);
+		panel_1.setBounds(154, 0, 278, 253);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
