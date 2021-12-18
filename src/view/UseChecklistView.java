@@ -2,6 +2,7 @@ package view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.SystemColor;
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ import model.checklist.ChecklistVo;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JCheckBox;
@@ -46,6 +49,8 @@ public class UseChecklistView {
 	public JPanel panel_3;
 	private UseChecklistController clcon;
 	private ChecklistVo clvo;
+	private Image img_sidebar;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -65,8 +70,9 @@ public class UseChecklistView {
 	}
 
 	private void initialize() {
+		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 546, Image.SCALE_SMOOTH);
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 785, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -75,7 +81,7 @@ public class UseChecklistView {
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBounds(0, 0, 155, 253);
+		panel.setBounds(0, 0, 220, 546);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -101,15 +107,16 @@ public class UseChecklistView {
 		
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(6, 164, 143, 16);
+		lblGoTo.setBounds(6, 281, 270, 16);
 		panel.add(lblGoTo);
 		
 		panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(6, 186, 143, 27);
+		panel_2.setBounds(20, 430, 143, 27);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
+		panel_2.addMouseListener(clcon);
 		
 		JLabel lblCreateChecklist = new JLabel("create checklist");
 		lblCreateChecklist.setBounds(6, 6, 103, 16);
@@ -118,9 +125,10 @@ public class UseChecklistView {
 		panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(6, 213, 143, 27);
+		panel_3.setBounds(20, 486, 143, 27);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
+		panel_3.addMouseListener(clcon);
 		
 		JLabel lblBackToMenu = new JLabel("back to menu");
 		lblBackToMenu.setBounds(6, 6, 86, 16);
@@ -131,8 +139,14 @@ public class UseChecklistView {
 		exportButton.setBounds(32, 126, 97, 25);
 		panel.add(exportButton);
 		
+		JLabel lblBack = new JLabel("");
+		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+		lblBack.setBounds(0, 0, 220, 546);
+		lblBack.setIcon(new ImageIcon(img_sidebar));
+		panel.add(lblBack);
+		
 		panel_1 = new JPanel();
-		panel_1.setBounds(154, 0, 278, 253);
+		panel_1.setBounds(218, 0, 551, 546);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		

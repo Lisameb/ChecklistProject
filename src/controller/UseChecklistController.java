@@ -23,7 +23,7 @@ import view.*;
  * 
  **********************************************/
 
-public class UseChecklistController implements ActionListener {
+public class UseChecklistController implements ActionListener, MouseListener {
 
 	private UseChecklistView view;
 	private TemplateView tview;
@@ -102,16 +102,47 @@ public class UseChecklistController implements ActionListener {
 	        
 		}
 		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		Object src = evt.getSource();
 		if(src == view.panel_2) {
 			tview = new TemplateView();
 			tview.setVisible(true);
+			view.getFrame().dispose();
 		}
 		
 		if(src == view.panel_3) {
-			//TODO Aufruf von MenuView
 			mview = new MenuView();
-			mview.getFrame().setVisible(true); // Panel in MenuView fehlt -> ist bisher komplett leer
+			mview.setVisible(true);
+			view.getFrame().dispose();
 		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
