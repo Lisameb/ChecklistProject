@@ -31,7 +31,7 @@ public class CreateNewChecklistView extends JFrame{
 	public void initialize() {
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 300, 230);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
