@@ -1,7 +1,9 @@
 package controller;
 
+import java.awt.Desktop;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
@@ -86,15 +88,16 @@ public class UseChecklistController implements ActionListener {
 		if(src == view.exportButton) {
 			// TODO call method to create XML file --> Jonas, Lea, Lisa
 			
-			// open PDF
+			/*move to button "create pdf" after gui was updated --> Katha & Lea*/
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showSaveDialog(null);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File fileToSave = file.getSelectedFile();
 	            fileToSave.getAbsolutePath();
 	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+
 	        } else {
-	        	// TODO window "path not found"
+	        	// TODO window "path not found" -> Katha&Lea
 	        }
 	        
 		}
