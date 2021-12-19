@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
 
 /**********************************************
  * UseChecklistView-Class
@@ -41,6 +42,7 @@ public class UseChecklistView {
 	public JButton modifyButton;
 	public JButton openButton;
 	public JButton exportButton;
+	public JButton btnCreatePdf;
 	public JCheckBox checkBox_check;
 	private JCheckBox item = new JCheckBox();
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
@@ -96,18 +98,33 @@ public class UseChecklistView {
 		panel.add(comboBox_check);
 		
 		openButton = new JButton("Open");
+		openButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		openButton.addActionListener(clcon);
-		openButton.setBounds(80, 92, 69, 29);
+		openButton.setBounds(20, 95, 96, 29);
 		panel.add(openButton);
 		
 		modifyButton = new JButton("Modify");
+		modifyButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		modifyButton.addActionListener(clcon);
-		modifyButton.setBounds(6, 92, 68, 29);
 		panel.add(modifyButton);
+		modifyButton.setBounds(20, 137, 96, 29);
+		
+		btnCreatePdf = new JButton("Create PDF");
+		btnCreatePdf.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCreatePdf.setBounds(20, 179, 96, 29);
+		btnCreatePdf.addActionListener(clcon);
+		panel.add(btnCreatePdf);
+		
+		exportButton = new JButton("Export");
+		exportButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		exportButton.addActionListener(clcon);
+		exportButton.setBounds(20, 221, 96, 29);
+		panel.add(exportButton);
+		
 		
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(6, 281, 270, 16);
+		lblGoTo.setBounds(20, 347, 202, 16);
 		panel.add(lblGoTo);
 		
 		panel_2 = new JPanel();
@@ -134,11 +151,6 @@ public class UseChecklistView {
 		lblBackToMenu.setBounds(6, 6, 86, 16);
 		panel_3.add(lblBackToMenu);
 		
-		exportButton = new JButton("Export");
-		exportButton.addActionListener(clcon);
-		exportButton.setBounds(32, 126, 97, 25);
-		panel.add(exportButton);
-		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
 		lblBack.setBounds(0, 0, 220, 546);
@@ -146,7 +158,7 @@ public class UseChecklistView {
 		panel.add(lblBack);
 		
 		panel_1 = new JPanel();
-		panel_1.setBounds(218, 0, 551, 546);
+		panel_1.setBounds(216, 0, 551, 546);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		

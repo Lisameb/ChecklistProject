@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import model.DaoFactory;
 import model.checklist.*;
@@ -86,20 +87,45 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			
 		}
 		if(src == view.exportButton) {
-			// TODO call method to create XML file --> Jonas, Lea, Lisa
-			
-			/*move to button "create pdf" after gui was updated --> Katha & Lea*/
+
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showSaveDialog(null);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
-	            File fileToSave = file.getSelectedFile();
+	        	File fileToSave;
+	            String path = file.getSelectedFile().getPath();
+	             
+	            if (!path.toLowerCase().endsWith(".xml")) {
+	              path = path + ".xml";
+	            } 
+	            
+	            fileToSave = new File(path);
 	            fileToSave.getAbsolutePath();
 	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
 	            export.createXML();
 	        } else {
-	        	// TODO window "path not found" -> Katha&Lea
+	        	JOptionPane.showMessageDialog(null,"Path not found :(");
 	        }
 	        
+		}
+		
+		if (src == view.btnCreatePdf) {
+			JFileChooser file = new JFileChooser();
+			int returnVal = file.showSaveDialog(null);
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	            File fileToSave;
+	            String path = file.getSelectedFile().getPath();
+	             
+	            if (!path.toLowerCase().endsWith(".pdf")) {
+	              path = path + ".pdf";
+	            } 
+	            
+	            fileToSave = new File(path);
+	            fileToSave.getAbsolutePath();
+	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+	            export.createPDF();
+	        } else {
+	        	JOptionPane.showMessageDialog(null,"Path not found :(");
+	        }
 		}
 		
 		
