@@ -125,6 +125,24 @@ public class ItemDao_DB implements IDaoItem {
 			e.printStackTrace();
 		}
 		return allCat;
-	}	
+	}
+	
+	public String getCategoryID(ItemVo item) {
+
+		String query = "SELECT category FROM item WHERE name = '" + item.getItemName() + "'";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			ResultSet resultset = stmt.executeQuery(query);
+			String category;
+			if(resultset.next()) {
+				category = resultset.getString("category");
+				return category;
+			}
+		} catch (SQLException e) {
+			System.err.println("getCategory fehlgeschlagen!");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }
