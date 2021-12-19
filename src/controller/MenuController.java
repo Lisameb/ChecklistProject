@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import view.ChangeChecklistView;
 import view.ChangeTemplateView;
+import view.ImportChecklistView;
 import view.ItemView;
 import view.LoginViewTest;
 import view.MenuView;
@@ -55,9 +56,9 @@ public class MenuController implements MouseListener{
 			mView.dispose();
 			
 		}else if(src == mView.panel_importChecklist) {
-//			ImportChecklistView icView = new ImportChecklistView();
-//			icView.setVisible(true);
-//			mView.dispose();
+			ImportChecklistView icView = new ImportChecklistView();
+			icView.setVisible(true);
+			mView.dispose();
 			
 		}else if(src == mView.panel_manageTemplates) {
 			ChangeTemplateView ctView = new ChangeTemplateView();
