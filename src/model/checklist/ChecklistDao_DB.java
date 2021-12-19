@@ -75,7 +75,6 @@ public class ChecklistDao_DB implements IDaoChecklist {
 			ResultSet resultset = stmt.executeQuery(query);
 			while(resultset.next()) {
 				allChecklist.add(resultset.getString("name"));
-				System.out.println(resultset.getString("name"));
 			}
 			stmt.close();
 		} catch (SQLException e) {

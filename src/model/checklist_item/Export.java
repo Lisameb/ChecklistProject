@@ -159,11 +159,9 @@ public class Export {
 			item.setItemID(itemDao.getItemID(item));
 			Checklist_itemVo checkItem = new Checklist_itemVo(checklistVo.getChecklistID(), item.getItemID());
 			int amount = checkItemDao.getAmount(checkItem);
-			System.out.println(amount);
 			item.setItemID(itemDao.getItemID(item));
 			child.addContent(new Element("cat_id").addContent(itemDao.getCategoryID(item)));
 			child.addContent(new Element("name").addContent(allItems.get(i)));
-			//child.addContent(new Element("amount").addContent(checkItemDao.getAmount(checkItem)));
 			child.addContent(new Element("amount").addContent(amount+""));
 			root.addContent(child);
 			

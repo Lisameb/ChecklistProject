@@ -32,7 +32,6 @@ public class LoginControllerTest implements ActionListener{
 		UserVo logUser = new UserVo(un, pas);
 		if(userDao.checkPassword(logUser)) {
 			daofactory.setCurrent_user(un);
-			System.out.println(daofactory.getCurrent_user());
 			return true;
 		}
 		return false;
