@@ -95,7 +95,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	            File fileToSave = file.getSelectedFile();
 	            fileToSave.getAbsolutePath();
 	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
-
+	            export.createXML();
 	        } else {
 	        	// TODO window "path not found" -> Katha&Lea
 	        }
