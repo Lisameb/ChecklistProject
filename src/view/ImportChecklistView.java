@@ -17,8 +17,8 @@ public class ImportChecklistView extends JFrame{
 	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
 	
 	public JPanel contentPane;
-	public JTextArea taChecklist;
-	private JTextField textField;
+	//public JTextArea taChecklist;
+	public JTextField textField;
 	public JLabel lblNameChecklist;
 	public JTextArea textArea;
 	public JButton btnImport;
