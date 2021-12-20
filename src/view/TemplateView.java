@@ -186,7 +186,7 @@ public class TemplateView extends JFrame {
 		btnSelect = new JButton("Select");
 		btnSelect.addMouseListener(tempcon);
 		btnSelect.setBackground(Color.WHITE);
-		btnSelect.setBounds(574, 486, 139, 42);
+		btnSelect.setBounds(563, 486, 150, 42);
 		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
 		contentPane.add(btnSelect);
 		
@@ -216,7 +216,7 @@ public class TemplateView extends JFrame {
 		btnBack.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
 		btnBack.addMouseListener(tempcon);
 		btnBack.setBackground(Color.WHITE);
-		btnBack.setBounds(396, 486, 139, 42);
+		btnBack.setBounds(396, 486, 150, 42);
 		contentPane.add(btnBack);
 		
 	}
