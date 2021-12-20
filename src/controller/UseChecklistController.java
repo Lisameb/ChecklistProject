@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import model.DaoFactory;
 import model.checklist.*;
@@ -23,7 +24,7 @@ import view.*;
  * 
  **********************************************/
 
-public class UseChecklistController implements ActionListener {
+public class UseChecklistController implements ActionListener, MouseListener {
 
 	private UseChecklistView view;
 	private TemplateView tview;
@@ -86,32 +87,88 @@ public class UseChecklistController implements ActionListener {
 			
 		}
 		if(src == view.exportButton) {
-			// TODO call method to create XML file --> Jonas, Lea, Lisa
-			
-			/*move to button "create pdf" after gui was updated --> Katha & Lea*/
+
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showSaveDialog(null);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
-	            File fileToSave = file.getSelectedFile();
+	        	File fileToSave;
+	            String path = file.getSelectedFile().getPath();
+	             
+	            if (!path.toLowerCase().endsWith(".xml")) {
+	              path = path + ".xml";
+	            } 
+	            
+	            fileToSave = new File(path);
 	            fileToSave.getAbsolutePath();
 	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
-
+	            export.createXML();
 	        } else {
-	        	// TODO window "path not found" -> Katha&Lea
+	        	JOptionPane.showMessageDialog(null,"Path not found :(");
 	        }
 	        
 		}
 		
+		if (src == view.btnCreatePdf) {
+			JFileChooser file = new JFileChooser();
+			int returnVal = file.showSaveDialog(null);
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	            File fileToSave;
+	            String path = file.getSelectedFile().getPath();
+	             
+	            if (!path.toLowerCase().endsWith(".pdf")) {
+	              path = path + ".pdf";
+	            } 
+	            
+	            fileToSave = new File(path);
+	            fileToSave.getAbsolutePath();
+	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+	            export.createPDF();
+	        } else {
+	        	JOptionPane.showMessageDialog(null,"Path not found :(");
+	        }
+		}
+		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		Object src = evt.getSource();
 		if(src == view.panel_2) {
 			tview = new TemplateView();
 			tview.setVisible(true);
+			view.getFrame().dispose();
 		}
 		
 		if(src == view.panel_3) {
-			//TODO Aufruf von MenuView
 			mview = new MenuView();
-			mview.getFrame().setVisible(true); // Panel in MenuView fehlt -> ist bisher komplett leer
+			mview.setVisible(true);
+			view.getFrame().dispose();
 		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

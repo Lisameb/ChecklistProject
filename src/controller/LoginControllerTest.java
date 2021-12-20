@@ -8,6 +8,7 @@ import model.DaoFactory;
 import model.user.UserDao_DB;
 import model.user.UserVo;
 import view.LoginViewTest;
+import view.MenuView;
 import view.TemplateView;
 
 public class LoginControllerTest implements ActionListener{
@@ -31,7 +32,6 @@ public class LoginControllerTest implements ActionListener{
 		UserVo logUser = new UserVo(un, pas);
 		if(userDao.checkPassword(logUser)) {
 			daofactory.setCurrent_user(un);
-			System.out.println(daofactory.getCurrent_user());
 			return true;
 		}
 		return false;
@@ -61,8 +61,10 @@ public class LoginControllerTest implements ActionListener{
 			if(this.loginUser()) {
 				view.setTxtLogUsername("");
 				view.setTxtLogPassword("");
-				TemplateView templateview = new TemplateView();
-				templateview.setVisible(true);
+//				TemplateView templateview = new TemplateView();
+//				templateview.setVisible(true);
+				MenuView menu = new MenuView();
+				menu.setVisible(true);
 				view.getFrame().dispose();
 			}
 			else {

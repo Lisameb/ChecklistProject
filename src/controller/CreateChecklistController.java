@@ -34,9 +34,11 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	private TemplateDao_DB tempDao;
 	private CreateChecklistView view;
 	private CreateNewChecklistView newView;
+	private TemplateView tempView;
 	
-	public CreateChecklistController(int temp_id) {
+	public CreateChecklistController(TemplateView tempView, int temp_id) {
 		this.temp_id = temp_id;
+		this.tempView = tempView;
 		newView = new CreateNewChecklistView(this);
 		newView.setVisible(true);
 		itemTemp = (Item_tempDao_DB) daofactory.getItem_tempDao();
@@ -146,6 +148,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 			view.lblName.setText(name);
 			view.setVisible(true);
 			newView.dispose();
+			tempView.dispose();
 			saveAllTempItems(temp_id);
 			setComboBoxCat();
 			updateTextArea(name);

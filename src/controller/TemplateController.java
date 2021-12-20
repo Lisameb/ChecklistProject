@@ -76,7 +76,7 @@ public class TemplateController implements MouseListener,ActionListener {
 			}
 		}
 		if(src == tempview.btnSelect && temp_id != 0) {
-			CreateChecklistController createCheckContro = new CreateChecklistController(temp_id);
+			CreateChecklistController createCheckContro = new CreateChecklistController(tempview,temp_id);
 		}
 		
 	}

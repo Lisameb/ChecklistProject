@@ -1,6 +1,8 @@
 package model.checklist_item;
 
 import java.awt.Desktop;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,6 +23,10 @@ import org.apache.pdfbox.pdmodel.interactive.annotation.PDAppearanceEntry;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAppearanceStream;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDBorderStyleDictionary;
 import org.apache.pdfbox.pdmodel.interactive.form.*;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import model.DaoFactory;
 import model.checklist.ChecklistDao_DB;
@@ -50,7 +56,6 @@ public class Export {
 		this.checkDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
 		this.checkItemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
-		this.createPDF();
 	}
 
 	public void createPDF() {
@@ -140,5 +145,35 @@ public class Export {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public void createXML() {
+		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user());
+		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
+		allItems = checkItemDao.getItemsC(checklistVo.getChecklistID());
+		Element root = new Element("checklist");
+		Document doc = new Document();
+		for (int i = 0; i < allItems.size(); i++) {
+			Element child = new Element("item");
+			ItemVo item = new ItemVo(allItems.get(i));
+			item.setItemID(itemDao.getItemID(item));
+			Checklist_itemVo checkItem = new Checklist_itemVo(checklistVo.getChecklistID(), item.getItemID());
+			int amount = checkItemDao.getAmount(checkItem);
+			item.setItemID(itemDao.getItemID(item));
+			child.addContent(new Element("cat_id").addContent(itemDao.getCategoryID(item)));
+			child.addContent(new Element("name").addContent(allItems.get(i)));
+			child.addContent(new Element("amount").addContent(amount+""));
+			root.addContent(child);
+			
+		}
+		doc.setRootElement(root);
+		XMLOutputter outter = new XMLOutputter();
+		outter.setFormat(Format.getPrettyFormat());
+		try {
+			outter.output(doc, new FileWriter(new File(path)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
