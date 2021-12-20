@@ -66,13 +66,13 @@ public class LoginViewTest {
 		panel_1.setLayout(null);
 		
 		JLabel lblReg = new JLabel("New here ? ");
-		lblReg.setForeground(SystemColor.desktop);
+		lblReg.setForeground(Color.BLACK);
 		lblReg.setFont(new Font("Gill Sans Ultra Bold", Font.BOLD, 22));
 		lblReg.setBounds(70, 16, 211, 20);
 		panel_1.add(lblReg);
 		
 		JLabel lblAddYourUsername = new JLabel("Add your username");
-		lblAddYourUsername.setForeground(SystemColor.desktop);
+		lblAddYourUsername.setForeground(Color.BLACK);
 		lblAddYourUsername.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAddYourUsername.setBounds(25, 87, 168, 20);
 		panel_1.add(lblAddYourUsername);
@@ -83,7 +83,7 @@ public class LoginViewTest {
 		txtRUsername.setColumns(10);
 		
 		JLabel lblAddYourPassword = new JLabel("Add your password");
-		lblAddYourPassword.setForeground(SystemColor.desktop);
+		lblAddYourPassword.setForeground(Color.BLACK);
 		lblAddYourPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAddYourPassword.setBounds(25, 159, 181, 20);
 		panel_1.add(lblAddYourPassword);
@@ -96,7 +96,7 @@ public class LoginViewTest {
 		btnRReg.addActionListener(logcon);
 		btnRReg.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnRReg.setBackground(new Color(255, 204, 153));
-		btnRReg.setForeground(new Color(0, 0, 0));
+		btnRReg.setForeground(Color.BLACK);
 		btnRReg.setBounds(78, 297, 117, 29);
 		panel_1.add(btnRReg);
 		
@@ -108,7 +108,7 @@ public class LoginViewTest {
 		panel_1.add(lblRBack);
 		
 		JLabel lblLog = new JLabel("Welcome back!");
-		lblLog.setForeground(SystemColor.window);
+		lblLog.setForeground(Color.WHITE);
 		lblLog.setFont(new Font("Gill Sans Ultra Bold", Font.BOLD, 21));
 		lblLog.setBounds(15, 16, 265, 29);
 		panel.add(lblLog);
@@ -120,13 +120,13 @@ public class LoginViewTest {
 		
 		JLabel lblUser = new JLabel("UserName");
 		lblUser.setFont(new Font("Verdana", Font.BOLD, 16));
-		lblUser.setForeground(SystemColor.text);
+		lblUser.setForeground(Color.WHITE);
 		lblUser.setBounds(15, 120, 93, 20);
 		panel.add(lblUser);
 		
 		JLabel lblPass = new JLabel("Password");
 		lblPass.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPass.setForeground(SystemColor.textHighlightText);
+		lblPass.setForeground(Color.WHITE);
 		lblPass.setBounds(15, 200, 93, 20);
 		panel.add(lblPass);
 		

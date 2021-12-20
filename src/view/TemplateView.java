@@ -43,6 +43,7 @@ public class TemplateView extends JFrame {
 	public JLabel lblParty;
 	public JLabel lblVaca;
 	public JButton btnSelect;
+	public JButton btnBack;
 	public JTextArea taPreview;
 
 	
@@ -183,10 +184,9 @@ public class TemplateView extends JFrame {
 		panel.add(lblFU);
 		
 		btnSelect = new JButton("Select");
-		//btnSelect.addActionListener(tempcon);
 		btnSelect.addMouseListener(tempcon);
-		btnSelect.setBackground(SystemColor.text);
-		btnSelect.setBounds(396, 480, 124, 42);
+		btnSelect.setBackground(Color.WHITE);
+		btnSelect.setBounds(574, 486, 139, 42);
 		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
 		contentPane.add(btnSelect);
 		
@@ -208,9 +208,16 @@ public class TemplateView extends JFrame {
 		panel_2.add(lblSmallBack);
 		
 		taPreview = new JTextArea();
-		taPreview.setBounds(396, 16, 317, 440);
+		taPreview.setBounds(396, 16, 317, 459);
 		taPreview.setEditable(false);
 		contentPane.add(taPreview);
+		
+		btnBack = new JButton("Main Menu");
+		btnBack.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
+		btnBack.addMouseListener(tempcon);
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setBounds(396, 486, 139, 42);
+		contentPane.add(btnBack);
 		
 	}
 }
