@@ -5,18 +5,26 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import controller.ItemController;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Image;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class ItemView extends JFrame {
 
@@ -25,23 +33,37 @@ public class ItemView extends JFrame {
 	public JButton btnAddItemTo;
 	private ItemController itemCon;
 	public JTextField tfItem;
+	private Image img_sidebar;
+	private Frame preView;
 	
 	//Nice to have: ausgewählte Category in Label anzeigen
 
-	public ItemView() {
+	public ItemView(Frame preView) {
+		this.preView = preView;
 		initialize();
 	}
 	
 	private void initialize() {
 		
 		itemCon = new ItemController(this);
+		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(153, 287, Image.SCALE_SMOOTH);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 526, 334);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				dispose();
+				preView.setVisible(true);
+				super.windowClosing(e);
+			}
+			
+		});
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(176, 224, 230));
@@ -71,6 +93,12 @@ public class ItemView extends JFrame {
 		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblListOfItems.setBounds(26, 35, 132, 16);
 		panel_1.add(lblListOfItems);
+		
+		JLabel lblBack = new JLabel("");
+		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+		lblBack.setBounds(0, 0, 153, 287);
+		lblBack.setIcon(new ImageIcon(img_sidebar));
+		panel.add(lblBack);
 		
 		btnAddItemTo = new JButton("Add Item to database");
 		btnAddItemTo.addActionListener(itemCon);
