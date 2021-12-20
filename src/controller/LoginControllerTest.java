@@ -27,10 +27,10 @@ public class LoginControllerTest implements ActionListener{
 	}
 
 	public boolean loginUser() {
-		pas = view.getTxtLogPassword();
-		un = view.getTxtLogUsername();
+		pas = this.view.getTxtLogPassword();
+		un = this.view.getTxtLogUsername();
 		UserVo logUser = new UserVo(un, pas);
-		if(userDao.checkPassword(logUser)) {
+		if(userDao.checkPassword(logUser) && !logUser.getUsername().isEmpty()) {
 			daofactory.setCurrent_user(un);
 			return true;
 		}
@@ -53,9 +53,7 @@ public class LoginControllerTest implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		un = view.getTxtLogUsername();
-		pas = view.getTxtLogPassword();
-		UserVo login = new UserVo(un, pas);
+		
 
 		if (src == view.btnLogin) {
 			if(this.loginUser()) {
@@ -66,6 +64,8 @@ public class LoginControllerTest implements ActionListener{
 				MenuView menu = new MenuView();
 				menu.setVisible(true);
 				view.getFrame().dispose();
+				un = null;
+				pas = null;
 			}
 			else {
 				JOptionPane.showMessageDialog(null,"Invalid Username or Password :(");

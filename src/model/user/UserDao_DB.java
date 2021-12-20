@@ -79,6 +79,7 @@ public class UserDao_DB implements IDaoUser{
 	
 	public boolean checkPassword(UserVo user) {
 		
+		
 		String query = "SELECT password FROM user WHERE name = '" + user.getUsername() + "'";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
@@ -88,7 +89,7 @@ public class UserDao_DB implements IDaoUser{
 				pw = resultset.getString("password");
 				
 			}
-			if(user.getPassword().equals(pw)) {
+			if(user.getPassword().equals(pw) && !user.getPassword().isEmpty()) {
 				return true;
 			}
 			stmt.close();
