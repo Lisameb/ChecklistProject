@@ -20,6 +20,7 @@ import model.template.TemplateDao_DB;
 import model.template.TemplateVo;
 import view.CreateChecklistView;
 import view.CreateNewChecklistView;
+import view.MenuView;
 import view.TemplateView;
 import view.UseChecklistView;
 
@@ -189,19 +190,21 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		// TODO Auto-generated method stub
 		Object src = e.getSource();
 		
-		if(src == view.lblMenTemp) {
+		if(src == view.panMenTemp) {
 			TemplateView tView = new TemplateView();
 			tView.setVisible(true);
 			view.dispose();
 		}
 		
-		if(src == view.lblMenCheck) {
+		if(src == view.panMenCheck) {
 			UseChecklistView uclView = new UseChecklistView();
 			uclView.getFrame().setVisible(true);
 			view.dispose();
 		}
-		if(src == view.lblMenBack) {
-			//TODO create link to menuView
+		if(src == view.panMenBack) {
+			MenuView mView = new MenuView();
+			mView.setVisible(true);
+			view.dispose();
 		}
 	}
 

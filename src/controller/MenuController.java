@@ -66,9 +66,9 @@ public class MenuController implements MouseListener{
 			mView.dispose();
 			
 		}else if(src == mView.panel_createItem) {
-			ItemView iView = new ItemView();
+			ItemView iView = new ItemView(mView);
 			iView.setVisible(true);
-			mView.dispose();
+			mView.setVisible(false);
 			
 		} else if(src == mView.panel_logOut) {
 			LoginViewTest lgView = new LoginViewTest();

@@ -15,9 +15,12 @@ import model.item_template.Item_tempVo;
 import model.template.TemplateVo;
 import view.ChangeChecklistView;
 import view.ItemView;
+import view.MenuView;
+import view.TemplateView;
+import view.UseChecklistView;
 
 
-public class ChangeChecklistController implements ActionListener{
+public class ChangeChecklistController implements ActionListener, MouseListener{
 
 	private ChangeChecklistView view;
 	private ChecklistDao_DB checklistDao;
@@ -160,5 +163,55 @@ public class ChangeChecklistController implements ActionListener{
 			setComboBoxCheck();
 			view.taChecklist.setText("");
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		Object src = evt.getSource();
+		
+		if(src == view.panMenBack) {
+			MenuView mView = new MenuView();
+			mView.setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenCheck) {
+			UseChecklistView ucView = new UseChecklistView();
+			ucView.getFrame().setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenTemp) {
+			TemplateView tView = new TemplateView();
+			tView.setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenItem) {
+			ItemView iView = new ItemView(view);
+			iView.setVisible(true);
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -10,12 +8,10 @@ import model.*;
 import model.item_template.Item_tempDao_DB;
 import model.template.TemplateDao_DB;
 import model.template.TemplateVo;
-import view.ChangeChecklistView;
-import view.CreateChecklistView;
-import view.CreateNewChecklistView;
+import view.MenuView;
 import view.TemplateView;
 
-public class TemplateController implements MouseListener,ActionListener {
+public class TemplateController implements MouseListener {
 	
 	TemplateView tempview;
 	private TemplateVo template;
@@ -77,6 +73,11 @@ public class TemplateController implements MouseListener,ActionListener {
 		}
 		if(src == tempview.btnSelect && temp_id != 0) {
 			CreateChecklistController createCheckContro = new CreateChecklistController(tempview,temp_id);
+			
+		}if(src == tempview.btnBack) {
+			MenuView mView = new MenuView();
+			mView.setVisible(true);
+			tempview.dispose();
 		}
 		
 	}
@@ -104,12 +105,5 @@ public class TemplateController implements MouseListener,ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 }
