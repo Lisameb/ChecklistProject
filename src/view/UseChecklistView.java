@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
@@ -16,14 +15,10 @@ import model.checklist.ChecklistVo;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
 
 /**********************************************
  * UseChecklistView-Class

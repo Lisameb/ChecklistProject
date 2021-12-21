@@ -9,9 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.CreateChecklistController;
 
-import controller.UseChecklistController;
-
-import javax.swing.JToolBar;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,13 +18,6 @@ import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
-
-import javax.swing.*;
-import javax.swing.border.BevelBorder;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CreateChecklistView extends JFrame {
 

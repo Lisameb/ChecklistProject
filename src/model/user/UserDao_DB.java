@@ -1,9 +1,6 @@
 package model.user;
 
 import java.sql.*;
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 
 import model.DaoFactory;
 

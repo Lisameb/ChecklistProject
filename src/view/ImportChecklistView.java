@@ -10,8 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ImportChecklistController;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ImportChecklistView extends JFrame{
 	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);

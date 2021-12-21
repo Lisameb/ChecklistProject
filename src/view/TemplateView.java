@@ -1,6 +1,5 @@
 package view;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -11,17 +10,11 @@ import javax.swing.border.EmptyBorder;
 
 import controller.TemplateController;
 
-import java.awt.event.*;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 

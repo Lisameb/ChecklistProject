@@ -11,8 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ChangeChecklistController;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ChangeChecklistView extends JFrame{
 	public JPanel contentPane;

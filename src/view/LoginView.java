@@ -1,5 +1,4 @@
 package view;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.SystemColor;
@@ -11,8 +10,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Color;
