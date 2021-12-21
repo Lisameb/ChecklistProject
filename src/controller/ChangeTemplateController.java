@@ -133,7 +133,7 @@ public class ChangeTemplateController implements  ActionListener{
 			
 		}
 		if(createView!=null && src == createView.btnNew) {
-			TemplateVo temp = new TemplateVo(createView.tfName.getText());
+			TemplateVo temp = new TemplateVo(createView.tfName.getText().toLowerCase());
 			if(tempDao.getTemplateID(temp) == 0) {
 				tempDao.insert(temp);
 				setComboBoxTemp();

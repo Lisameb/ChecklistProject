@@ -96,7 +96,7 @@ public class ImportChecklistController implements ActionListener{
 	                    ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
 	                    for(int j = 0; j < itemsByC.size(); j++) {
 	                    	if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
-	                    		addItemtoChecklist(view.textField.getText(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
+	                    		addItemtoChecklist(view.textField.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
 	                    	}
 	                    }
 	                }

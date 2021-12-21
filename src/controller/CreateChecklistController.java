@@ -144,7 +144,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		
 		if(src == newView.btnNew) {
 			createNewChecklist();
-			String name = newView.tfName.getText();
+			String name = newView.tfName.getText().toLowerCase();
 			view = new CreateChecklistView(this);
 			view.lblName.setText(name);
 			view.setVisible(true);
