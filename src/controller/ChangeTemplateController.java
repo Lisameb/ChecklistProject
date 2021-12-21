@@ -95,7 +95,7 @@ public class ChangeTemplateController implements  ActionListener{
 	}
 	public void updateTextArea(String template) {
 		
-		view.itemList.setText("");		
+		view.taItemList.setText("");		
 		ArrayList<String> list = new ArrayList<String>();
 		int amount;
 		
@@ -110,7 +110,7 @@ public class ChangeTemplateController implements  ActionListener{
 			Item_tempVo tempItem = new Item_tempVo(temp, item);
 			amount = item_tempDao.getAmount(tempItem);
 			
-			view.itemList.append(amount + " " + list.get(i) + "\n");
+			view.taItemList.append(amount + " " + list.get(i) + "\n");
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class ChangeTemplateController implements  ActionListener{
 			TemplateVo temp = new TemplateVo(view.comboBoxTemp.getSelectedItem().toString());
 			tempDao.delete(temp);
 			setComboBoxTemp();
-			view.itemList.setText("");
+			view.taItemList.setText("");
 		}
 		if(src == view.btnAddItemTo) {
 			String temp = (String)view.comboBoxTemp.getSelectedItem();
