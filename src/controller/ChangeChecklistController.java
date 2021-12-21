@@ -34,12 +34,12 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	}
 
 	public void setComboBoxCheck() {
-		view.checkComboBox.removeAllItems();
+		view.comboBoxChecklist.removeAllItems();
 		ArrayList<String> checkList = new ArrayList<>(); 
 		checkList = checklistDao.getAllChecklist(daofactory.getCurrent_user());
 
 		for(String name : checkList) {
-			view.checkComboBox.addItem(name);
+			view.comboBoxChecklist.addItem(name);
 		}
 	}
 
@@ -113,16 +113,16 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
-		if (view.checkComboBox == src) {
-			String checklistName = (String) view.checkComboBox.getSelectedItem();
+		if (view.comboBoxChecklist == src) {
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			updateTextArea(checklistName);
 		}
 		
 		if (view.btnSave == src) {
-			ChecklistVo checklist = new ChecklistVo(view.checkComboBox.getSelectedItem().toString(), daofactory.getCurrent_user());
+			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user());
 			checklistDao.changeChecklistName(checklist, view.tfName.getText());
 			setComboBoxCheck();
-			view.checkComboBox.setSelectedItem(view.tfName.getText());
+			view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
 		}
 		
 		if(src == view.comboBoxCat) {
@@ -131,7 +131,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 		if(src == view.btnAdd) {
-			String checklist = (String)view.checkComboBox.getSelectedItem();
+			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
 			int amount = 1;
 			
@@ -146,7 +146,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 		if(src == view.btnDelete) {
-			String checklist = (String)view.checkComboBox.getSelectedItem();
+			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
 			
 			deleteItemFromChecklist(checklist, item);
@@ -155,7 +155,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 		if(src == view.btnDeleteChecklist) {
-			ChecklistVo checklist = new ChecklistVo(view.checkComboBox.getSelectedItem().toString(), daofactory.getCurrent_user());
+			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user());
 			checklist.setChecklistID(checklistDao.getChecklistID(checklist));
 			checklistDao.delete(checklist);
 			setComboBoxCheck();

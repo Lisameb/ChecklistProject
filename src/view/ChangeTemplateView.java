@@ -25,11 +25,13 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.DropMode;
 
 public class  ChangeTemplateView extends JFrame {
 
 	public JPanel contentPane;
-	public JTextField textFieldAmount;
+	public JTextField tfAmount;
 	public JComboBox comboBoxTemp;
 	public JComboBox comboBoxCategory;
 	public JComboBox comboBoxItem;
@@ -38,7 +40,7 @@ public class  ChangeTemplateView extends JFrame {
 	public JButton btnDeleteTemp;
 	public JButton btnDeleteItemTo;
 	public JButton btnAddNewItem;
-	public JTextArea itemList;
+	public JTextArea taItemList;
 	private Image img_sidebar;
 	
 	
@@ -135,10 +137,10 @@ public class  ChangeTemplateView extends JFrame {
 		lblAmount.setBounds(36, 443, 75, 22);
 		panel_1.add(lblAmount);
 		
-		textFieldAmount = new JTextField();
-		textFieldAmount.setBounds(155, 445, 52, 22);
-		panel_1.add(textFieldAmount);
-		textFieldAmount.setColumns(10);
+		tfAmount = new JTextField();
+		tfAmount.setBounds(155, 445, 52, 22);
+		panel_1.add(tfAmount);
+		tfAmount.setColumns(10);
 		
 		btnAddItemTo = new JButton("Add Item");
 		btnAddItemTo.addActionListener(contro);
@@ -172,11 +174,12 @@ public class  ChangeTemplateView extends JFrame {
 		btnDeleteItemTo.setBounds(377, 478, 125, 25);
 		panel_1.add(btnDeleteItemTo);
 		
-		itemList = new JTextArea();
-		itemList.setText("Choose template");
-		itemList.setBounds(46, 42, 456, 263);
-		panel_1.add(itemList);
+		taItemList = new JTextArea();
+		taItemList.setText("Choose template");
+		taItemList.setBounds(46, 42, 456, 263);
+		panel_1.add(taItemList);
 
+		
 		btnBack = new JButton("Main Menu");
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBack.setBackground(new Color(176, 224, 230));
@@ -191,5 +194,4 @@ public class  ChangeTemplateView extends JFrame {
 		panel.add(lblBack);
 		
 	}
-	
 }

@@ -20,10 +20,10 @@ import java.awt.Color;
 public class LoginViewTest {
 
 	private JFrame frame;
-	private JTextField txtLogUsername;
-	private JPasswordField txtLogPassword;
-	private JTextField txtRUsername;
-	private JPasswordField txtRPassword;
+	private JTextField tfLogUsername;
+	private JPasswordField tfLogPassword;
+	private JTextField tfRUsername;
+	private JPasswordField tfRPassword;
 	private final JPanel panel = new JPanel();
 	private final JPanel panel_1 = new JPanel();
 	private LoginControllerTest logcon;
@@ -77,10 +77,10 @@ public class LoginViewTest {
 		lblAddYourUsername.setBounds(25, 87, 168, 20);
 		panel_1.add(lblAddYourUsername);
 		
-		txtRUsername = new JTextField();
-		txtRUsername.setBounds(25, 117, 146, 26);
-		panel_1.add(txtRUsername);
-		txtRUsername.setColumns(10);
+		tfRUsername = new JTextField();
+		tfRUsername.setBounds(25, 117, 146, 26);
+		panel_1.add(tfRUsername);
+		tfRUsername.setColumns(10);
 		
 		JLabel lblAddYourPassword = new JLabel("Add your password");
 		lblAddYourPassword.setForeground(Color.BLACK);
@@ -88,9 +88,9 @@ public class LoginViewTest {
 		lblAddYourPassword.setBounds(25, 159, 181, 20);
 		panel_1.add(lblAddYourPassword);
 		
-		txtRPassword = new JPasswordField();
-		txtRPassword.setBounds(25, 197, 146, 26);
-		panel_1.add(txtRPassword);
+		tfRPassword = new JPasswordField();
+		tfRPassword.setBounds(25, 197, 146, 26);
+		panel_1.add(tfRPassword);
 		
 		btnRReg = new JButton("Register");
 		btnRReg.addActionListener(logcon);
@@ -113,10 +113,10 @@ public class LoginViewTest {
 		lblLog.setBounds(15, 16, 265, 29);
 		panel.add(lblLog);
 		
-		txtLogUsername = new JTextField();
-		txtLogUsername.setBounds(123, 117, 146, 26);
-		panel.add(txtLogUsername);
-		txtLogUsername.setColumns(10);
+		tfLogUsername = new JTextField();
+		tfLogUsername.setBounds(123, 117, 146, 26);
+		panel.add(tfLogUsername);
+		tfLogUsername.setColumns(10);
 		
 		JLabel lblUser = new JLabel("UserName");
 		lblUser.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -130,9 +130,9 @@ public class LoginViewTest {
 		lblPass.setBounds(15, 200, 93, 20);
 		panel.add(lblPass);
 		
-		txtLogPassword = new JPasswordField();
-		txtLogPassword.setBounds(123, 197, 146, 26);
-		panel.add(txtLogPassword);
+		tfLogPassword = new JPasswordField();
+		tfLogPassword.setBounds(123, 197, 146, 26);
+		panel.add(tfLogPassword);
 		
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(logcon);
@@ -159,30 +159,30 @@ public class LoginViewTest {
 
 	
 	public String getTxtLogUsername() {
-		return txtLogUsername.getText();
+		return tfLogUsername.getText();
 	}
 	public String getTxtLogPassword() {
-		return txtLogPassword.getText();
+		return tfLogPassword.getText();
 	}
 	public String getTxtRUsername() {
-		return txtRUsername.getText();
+		return tfRUsername.getText();
 	}
 	public String getTxtRPassword() {
-		return txtRPassword.getText();
+		return tfRPassword.getText();
 	}
 	
 	public void setTxtLogUsername(String userName) {
-		txtLogUsername.setText(userName);
+		tfLogUsername.setText(userName);
 	}
 	
 	public void setTxtLogPassword(String password) {
-		txtLogPassword.setText(password);	
+		tfLogPassword.setText(password);	
 	}
 	public void setTxtRUsername(String userName) {
-		txtRUsername.setText(userName);
+		tfRUsername.setText(userName);
 	}
 	public void setTxtRPassword(String password) {
-		txtRPassword.setText(password);
+		tfRPassword.setText(password);
 	}
 }
 

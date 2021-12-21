@@ -33,7 +33,7 @@ public class ChangeChecklistView extends JFrame{
 	
 	
 	public JTextArea taChecklist;
-	public JComboBox<String> checkComboBox;
+	public JComboBox<String> comboBoxChecklist;
 	public JComboBox<String> comboBoxCat;
 	public JComboBox<String> comboBoxItems;
 	public JButton btnSave;
@@ -215,12 +215,12 @@ private void initialize() {
 		btnDeleteChecklist.setBounds(538, 496, 210, 29);
 		contentPane.add(btnDeleteChecklist);
 		
-		checkComboBox = new JComboBox<String>();
-		checkComboBox.setBounds(245, 67, 220, 22);
-		checkComboBox.addActionListener(changeCo);
+		comboBoxChecklist = new JComboBox<String>();
+		comboBoxChecklist.setBounds(245, 67, 220, 22);
+		comboBoxChecklist.addActionListener(changeCo);
 		changeCo.setComboBoxCheck();
-		checkComboBox.setSelectedItem(chosenChecklist);
-		contentPane.add(checkComboBox);
+		comboBoxChecklist.setSelectedItem(chosenChecklist);
+		contentPane.add(comboBoxChecklist);
 		
 	}
 

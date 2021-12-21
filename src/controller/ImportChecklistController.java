@@ -83,7 +83,7 @@ public class ImportChecklistController implements ActionListener{
 		
 		if (src==view.btnImport) {
 			//....
-			ChecklistVo check = new ChecklistVo(view.textField.getText(), daofactory.getCurrent_user());
+			ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user());
 			checklistDao.insert(check);
 			Document document;
 			try {
@@ -96,7 +96,7 @@ public class ImportChecklistController implements ActionListener{
 	                    ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
 	                    for(int j = 0; j < itemsByC.size(); j++) {
 	                    	if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
-	                    		addItemtoChecklist(view.textField.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
+	                    		addItemtoChecklist(view.tfName.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
 	                    	}
 	                    }
 	                }
@@ -124,17 +124,17 @@ public class ImportChecklistController implements ActionListener{
     	    Validator validator = schema.newValidator();
     	    validator.validate(new DOMSource(document));
             //document.getDocumentElement().normalize();
-           	view.textArea.append(document.getDocumentElement().getNodeName() + "\n");
+           	view.taItems.append(document.getDocumentElement().getNodeName() + "\n");
            	NodeList nList = document.getElementsByTagName("item");
-           	view.textArea.append("----------------------------");
+           	view.taItems.append("----------------------------");
            	for (int i = 0; i < nList.getLength(); i++) {
                 Node nNode = nList.item(i);
-                view.textArea.append("\nCurrent Element : " + nNode.getNodeName() + "\n");
+                view.taItems.append("\nCurrent Element : " + nNode.getNodeName() + "\n");
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    view.textArea.append("category : " + eElement.getElementsByTagName("category").item(0).getTextContent() + "\n");
-                    view.textArea.append("item name : " + eElement.getElementsByTagName("name").item(0).getTextContent() + "\n");
-                    view.textArea.append("amount : " + eElement.getElementsByTagName("amount").item(0).getTextContent() + "\n");
+                    view.taItems.append("category : " + eElement.getElementsByTagName("category").item(0).getTextContent() + "\n");
+                    view.taItems.append("item name : " + eElement.getElementsByTagName("name").item(0).getTextContent() + "\n");
+                    view.taItems.append("amount : " + eElement.getElementsByTagName("amount").item(0).getTextContent() + "\n");
                 }
             }
            	

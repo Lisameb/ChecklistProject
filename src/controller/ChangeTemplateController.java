@@ -156,13 +156,13 @@ public class ChangeTemplateController implements  ActionListener{
 			int amount;
 			
 			try {
-				amount =  Integer.parseInt(view.textFieldAmount.getText());
+				amount =  Integer.parseInt(view.tfAmount.getText());
 			} catch(Exception ex) {
 				amount = 1;
 			}
 			addItemtoTemp(temp, item, amount);
 			updateTextArea(temp);
-			view.textFieldAmount.setText("");
+			view.tfAmount.setText("");
 		}
 		if(src == view.btnDeleteItemTo) {
 			String temp = (String)view.comboBoxTemp.getSelectedItem();

@@ -18,9 +18,9 @@ public class ImportChecklistView extends JFrame{
 	
 	public JPanel contentPane;
 	//public JTextArea taChecklist;
-	public JTextField textField;
+	public JTextField tfName;
 	public JLabel lblNameChecklist;
-	public JTextArea textArea;
+	public JTextArea taItems;
 	public JButton btnImport;
 	public JButton btnChooseFile;
 	private ImportChecklistController importCo;
@@ -57,10 +57,10 @@ public class ImportChecklistView extends JFrame{
 		panel.add(btnImport);
 		btnImport.addActionListener(importCo);
 		
-		textField = new JTextField();
-		textField.setBounds(12, 425, 124, 22);
-		panel.add(textField);
-		textField.setColumns(10);
+		tfName = new JTextField();
+		tfName.setBounds(12, 425, 124, 22);
+		panel.add(tfName);
+		tfName.setColumns(10);
 		
 		lblNameChecklist = new JLabel("Name your Checklist:");
 		lblNameChecklist.setBounds(12, 404, 172, 16);
@@ -73,9 +73,9 @@ public class ImportChecklistView extends JFrame{
 		lblBack.setIcon(new ImageIcon(img_back));
 		panel.add(lblBack);
 		
-		textArea = new JTextArea();
+		taItems = new JTextArea();
 		//JScrollPane sp = new JScrollPane(textArea);
-		textArea.setBounds(247, 13, 305, 387);
-		contentPane.add(textArea);
+		taItems.setBounds(247, 13, 305, 387);
+		contentPane.add(taItems);
 	}
 }

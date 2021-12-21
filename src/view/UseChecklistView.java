@@ -38,12 +38,12 @@ public class UseChecklistView {
 
 	private JFrame frame;
 
-	public JComboBox<String> comboBox_check;
-	public JButton modifyButton;
-	public JButton openButton;
-	public JButton exportButton;
+	public JComboBox<String> comboBoxChecklist;
+	public JButton btnModify;
+	public JButton btnOpen;
+	public JButton btnExport;
 	public JButton btnCreatePdf;
-	public JCheckBox checkBox_check;
+	public JCheckBox checkBox_checklist;
 	private JCheckBox item = new JCheckBox();
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
 	public JPanel panel_1;
@@ -78,23 +78,23 @@ public class UseChecklistView {
 		lblChecklistsOfUser.setBounds(20, 5, 115, 16);
 		panel.add(lblChecklistsOfUser);
 		
-		comboBox_check = new JComboBox<String>();
-		comboBox_check.addActionListener(clcon);
-		comboBox_check.setBounds(20, 26, 115, 27);
+		comboBoxChecklist = new JComboBox<String>();
+		comboBoxChecklist.addActionListener(clcon);
+		comboBoxChecklist.setBounds(20, 26, 115, 27);
 		clcon.setComboBoxCheck();
-		panel.add(comboBox_check);
+		panel.add(comboBoxChecklist);
 		
-		openButton = new JButton("Open");
-		openButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		openButton.addActionListener(clcon);
-		openButton.setBounds(20, 95, 96, 29);
-		panel.add(openButton);
+		btnOpen = new JButton("Open");
+		btnOpen.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnOpen.addActionListener(clcon);
+		btnOpen.setBounds(20, 95, 96, 29);
+		panel.add(btnOpen);
 		
-		modifyButton = new JButton("Modify");
-		modifyButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		modifyButton.addActionListener(clcon);
-		panel.add(modifyButton);
-		modifyButton.setBounds(20, 137, 96, 29);
+		btnModify = new JButton("Modify");
+		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnModify.addActionListener(clcon);
+		panel.add(btnModify);
+		btnModify.setBounds(20, 137, 96, 29);
 		
 		btnCreatePdf = new JButton("Create PDF");
 		btnCreatePdf.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -102,11 +102,11 @@ public class UseChecklistView {
 		btnCreatePdf.addActionListener(clcon);
 		panel.add(btnCreatePdf);
 		
-		exportButton = new JButton("Export");
-		exportButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		exportButton.addActionListener(clcon);
-		exportButton.setBounds(20, 221, 96, 29);
-		panel.add(exportButton);
+		btnExport = new JButton("Export");
+		btnExport.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnExport.addActionListener(clcon);
+		btnExport.setBounds(20, 221, 96, 29);
+		panel.add(btnExport);
 		
 		
 		JLabel lblGoTo = new JLabel("Go To...");
