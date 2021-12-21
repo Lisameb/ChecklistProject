@@ -3,14 +3,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
 import model.DaoFactory;
-import model.checklist.ChecklistDao_DB;
-import model.checklist_item.Checklist_itemDao_DB;
-import model.checklist_item.Checklist_itemVo;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
 import model.item.ItemVo;

@@ -9,7 +9,6 @@ import model.user.UserDao_DB;
 import model.user.UserVo;
 import view.LoginView;
 import view.MenuView;
-import view.TemplateView;
 
 public class LoginController implements ActionListener{
 
