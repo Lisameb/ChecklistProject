@@ -60,7 +60,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			String checklistName = (String) view.comboBox_check.getSelectedItem();
 			cclview = new ChangeChecklistView(checklistName);
 			cclview.setVisible(true); // I am Confusion: America explain -> geht das so auch oder muss man ein Controller-Objekt erstellen in changeChecklistView?
-			view.getFrame().dispose();
+			view.dispose();
 			
 		}
 		
@@ -128,13 +128,13 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		if(src == view.panel_2) {
 			tview = new TemplateView();
 			tview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 		if(src == view.panel_3) {
 			mview = new MenuView();
 			mview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 	}

@@ -110,7 +110,7 @@ public class ImportChecklistController implements ActionListener{
 			}
 			view.dispose();
 			UseChecklistView use = new UseChecklistView();
-			use.getFrame().setVisible(true);
+			use.setVisible(true);
 			
 		}
 		if (src == view.btnCancel) {

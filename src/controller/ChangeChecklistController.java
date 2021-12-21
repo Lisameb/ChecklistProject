@@ -175,7 +175,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		if(src == view.panMenCheck) {
 			UseChecklistView ucView = new UseChecklistView();
-			ucView.getFrame().setVisible(true);
+			ucView.setVisible(true);
 			view.dispose();
 		}
 		if(src == view.panMenTemp) {

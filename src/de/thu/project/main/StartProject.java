@@ -24,7 +24,7 @@ public class StartProject {
 					
 //					LoginView window = new LoginView();
 					LoginViewTest window = new LoginViewTest();
-					window.getFrame().setVisible(true);
+					window.setVisible(true);
 					
 					/*
 					 * For checklist managing GUI (not fully implemented):

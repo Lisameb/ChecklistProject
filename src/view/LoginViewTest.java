@@ -17,9 +17,8 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Color;
 
-public class LoginViewTest {
+public class LoginViewTest extends JFrame{
 
-	private JFrame frame;
 	private JTextField txtLogUsername;
 	private JPasswordField txtLogPassword;
 	private JTextField txtRUsername;
@@ -46,17 +45,16 @@ public class LoginViewTest {
 		
 		logcon = new LoginControllerTest(this);
 		
-		setFrame(new JFrame());
-		getFrame().getContentPane().setLayout(null);
-		getFrame().setBackground(new Color(240, 240, 240));
-		getFrame().setBounds(100, 100, 631, 536);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getFrame().getContentPane().setLayout(null);
+		getContentPane().setLayout(null);
+		setBackground(new Color(240, 240, 240));
+		setBounds(100, 100, 631, 536);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBounds(0, 0, 609, 480);
-		getFrame().getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
@@ -147,16 +145,6 @@ public class LoginViewTest {
 		lblLogBack.setIcon(icon);
 		panel.add(lblLogBack);
 	}
-	
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
-
 	
 	public String getTxtLogUsername() {
 		return txtLogUsername.getText();

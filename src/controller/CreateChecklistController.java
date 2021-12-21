@@ -198,7 +198,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		
 		if(src == view.panMenCheck) {
 			UseChecklistView uclView = new UseChecklistView();
-			uclView.getFrame().setVisible(true);
+			uclView.setVisible(true);
 			view.dispose();
 		}
 		if(src == view.panMenBack) {

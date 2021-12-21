@@ -63,7 +63,7 @@ public class LoginControllerTest implements ActionListener{
 //				templateview.setVisible(true);
 				MenuView menu = new MenuView();
 				menu.setVisible(true);
-				view.getFrame().dispose();
+				view.dispose();
 				un = null;
 				pas = null;
 			}
