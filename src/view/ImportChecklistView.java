@@ -23,6 +23,7 @@ public class ImportChecklistView extends JFrame{
 	public JTextArea textArea;
 	public JButton btnImport;
 	public JButton btnChooseFile;
+	public JButton btnCancel;
 	private ImportChecklistController importCo;
 	
 
@@ -35,6 +36,7 @@ public class ImportChecklistView extends JFrame{
 		
 		importCo = new ImportChecklistController(this);
 		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 595, 585);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
@@ -53,7 +55,7 @@ public class ImportChecklistView extends JFrame{
 		btnChooseFile.addActionListener(importCo);
 		
 		btnImport = new JButton("Import");
-		btnImport.setBounds(12, 476, 97, 25);
+		btnImport.setBounds(12, 460, 97, 25);
 		panel.add(btnImport);
 		btnImport.addActionListener(importCo);
 		
@@ -61,6 +63,11 @@ public class ImportChecklistView extends JFrame{
 		textField.setBounds(12, 425, 124, 22);
 		panel.add(textField);
 		textField.setColumns(10);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(12, 500, 97, 25);
+		btnCancel.addActionListener(importCo);
+		panel.add(btnCancel);
 		
 		lblNameChecklist = new JLabel("Name your Checklist:");
 		lblNameChecklist.setBounds(12, 404, 172, 16);
@@ -74,7 +81,6 @@ public class ImportChecklistView extends JFrame{
 		panel.add(lblBack);
 		
 		textArea = new JTextArea();
-		//JScrollPane sp = new JScrollPane(textArea);
 		textArea.setBounds(247, 13, 305, 387);
 		contentPane.add(textArea);
 	}

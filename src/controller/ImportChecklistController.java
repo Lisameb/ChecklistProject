@@ -113,6 +113,11 @@ public class ImportChecklistController implements ActionListener{
 			use.getFrame().setVisible(true);
 			
 		}
+		if (src == view.btnCancel) {
+			view.dispose();
+			MenuView menu = new MenuView();
+			menu.setVisible(true);
+		}
 	}
 	
 	public void importXML() throws ParserConfigurationException, SAXException {
