@@ -7,6 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import model.DaoFactory;
+import model.checklist.ChecklistDao_DB;
+import model.checklist_item.Checklist_itemDao_DB;
 import model.checklist_item.Checklist_itemVo;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
@@ -22,17 +25,20 @@ import view.MenuView;
 
 public class ChangeTemplateController implements  ActionListener{
 
+	private CreateTemplateView createView;
 	private ChangeTemplateView view;
+	
+	private DaoFactory daofactory = DaoFactory.getInstance();
 	private TemplateDao_DB tempDao;
 	private ItemDao_DB itemDao;
 	private Item_tempDao_DB itemTempDao;
-	private CreateTemplateView createView;
+	
 	
 	public ChangeTemplateController (ChangeTemplateView view) {
 		this.view = view;
-		this.tempDao = new TemplateDao_DB();
-		this.itemDao = new ItemDao_DB();
-		this.itemTempDao = new Item_tempDao_DB();
+		this.tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
+		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
+		this.itemTempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
 	}
 	
 	public void setComboBoxTemp() {

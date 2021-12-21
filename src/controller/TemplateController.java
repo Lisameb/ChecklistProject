@@ -13,14 +13,19 @@ import view.TemplateView;
 
 public class TemplateController implements MouseListener {
 	
+	
 	TemplateView tempview;
 	private TemplateVo template;
-	private TemplateDao_DB templateDao = new TemplateDao_DB();
-	private Item_tempDao_DB item_tempDao = new Item_tempDao_DB();
+	
+	private DaoFactory daofactory = DaoFactory.getInstance();
+	private TemplateDao_DB templateDao;
+	private Item_tempDao_DB item_tempDao;
 	int temp_id = 0;
 	
 	public TemplateController(TemplateView view) {
 		this.tempview = view;
+		this.templateDao = (TemplateDao_DB) daofactory.getTemplateDao();
+		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
 	}
 
 	@Override
