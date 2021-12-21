@@ -46,7 +46,7 @@ public class UseChecklistView {
 	public JCheckBox checkBox_check;
 	private JCheckBox item = new JCheckBox();
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
-	private JPanel panel_1;
+	public JPanel panel_1;
 	public JPanel panel_2;
 	public JPanel panel_3;
 	private UseChecklistController clcon;
