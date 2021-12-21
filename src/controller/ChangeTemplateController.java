@@ -31,14 +31,14 @@ public class ChangeTemplateController implements  ActionListener{
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private TemplateDao_DB tempDao;
 	private ItemDao_DB itemDao;
-	private Item_tempDao_DB itemTempDao;
+	private Item_tempDao_DB item_tempDao;
 	
 	
 	public ChangeTemplateController (ChangeTemplateView view) {
 		this.view = view;
 		this.tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
 		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
-		this.itemTempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
+		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
 	}
 	
 	public void setComboBoxTemp() {
@@ -80,7 +80,7 @@ public class ChangeTemplateController implements  ActionListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Item_tempVo itemTemp = new Item_tempVo(tempVo, itemVo);
-		itemTempDao.addItem(itemTemp, amount);
+		item_tempDao.addItem(itemTemp, amount);
 	}
 	public void deleteItemFromTemp(String template, String item) {
 		
@@ -91,7 +91,7 @@ public class ChangeTemplateController implements  ActionListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Item_tempVo itemTemp = new Item_tempVo(tempVo, itemVo);
-		itemTempDao.deleteItem(itemTemp);
+		item_tempDao.deleteItem(itemTemp);
 	}
 	public void updateTextArea(String template) {
 		
@@ -102,13 +102,13 @@ public class ChangeTemplateController implements  ActionListener{
 		TemplateVo temp = new TemplateVo(template);
 		temp.setTemplateID(tempDao.getTemplateID(temp));
 	
-		list = itemTempDao.getItemsT(temp.getTemplateID()); 
+		list = item_tempDao.getItemsT(temp.getTemplateID()); 
 		
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			item.setItemID(itemDao.getItemID(item));
 			Item_tempVo tempItem = new Item_tempVo(temp, item);
-			amount = itemTempDao.getAmount(tempItem);
+			amount = item_tempDao.getAmount(tempItem);
 			
 			view.itemList.append(amount + " " + list.get(i) + "\n");
 		}

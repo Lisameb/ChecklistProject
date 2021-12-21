@@ -1,13 +1,8 @@
 package controller;
 
-import java.awt.Desktop;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -28,17 +23,19 @@ public class UseChecklistController implements ActionListener, MouseListener {
 
 	private UseChecklistView view;
 	private TemplateView tview;
-	private ChecklistDao_DB checklistDao;
-	private Checklist_itemDao_DB checklist_itemDao_DB;
-	private DaoFactory daofactory = DaoFactory.getInstance();
-	private ArrayList<String> checklistItems;
 	private ChangeChecklistView cclview;
 	private MenuView mview;
+	
+	private DaoFactory daofactory = DaoFactory.getInstance();
+	private ChecklistDao_DB checklistDao;
+	private Checklist_itemDao_DB checklist_itemDao;
+	
+	private ArrayList<String> checklistItems;
 	
 	public UseChecklistController(UseChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
-		this.checklist_itemDao_DB = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		this.checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 	}
 	
 	public void setComboBoxCheck() {
@@ -79,7 +76,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			ChecklistVo checklist = new ChecklistVo(checklistName, daofactory.getCurrent_user());
 			int checklistID = checklistDao.getChecklistID(checklist);
 			checklistItems = new ArrayList<String>();
-			checklistItems = checklist_itemDao_DB.getItemsC(checklistID);
+			checklistItems = checklist_itemDao.getItemsC(checklistID);
 			
 			for(int i = 0; i < checklistItems.size(); i++) {
 				view.createrCheckBox(i, checklistItems);

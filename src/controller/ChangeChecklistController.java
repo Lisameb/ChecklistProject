@@ -11,8 +11,6 @@ import model.checklist_item.Checklist_itemVo;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
 import model.item.ItemVo;
-import model.item_template.Item_tempVo;
-import model.template.TemplateVo;
 import view.ChangeChecklistView;
 import view.ItemView;
 import view.MenuView;
@@ -25,14 +23,14 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	private ChangeChecklistView view;
 	private ChecklistDao_DB checklistDao;
 	private ItemDao_DB itemDao;
-	private Checklist_itemDao_DB checklistItemDao;
+	private Checklist_itemDao_DB checklist_itemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	public ChangeChecklistController(ChangeChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
-		this.checklistItemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		this.checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 	}
 
 	public void setComboBoxCheck() {
@@ -75,7 +73,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checklistItemDao.addItem(checklistItem, amount);
+		checklist_itemDao.addItem(checklistItem, amount);
 	}
 	
 	public void deleteItemFromChecklist(String checklistName, String item) {
@@ -87,7 +85,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checklistItemDao.deleteItem(checklistItem);
+		checklist_itemDao.deleteItem(checklistItem);
 	}
 	
 	public void updateTextArea(String checklistName) {
@@ -98,13 +96,13 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
 		int checklist_id = checklistDao.getChecklistID(checklistVo);
-		list = checklistItemDao.getItemsC(checklist_id);
+		list = checklist_itemDao.getItemsC(checklist_id);
 		
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			int item_id = itemDao.getItemID(item);
 			Checklist_itemVo checkitem = new Checklist_itemVo(checklist_id, item_id);
-			amount = checklistItemDao.getAmount(checkitem);
+			amount = checklist_itemDao.getAmount(checkitem);
 			view.taChecklist.append(amount + " " + list.get(i) +"\n");
 			
 		}

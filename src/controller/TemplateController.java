@@ -18,13 +18,13 @@ public class TemplateController implements MouseListener {
 	private TemplateVo template;
 	
 	private DaoFactory daofactory = DaoFactory.getInstance();
-	private TemplateDao_DB templateDao;
+	private TemplateDao_DB tempDao;
 	private Item_tempDao_DB item_tempDao;
 	int temp_id = 0;
 	
 	public TemplateController(TemplateView view) {
 		this.tempview = view;
-		this.templateDao = (TemplateDao_DB) daofactory.getTemplateDao();
+		this.tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
 		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
 	}
 
@@ -38,7 +38,7 @@ public class TemplateController implements MouseListener {
 		
 		if(src == tempview.lblEmpty) {
 			template = new TemplateVo("empty");
-			this.temp_id = templateDao.getTemplateID(template);
+			this.temp_id = tempDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
 				tempview.taPreview.append(list.get(i) + "\n");
@@ -46,7 +46,7 @@ public class TemplateController implements MouseListener {
 		}
 		if(src == tempview.lblDest) {
 			template = new TemplateVo("destination");
-			this.temp_id = templateDao.getTemplateID(template);
+			this.temp_id = tempDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
 				tempview.taPreview.append(" - " + list.get(i) + "\n");
@@ -54,7 +54,7 @@ public class TemplateController implements MouseListener {
 		}
 		if(src == tempview.lblGroc) {
 			template = new TemplateVo("groceries");
-			this.temp_id = templateDao.getTemplateID(template);
+			this.temp_id = tempDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
 				tempview.taPreview.append(" - " + list.get(i) + "\n");
@@ -62,7 +62,7 @@ public class TemplateController implements MouseListener {
 		}
 		if(src == tempview.lblParty) {
 			template = new TemplateVo("party");
-			this.temp_id = templateDao.getTemplateID(template);
+			this.temp_id = tempDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
 				tempview.taPreview.append(" - " + list.get(i) + "\n");
@@ -70,7 +70,7 @@ public class TemplateController implements MouseListener {
 		}
 		if(src == tempview.lblVaca) {
 			template = new TemplateVo("vacation");
-			this.temp_id = templateDao.getTemplateID(template);
+			this.temp_id = tempDao.getTemplateID(template);
 			list = item_tempDao.getItemsT(temp_id); 
 			for(int i = 0; i < list.size(); i++) {
 				tempview.taPreview.append(" - " + list.get(i) + "\n");

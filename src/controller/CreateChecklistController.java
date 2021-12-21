@@ -29,8 +29,8 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	int temp_id;
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private Item_tempDao_DB itemTemp;
-	private Checklist_itemDao_DB checkItem;
-	private ChecklistDao_DB checkDao;
+	private Checklist_itemDao_DB checklist_itemDao;
+	private ChecklistDao_DB checklistDao;
 	private ItemDao_DB itemDao;
 	private TemplateDao_DB tempDao;
 	private CreateChecklistView view;
@@ -43,15 +43,15 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		newView = new CreateNewChecklistView(this);
 		newView.setVisible(true);
 		itemTemp = (Item_tempDao_DB) daofactory.getItem_tempDao();
-		checkItem = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
-		checkDao = (ChecklistDao_DB) daofactory.getChecklistDao();
+		checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		itemDao = (ItemDao_DB) daofactory.getItemDao();
 		tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
 	}
 	
 	public void createNewChecklist() {
 		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user());
-		checkDao.insert(checkVo);
+		checklistDao.insert(checkVo);
 	}
 	
 	public void saveAllTempItems(int temp_id) {
@@ -59,7 +59,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		ArrayList<String> list=new ArrayList<String>();
 		list = itemTemp.getItemsT(temp_id);	
 		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user());
-		checkVo.setChecklistID(checkDao.getChecklistID(checkVo));
+		checkVo.setChecklistID(checklistDao.getChecklistID(checkVo));
 		
 		
 		for(int i = 0; i < list.size(); i++) {
@@ -71,7 +71,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 			
 			Checklist_itemVo checkItemVo = new Checklist_itemVo(checkVo.getChecklistID(), item.getItemID());
 			checkItemVo.setAmount(amount);
-			checkItem.addItem(checkItemVo, amount);
+			checklist_itemDao.addItem(checkItemVo, amount);
 		}
 	}
 	public void setComboBoxCat() {
@@ -97,25 +97,25 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	public void addItemtoChecklist(String checklistName, String item, int amount) {
 
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
-		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
+		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 
 		ItemVo itemVo = new ItemVo(item);
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checkItem.addItem(checklistItem, amount);
+		checklist_itemDao.addItem(checklistItem, amount);
 	}
 	
 	public void deleteItemFromChecklist(String checklistName, String item) {
 
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
-		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
+		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 		
 		ItemVo itemVo = new ItemVo(item);
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checkItem.deleteItem(checklistItem);
+		checklist_itemDao.deleteItem(checklistItem);
 	}
 	
 	public void updateTextArea(String checklistName) {
@@ -125,14 +125,14 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		int amount;	
 		
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
-		int checklist_id = checkDao.getChecklistID(checklistVo);
-		list = checkItem.getItemsC(checklist_id);
+		int checklist_id = checklistDao.getChecklistID(checklistVo);
+		list = checklist_itemDao.getItemsC(checklist_id);
 		
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			int item_id = itemDao.getItemID(item);
 			Checklist_itemVo checkitem = new Checklist_itemVo(checklist_id, item_id);
-			amount = checkItem.getAmount(checkitem);
+			amount = checklist_itemDao.getAmount(checkitem);
 			view.taChecklist.append(amount + " " + list.get(i) +"\n");
 			
 		}
