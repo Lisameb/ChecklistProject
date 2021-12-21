@@ -1,13 +1,7 @@
 package de.thu.project.main;
 
 import java.awt.EventQueue;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
-import view.ChangeChecklistView;
-import view.ChangeTemplateView;
-import view.ItemView;
 //import view.LoginView;
 import view.LoginView;
 public class StartProject {
