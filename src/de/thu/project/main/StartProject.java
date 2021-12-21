@@ -9,7 +9,7 @@ import view.ChangeChecklistView;
 import view.ChangeTemplateView;
 import view.ItemView;
 //import view.LoginView;
-import view.LoginViewTest;
+import view.LoginView;
 public class StartProject {
 
 	public static void main(String[] args) {
@@ -23,8 +23,8 @@ public class StartProject {
 					 */
 					
 //					LoginView window = new LoginView();
-					LoginViewTest window = new LoginViewTest();
-					window.getFrame().setVisible(true);
+					LoginView window = new LoginView();
+					window.setVisible(true);
 					
 					/*
 					 * For checklist managing GUI (not fully implemented):

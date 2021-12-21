@@ -34,9 +34,8 @@ import java.awt.event.ActionListener;
  * 
  **********************************************/
 
-public class UseChecklistView {
+public class UseChecklistView extends JFrame{
 
-	private JFrame frame;
 
 	public JComboBox<String> comboBoxChecklist;
 	public JButton btnModify;
@@ -60,10 +59,9 @@ public class UseChecklistView {
 
 	private void initialize() {
 		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 546, Image.SCALE_SMOOTH);
-		frame = new JFrame();
-		frame.setBounds(100, 100, 785, 585);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 785, 585);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		clcon = new UseChecklistController(this);
 		
@@ -71,7 +69,7 @@ public class UseChecklistView {
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBounds(0, 0, 220, 546);
-		frame.getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblChecklistsOfUser = new JLabel("Checklists of User");
@@ -146,7 +144,7 @@ public class UseChecklistView {
 		
 		panel_1 = new JPanel();
 		panel_1.setBounds(216, 0, 551, 546);
-		frame.getContentPane().add(panel_1);
+		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Checklist");
@@ -170,12 +168,5 @@ public class UseChecklistView {
 	    panel_1.add(boxes.get(i)); 
 	    
     } 
-	
-	public JFrame getFrame() {
-		return frame;
-	}
 
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
 }

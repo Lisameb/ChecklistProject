@@ -113,16 +113,17 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
-		if (view.comboBoxChecklist == src) {
-			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+		if (src == view.checkComboBox) {
+			String checklistName = (String) view.checkComboBox.getSelectedItem();
 			updateTextArea(checklistName);
 		}
 		
-		if (view.btnSave == src) {
-			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user());
+		if (src == view.btnSave) {
+			ChecklistVo checklist = new ChecklistVo(view.checkComboBox.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user());
 			checklistDao.changeChecklistName(checklist, view.tfName.getText());
 			setComboBoxCheck();
-			view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
+			view.tfName.setText("");
+			view.checkComboBox.setSelectedItem(view.tfName.getText());
 		}
 		
 		if(src == view.comboBoxCat) {
@@ -174,7 +175,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		if(src == view.panMenCheck) {
 			UseChecklistView ucView = new UseChecklistView();
-			ucView.getFrame().setVisible(true);
+			ucView.setVisible(true);
 			view.dispose();
 		}
 		if(src == view.panMenTemp) {

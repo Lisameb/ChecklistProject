@@ -7,7 +7,7 @@ import view.ChangeChecklistView;
 import view.ChangeTemplateView;
 import view.ImportChecklistView;
 import view.ItemView;
-import view.LoginViewTest;
+import view.LoginView;
 import view.MenuView;
 import view.TemplateView;
 import view.UseChecklistView;
@@ -42,7 +42,7 @@ public class MenuController implements MouseListener{
 		
 		if(src == mView.panel_checklist) {
 			UseChecklistView ucView = new UseChecklistView();
-			ucView.getFrame().setVisible(true);
+			ucView.setVisible(true);
 			mView.dispose();
 			
 		}else if(src == mView.panel_newChecklist) {
@@ -71,8 +71,8 @@ public class MenuController implements MouseListener{
 			mView.setVisible(false);
 			
 		} else if(src == mView.panel_logOut) {
-			LoginViewTest lgView = new LoginViewTest();
-			lgView.getFrame().setVisible(true);
+			LoginView lgView = new LoginView();
+			lgView.setVisible(true);
 			mView.dispose();
 			
 		}

@@ -49,16 +49,8 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	}
 	
 	
-	// für die ComboBox: getAllChecklist(String username) von ChecklistDao_DB.java DOOOOOONE
-	// für Button "Modify": modifyChecklistView DOOOOOONE
-	// für Button Open: getItemsC(int checklist_id) von Checklist_itemDao_DB.java  DOOO//OOONE
-	// für Go To Create Checklist: CreateChecklistView DOOOOOONE
-	// für Go To Menu: MenuView DOOOOOONE
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
 		Object src = evt.getSource();
 		
 		if(src == view.comboBoxChecklist) {
@@ -69,6 +61,8 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			cclview = new ChangeChecklistView(checklistName);
 			cclview.setVisible(true); // I am Confusion: America explain -> geht das so auch oder muss man ein Controller-Objekt erstellen in changeChecklistView?
+			view.dispose();
+			
 		}
 		
 		if(src == view.btnOpen) {
@@ -135,13 +129,13 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		if(src == view.panel_2) {
 			tview = new TemplateView();
 			tview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 		if(src == view.panel_3) {
 			mview = new MenuView();
 			mview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 	}
