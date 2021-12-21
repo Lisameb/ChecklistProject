@@ -30,7 +30,13 @@ import view.ImportChecklistView;
 import view.MenuView;
 import view.UseChecklistView;
 
-//TODO Class works, but it runs like a 100 year old snail on crutches -> look for ways to make it faster
+/**********************************************
+ * ImportChecklistController-Class
+ * 
+ * class checks if imported XML is similar to our XML scheme (XSD);
+ * class only inserts items, already included in our database, into the imported checklist
+ * 
+ **********************************************/
 
 public class ImportChecklistController implements ActionListener{
 
