@@ -10,8 +10,6 @@ import javax.swing.border.BevelBorder;
 
 import controller.MenuController;
 
-import javax.swing.UIManager;
-import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 

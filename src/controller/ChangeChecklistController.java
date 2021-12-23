@@ -11,34 +11,35 @@ import model.checklist_item.Checklist_itemVo;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
 import model.item.ItemVo;
-import model.item_template.Item_tempVo;
-import model.template.TemplateVo;
 import view.ChangeChecklistView;
 import view.ItemView;
+import view.MenuView;
+import view.TemplateView;
+import view.UseChecklistView;
 
 
-public class ChangeChecklistController implements ActionListener{
+public class ChangeChecklistController implements ActionListener, MouseListener{
 
 	private ChangeChecklistView view;
 	private ChecklistDao_DB checklistDao;
 	private ItemDao_DB itemDao;
-	private Checklist_itemDao_DB checklistItemDao;
+	private Checklist_itemDao_DB checklist_itemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	public ChangeChecklistController(ChangeChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
-		this.checklistItemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		this.checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 	}
 
 	public void setComboBoxCheck() {
-		view.checkComboBox.removeAllItems();
+		view.comboBoxChecklist.removeAllItems();
 		ArrayList<String> checkList = new ArrayList<>(); 
 		checkList = checklistDao.getAllChecklist(daofactory.getCurrent_user());
 
 		for(String name : checkList) {
-			view.checkComboBox.addItem(name);
+			view.comboBoxChecklist.addItem(name);
 		}
 	}
 
@@ -72,7 +73,7 @@ public class ChangeChecklistController implements ActionListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checklistItemDao.addItem(checklistItem, amount);
+		checklist_itemDao.addItem(checklistItem, amount);
 	}
 	
 	public void deleteItemFromChecklist(String checklistName, String item) {
@@ -84,7 +85,7 @@ public class ChangeChecklistController implements ActionListener{
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
-		checklistItemDao.deleteItem(checklistItem);
+		checklist_itemDao.deleteItem(checklistItem);
 	}
 	
 	public void updateTextArea(String checklistName) {
@@ -95,13 +96,13 @@ public class ChangeChecklistController implements ActionListener{
 		
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
 		int checklist_id = checklistDao.getChecklistID(checklistVo);
-		list = checklistItemDao.getItemsC(checklist_id);
+		list = checklist_itemDao.getItemsC(checklist_id);
 		
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			int item_id = itemDao.getItemID(item);
 			Checklist_itemVo checkitem = new Checklist_itemVo(checklist_id, item_id);
-			amount = checklistItemDao.getAmount(checkitem);
+			amount = checklist_itemDao.getAmount(checkitem);
 			view.taChecklist.append(amount + " " + list.get(i) +"\n");
 			
 		}
@@ -112,16 +113,17 @@ public class ChangeChecklistController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
-		if (view.checkComboBox == src) {
-			String checklistName = (String) view.checkComboBox.getSelectedItem();
+		if (src == view.comboBoxChecklist) {
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			updateTextArea(checklistName);
 		}
 		
-		if (view.btnSave == src) {
-			ChecklistVo checklist = new ChecklistVo(view.checkComboBox.getSelectedItem().toString(), daofactory.getCurrent_user());
+		if (src == view.btnSave) {
+			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user());
 			checklistDao.changeChecklistName(checklist, view.tfName.getText());
 			setComboBoxCheck();
-			view.checkComboBox.setSelectedItem(view.tfName.getText());
+			view.tfName.setText("");
+			view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
 		}
 		
 		if(src == view.comboBoxCat) {
@@ -130,7 +132,7 @@ public class ChangeChecklistController implements ActionListener{
 		}
 		
 		if(src == view.btnAdd) {
-			String checklist = (String)view.checkComboBox.getSelectedItem();
+			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
 			int amount = 1;
 			
@@ -145,7 +147,7 @@ public class ChangeChecklistController implements ActionListener{
 		}
 		
 		if(src == view.btnDelete) {
-			String checklist = (String)view.checkComboBox.getSelectedItem();
+			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
 			
 			deleteItemFromChecklist(checklist, item);
@@ -154,11 +156,61 @@ public class ChangeChecklistController implements ActionListener{
 		}
 		
 		if(src == view.btnDeleteChecklist) {
-			ChecklistVo checklist = new ChecklistVo(view.checkComboBox.getSelectedItem().toString(), daofactory.getCurrent_user());
+			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user());
 			checklist.setChecklistID(checklistDao.getChecklistID(checklist));
 			checklistDao.delete(checklist);
 			setComboBoxCheck();
 			view.taChecklist.setText("");
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		Object src = evt.getSource();
+		
+		if(src == view.panMenBack) {
+			MenuView mView = new MenuView();
+			mView.setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenCheck) {
+			UseChecklistView ucView = new UseChecklistView();
+			ucView.setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenTemp) {
+			TemplateView tView = new TemplateView();
+			tView.setVisible(true);
+			view.dispose();
+		}
+		if(src == view.panMenItem) {
+			ItemView iView = new ItemView(view);
+			iView.setVisible(true);
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

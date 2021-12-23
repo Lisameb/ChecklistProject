@@ -10,11 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.CreateChecklistController;
-import controller.TemplateController;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
 
 public class CreateNewChecklistView extends JFrame{
 	

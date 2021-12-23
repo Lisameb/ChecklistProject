@@ -11,8 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ChangeChecklistController;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ChangeChecklistView extends JFrame{
 	public JPanel contentPane;
@@ -22,18 +20,18 @@ public class ChangeChecklistView extends JFrame{
 
 	public JTextField tfName;
 	public JTextField tfAmount;
-	public JTextField tfUnit;
 	public JLabel lblMenTemp;
 	public JLabel lblMenCheck;
 	public JLabel lblMenBack;
 	
 	public JPanel panMenTemp;
 	public JPanel panMenCheck;
-	public JPanel panMenBack; 
+	public JPanel panMenBack;
+	public JPanel panMenItem;
 	
 	
 	public JTextArea taChecklist;
-	public JComboBox<String> checkComboBox;
+	public JComboBox<String> comboBoxChecklist;
 	public JComboBox<String> comboBoxCat;
 	public JComboBox<String> comboBoxItems;
 	public JButton btnSave;
@@ -75,6 +73,7 @@ private void initialize() {
 		panMenTemp.setBounds(0, 183, 219, 60);
 		panel.add(panMenTemp);
 		panMenTemp.setLayout(null);
+		panMenTemp.addMouseListener(changeCo);
 		
 		lblMenTemp = new JLabel("templates");
 		lblMenTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -87,6 +86,7 @@ private void initialize() {
 		panMenCheck.setBounds(0, 243, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
+		panMenCheck.addMouseListener(changeCo);
 		
 		lblMenCheck = new JLabel("your checklists");
 		lblMenCheck.setBounds(15, 21, 134, 20);
@@ -96,9 +96,10 @@ private void initialize() {
 		panMenBack = new JPanel();
 		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
 		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenBack.setBounds(0, 303, 219, 60);
+		panMenBack.setBounds(0, 365, 219, 60);
 		panel.add(panMenBack);
 		panMenBack.setLayout(null);
+		panMenBack.addMouseListener(changeCo);
 		
 		lblMenBack = new JLabel("back to menu");
 		lblMenBack.setBounds(15, 21, 136, 20);
@@ -109,6 +110,19 @@ private void initialize() {
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
 		lblGoTo.setBounds(15, 124, 178, 37);
 		panel.add(lblGoTo);
+
+		panMenItem = new JPanel();
+		panMenItem.setLayout(null);
+		panMenItem.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
+		panMenItem.setBackground(SystemColor.inactiveCaptionBorder);
+		panMenItem.setBounds(0, 304, 219, 60);
+		panel.add(panMenItem);
+		panMenItem.addMouseListener(changeCo);
+		
+		JLabel lblMenItem = new JLabel("create new item");
+		lblMenItem.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMenItem.setBounds(15, 21, 136, 20);
+		panMenItem.add(lblMenItem);
 		
 		JLabel lblIcon = new JLabel("");
 		lblIcon.setBounds(15, 16, 80, 69);
@@ -123,7 +137,7 @@ private void initialize() {
 		
 		JLabel lblTitle = new JLabel("Modify your checklist");
 		lblTitle.setFont(new Font("Gill Sans Nova Cond Ultra Bold", Font.BOLD, 24));
-		lblTitle.setBounds(307, 16, 357, 20);
+		lblTitle.setBounds(307, 16, 357, 40);
 		contentPane.add(lblTitle);
 		
 		taChecklist = new JTextArea();
@@ -181,16 +195,6 @@ private void initialize() {
 		contentPane.add(tfAmount);
 		tfAmount.setColumns(10);
 		
-		JLabel lblUnit = new JLabel("Unit");
-		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblUnit.setBounds(353, 391, 69, 20);
-		contentPane.add(lblUnit);
-		
-		tfUnit = new JTextField();
-		tfUnit.setBounds(353, 422, 112, 26);
-		contentPane.add(tfUnit);
-		tfUnit.setColumns(10);
-		
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(changeCo);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -209,12 +213,12 @@ private void initialize() {
 		btnDeleteChecklist.setBounds(538, 496, 210, 29);
 		contentPane.add(btnDeleteChecklist);
 		
-		checkComboBox = new JComboBox<String>();
-		checkComboBox.setBounds(245, 67, 220, 22);
-		checkComboBox.addActionListener(changeCo);
+		comboBoxChecklist = new JComboBox<String>();
+		comboBoxChecklist.setBounds(245, 67, 220, 22);
+		comboBoxChecklist.addActionListener(changeCo);
 		changeCo.setComboBoxCheck();
-		checkComboBox.setSelectedItem(chosenChecklist);
-		contentPane.add(checkComboBox);
+		comboBoxChecklist.setSelectedItem(chosenChecklist);
+		contentPane.add(comboBoxChecklist);
 		
 	}
 

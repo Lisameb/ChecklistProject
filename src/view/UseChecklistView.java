@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
@@ -16,14 +15,10 @@ import model.checklist.ChecklistVo;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
 
 /**********************************************
  * UseChecklistView-Class
@@ -34,19 +29,18 @@ import java.awt.event.ActionListener;
  * 
  **********************************************/
 
-public class UseChecklistView {
+public class UseChecklistView extends JFrame{
 
-	private JFrame frame;
 
-	public JComboBox<String> comboBox_check;
-	public JButton modifyButton;
-	public JButton openButton;
-	public JButton exportButton;
+	public JComboBox<String> comboBoxChecklist;
+	public JButton btnModify;
+	public JButton btnOpen;
+	public JButton btnExport;
 	public JButton btnCreatePdf;
-	public JCheckBox checkBox_check;
+	public JCheckBox checkBox_checklist;
 	private JCheckBox item = new JCheckBox();
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
-	private JPanel panel_1;
+	public JPanel panel_1;
 	public JPanel panel_2;
 	public JPanel panel_3;
 	private UseChecklistController clcon;
@@ -54,29 +48,15 @@ public class UseChecklistView {
 	private Image img_sidebar;
 	
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UseChecklistView window = new UseChecklistView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public UseChecklistView() {
 		initialize();
 	}
 
 	private void initialize() {
 		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 546, Image.SCALE_SMOOTH);
-		frame = new JFrame();
-		frame.setBounds(100, 100, 785, 585);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 785, 585);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		clcon = new UseChecklistController(this);
 		
@@ -84,30 +64,30 @@ public class UseChecklistView {
 		panel.setBackground(SystemColor.inactiveCaption);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBounds(0, 0, 220, 546);
-		frame.getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblChecklistsOfUser = new JLabel("Checklists of User");
 		lblChecklistsOfUser.setBounds(20, 5, 115, 16);
 		panel.add(lblChecklistsOfUser);
 		
-		comboBox_check = new JComboBox<String>();
-		comboBox_check.addActionListener(clcon);
-		comboBox_check.setBounds(20, 26, 115, 27);
+		comboBoxChecklist = new JComboBox<String>();
+		comboBoxChecklist.addActionListener(clcon);
+		comboBoxChecklist.setBounds(20, 26, 115, 27);
 		clcon.setComboBoxCheck();
-		panel.add(comboBox_check);
+		panel.add(comboBoxChecklist);
 		
-		openButton = new JButton("Open");
-		openButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		openButton.addActionListener(clcon);
-		openButton.setBounds(20, 95, 96, 29);
-		panel.add(openButton);
+		btnOpen = new JButton("Open");
+		btnOpen.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnOpen.addActionListener(clcon);
+		btnOpen.setBounds(20, 95, 96, 29);
+		panel.add(btnOpen);
 		
-		modifyButton = new JButton("Modify");
-		modifyButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		modifyButton.addActionListener(clcon);
-		panel.add(modifyButton);
-		modifyButton.setBounds(20, 137, 96, 29);
+		btnModify = new JButton("Modify");
+		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnModify.addActionListener(clcon);
+		panel.add(btnModify);
+		btnModify.setBounds(20, 137, 96, 29);
 		
 		btnCreatePdf = new JButton("Create PDF");
 		btnCreatePdf.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -115,11 +95,11 @@ public class UseChecklistView {
 		btnCreatePdf.addActionListener(clcon);
 		panel.add(btnCreatePdf);
 		
-		exportButton = new JButton("Export");
-		exportButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		exportButton.addActionListener(clcon);
-		exportButton.setBounds(20, 221, 96, 29);
-		panel.add(exportButton);
+		btnExport = new JButton("Export");
+		btnExport.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnExport.addActionListener(clcon);
+		btnExport.setBounds(20, 221, 96, 29);
+		panel.add(btnExport);
 		
 		
 		JLabel lblGoTo = new JLabel("Go To...");
@@ -159,7 +139,7 @@ public class UseChecklistView {
 		
 		panel_1 = new JPanel();
 		panel_1.setBounds(216, 0, 551, 546);
-		frame.getContentPane().add(panel_1);
+		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Checklist");
@@ -183,12 +163,5 @@ public class UseChecklistView {
 	    panel_1.add(boxes.get(i)); 
 	    
     } 
-	
-	public JFrame getFrame() {
-		return frame;
-	}
 
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
 }

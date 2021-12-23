@@ -13,7 +13,6 @@ import controller.ChangeTemplateController;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
 
 public class CreateTemplateView extends JFrame{
 	

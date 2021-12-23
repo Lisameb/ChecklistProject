@@ -1,13 +1,8 @@
 package controller;
 
-import java.awt.Desktop;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -28,65 +23,62 @@ public class UseChecklistController implements ActionListener, MouseListener {
 
 	private UseChecklistView view;
 	private TemplateView tview;
-	private ChecklistDao_DB checklistDao;
-	private Checklist_itemDao_DB checklist_itemDao_DB;
-	private DaoFactory daofactory = DaoFactory.getInstance();
-	private ArrayList<String> checklistItems;
 	private ChangeChecklistView cclview;
 	private MenuView mview;
+	
+	private DaoFactory daofactory = DaoFactory.getInstance();
+	private ChecklistDao_DB checklistDao;
+	private Checklist_itemDao_DB checklist_itemDao;
+	
+	private ArrayList<String> checklistItems;
 	
 	public UseChecklistController(UseChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
-		this.checklist_itemDao_DB = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		this.checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 	}
 	
 	public void setComboBoxCheck() {
-		view.comboBox_check.removeAllItems();
+		view.comboBoxChecklist.removeAllItems();
 		ArrayList<String> checklist = new ArrayList<String>();
 		checklist = checklistDao.getAllChecklist(daofactory.getCurrent_user());
 		
 		for(String name : checklist) {
-			view.comboBox_check.addItem(name);
+			view.comboBoxChecklist.addItem(name);
 		}
 	}
 	
 	
-	// für die ComboBox: getAllChecklist(String username) von ChecklistDao_DB.java DOOOOOONE
-	// für Button "Modify": modifyChecklistView DOOOOOONE
-	// für Button Open: getItemsC(int checklist_id) von Checklist_itemDao_DB.java  DOOO//OOONE
-	// für Go To Create Checklist: CreateChecklistView DOOOOOONE
-	// für Go To Menu: MenuView DOOOOOONE
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
 		Object src = evt.getSource();
 		
-		if(src == view.comboBox_check) {
+		if(src == view.comboBoxChecklist) {
 			//TODO
 		}
 		
-		if(src == view.modifyButton) {
-			String checklistName = (String) view.comboBox_check.getSelectedItem();
+		if(src == view.btnModify) {
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			cclview = new ChangeChecklistView(checklistName);
 			cclview.setVisible(true); // I am Confusion: America explain -> geht das so auch oder muss man ein Controller-Objekt erstellen in changeChecklistView?
+			view.dispose();
+			
 		}
 		
-		if(src == view.openButton) {
-			String checklistName = (String) view.comboBox_check.getSelectedItem();
+		if(src == view.btnOpen) {
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			ChecklistVo checklist = new ChecklistVo(checklistName, daofactory.getCurrent_user());
 			int checklistID = checklistDao.getChecklistID(checklist);
 			checklistItems = new ArrayList<String>();
-			checklistItems = checklist_itemDao_DB.getItemsC(checklistID);
+			checklistItems = checklist_itemDao.getItemsC(checklistID);
 			
 			for(int i = 0; i < checklistItems.size(); i++) {
 				view.createrCheckBox(i, checklistItems);
 			}
+			view.panel_1.updateUI();;
 			
 		}
-		if(src == view.exportButton) {
+		if(src == view.btnExport) {
 
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showSaveDialog(null);
@@ -100,7 +92,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	            
 	            fileToSave = new File(path);
 	            fileToSave.getAbsolutePath();
-	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+	            Export export = new Export((String)view.comboBoxChecklist.getSelectedItem(),fileToSave.getAbsolutePath());
 	            export.createXML();
 	        } else {
 	        	JOptionPane.showMessageDialog(null,"Path not found :(");
@@ -121,7 +113,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	            
 	            fileToSave = new File(path);
 	            fileToSave.getAbsolutePath();
-	            Export export = new Export((String)view.comboBox_check.getSelectedItem(),fileToSave.getAbsolutePath());
+	            Export export = new Export((String)view.comboBoxChecklist.getSelectedItem(),fileToSave.getAbsolutePath());
 	            export.createPDF();
 	        } else {
 	        	JOptionPane.showMessageDialog(null,"Path not found :(");
@@ -137,13 +129,13 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		if(src == view.panel_2) {
 			tview = new TemplateView();
 			tview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 		if(src == view.panel_3) {
 			mview = new MenuView();
 			mview.setVisible(true);
-			view.getFrame().dispose();
+			view.dispose();
 		}
 		
 	}

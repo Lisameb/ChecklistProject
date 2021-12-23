@@ -3,11 +3,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
-import model.checklist_item.Checklist_itemVo;
+import model.DaoFactory;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
 import model.item.ItemVo;
@@ -18,20 +15,24 @@ import model.template.TemplateVo;
 import view.ChangeTemplateView;
 import view.CreateTemplateView;
 import view.ItemView;
+import view.MenuView;
 
-public class ChangeTemplateController implements  ActionListener {
+public class ChangeTemplateController implements  ActionListener{
 
+	private CreateTemplateView createView;
 	private ChangeTemplateView view;
+	
+	private DaoFactory daofactory = DaoFactory.getInstance();
 	private TemplateDao_DB tempDao;
 	private ItemDao_DB itemDao;
-	private Item_tempDao_DB itemTempDao;
-	private CreateTemplateView createView;
+	private Item_tempDao_DB item_tempDao;
+	
 	
 	public ChangeTemplateController (ChangeTemplateView view) {
 		this.view = view;
-		this.tempDao = new TemplateDao_DB();
-		this.itemDao = new ItemDao_DB();
-		this.itemTempDao = new Item_tempDao_DB();
+		this.tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
+		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
+		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
 	}
 	
 	public void setComboBoxTemp() {
@@ -67,15 +68,13 @@ public class ChangeTemplateController implements  ActionListener {
 	public void addItemtoTemp(String template, String item, int amount) {
 		
 		TemplateVo tempVo = new TemplateVo(template);
-//		int temp_id = tempDao.getTemplateID(tempVo);
-//		TemplateVo temo2 = new TemplateVo(temp_id, template);
 		tempVo.setTemplateID(tempDao.getTemplateID(tempVo));
 		
 		ItemVo itemVo = new ItemVo(item);
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Item_tempVo itemTemp = new Item_tempVo(tempVo, itemVo);
-		itemTempDao.addItem(itemTemp, amount);
+		item_tempDao.addItem(itemTemp, amount);
 	}
 	public void deleteItemFromTemp(String template, String item) {
 		
@@ -86,45 +85,41 @@ public class ChangeTemplateController implements  ActionListener {
 		itemVo.setItemID(itemDao.getItemID(itemVo));
 		
 		Item_tempVo itemTemp = new Item_tempVo(tempVo, itemVo);
-		itemTempDao.deleteItem(itemTemp);
+		item_tempDao.deleteItem(itemTemp);
 	}
 	public void updateTextArea(String template) {
 		
-		view.itemList.setText("");		
+		view.taItemList.setText("");		
 		ArrayList<String> list = new ArrayList<String>();
 		int amount;
 		
 		TemplateVo temp = new TemplateVo(template);
 		temp.setTemplateID(tempDao.getTemplateID(temp));
 	
-		list = itemTempDao.getItemsT(temp.getTemplateID()); 
+		list = item_tempDao.getItemsT(temp.getTemplateID()); 
 		
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			item.setItemID(itemDao.getItemID(item));
 			Item_tempVo tempItem = new Item_tempVo(temp, item);
-			amount = itemTempDao.getAmount(tempItem);
+			amount = item_tempDao.getAmount(tempItem);
 			
-			view.itemList.append(amount + " " + list.get(i) + "\n");
+			view.taItemList.append(amount + " " + list.get(i) + "\n");
 		}
 	}
 	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		
 		
 		if(src == view.btnShowItems) {
 			String template = (String)view.comboBoxTemp.getSelectedItem();
 			updateTextArea(template);
 		}
-		if(src == view.comboBoxCategory) {
-			String cat = (String)view.comboBoxCategory.getSelectedItem();
-			setComboBoxItem(cat);
-		}
 		if(src == view.btnAddNewItem) {
-			ItemView view = new ItemView();
-			view.setVisible(true);
+			ItemView iView = new ItemView(view);
+			iView.setVisible(true);
 		}
 		if(src == view.btnNewTemp) {
 			createView = new CreateTemplateView(this);
@@ -132,7 +127,7 @@ public class ChangeTemplateController implements  ActionListener {
 			
 		}
 		if(createView!=null && src == createView.btnNew) {
-			TemplateVo temp = new TemplateVo(createView.tfName.getText());
+			TemplateVo temp = new TemplateVo(createView.tfName.getText().toLowerCase());
 			if(tempDao.getTemplateID(temp) == 0) {
 				tempDao.insert(temp);
 				setComboBoxTemp();
@@ -147,7 +142,7 @@ public class ChangeTemplateController implements  ActionListener {
 			TemplateVo temp = new TemplateVo(view.comboBoxTemp.getSelectedItem().toString());
 			tempDao.delete(temp);
 			setComboBoxTemp();
-			view.itemList.setText("");
+			view.taItemList.setText("");
 		}
 		if(src == view.btnAddItemTo) {
 			String temp = (String)view.comboBoxTemp.getSelectedItem();
@@ -155,22 +150,30 @@ public class ChangeTemplateController implements  ActionListener {
 			int amount;
 			
 			try {
-				amount =  Integer.parseInt(view.textFieldAmount.getText());
+				amount =  Integer.parseInt(view.tfAmount.getText());
 			} catch(Exception ex) {
 				amount = 1;
 			}
 			addItemtoTemp(temp, item, amount);
 			updateTextArea(temp);
-			view.textFieldAmount.setText("");
+			view.tfAmount.setText("");
 		}
 		if(src == view.btnDeleteItemTo) {
 			String temp = (String)view.comboBoxTemp.getSelectedItem();
 			String item = (String)view.comboBoxItem.getSelectedItem();
 			
 			deleteItemFromTemp(temp, item);
-			updateTextArea(temp);
+			updateTextArea(temp);	
 		}
-		
+		if(src == view.comboBoxCategory) {
+			String cat = (String)view.comboBoxCategory.getSelectedItem();
+			setComboBoxItem(cat);
+		}
+		if(src == view.btnBack) {
+			MenuView mView = new MenuView();
+			mView.setVisible(true);
+			view.dispose();
+		}
 		
 	}
 

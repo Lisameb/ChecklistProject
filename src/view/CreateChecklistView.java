@@ -9,9 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.CreateChecklistController;
 
-import controller.UseChecklistController;
-
-import javax.swing.JToolBar;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,13 +18,6 @@ import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
-
-import javax.swing.*;
-import javax.swing.border.BevelBorder;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CreateChecklistView extends JFrame {
 
@@ -38,7 +28,6 @@ public class CreateChecklistView extends JFrame {
 
 	public JTextField tfName;
 	public JTextField tfAmount;
-	public JTextField tfUnit;
 	public JLabel lblMenTemp;
 	public JLabel lblMenCheck;
 	public JLabel lblMenBack;
@@ -88,9 +77,9 @@ public class CreateChecklistView extends JFrame {
 		panMenTemp.setBounds(0, 183, 219, 60);
 		panel.add(panMenTemp);
 		panMenTemp.setLayout(null);
+		panMenTemp.addMouseListener(clController);
 		
 		lblMenTemp = new JLabel("templates");
-		lblMenTemp.addMouseListener(clController);
 		lblMenTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMenTemp.setBounds(15, 21, 112, 20);
 		panMenTemp.add(lblMenTemp);
@@ -101,9 +90,9 @@ public class CreateChecklistView extends JFrame {
 		panMenCheck.setBounds(0, 243, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
+		panMenCheck.addMouseListener(clController);
 		
 		lblMenCheck = new JLabel("your checklists");
-		lblMenCheck.addMouseListener(clController);
 		lblMenCheck.setBounds(15, 21, 134, 20);
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -114,9 +103,9 @@ public class CreateChecklistView extends JFrame {
 		panMenBack.setBounds(0, 303, 219, 60);
 		panel.add(panMenBack);
 		panMenBack.setLayout(null);
+		panMenBack.addMouseListener(clController);
 		
 		lblMenBack = new JLabel("back to menu");
-		lblMenBack.addMouseListener(clController);
 		lblMenBack.setBounds(15, 21, 136, 20);
 		panMenBack.add(lblMenBack);
 		lblMenBack.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -139,7 +128,7 @@ public class CreateChecklistView extends JFrame {
 		
 		taChecklist = new JTextArea();
 		taChecklist.setEditable(false);
-		taChecklist.setBounds(489, 67, 259, 401);
+		taChecklist.setBounds(487, 129, 259, 401);
 		contentPane.add(taChecklist);
 		
 		comboBoxCat = new JComboBox<String>();
@@ -172,17 +161,6 @@ public class CreateChecklistView extends JFrame {
 		contentPane.add(tfAmount);
 		tfAmount.setColumns(10);
 		
-		JLabel lblUnit = new JLabel("Unit");
-		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblUnit.setBounds(353, 295, 69, 20);
-		contentPane.add(lblUnit);
-		
-		tfUnit = new JTextField();
-		tfUnit.setEditable(false);
-		tfUnit.setBounds(353, 325, 112, 26);
-		contentPane.add(tfUnit);
-		tfUnit.setColumns(10);
-		
 		JLabel lblTitle = new JLabel("Create your checklist");
 		lblTitle.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
 		lblTitle.setBounds(307, 16, 357, 20);
@@ -202,7 +180,7 @@ public class CreateChecklistView extends JFrame {
 		
 		lblName = new JLabel();
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblName.setBounds(245, 67, 220, 20);
+		lblName.setBounds(245, 67, 501, 20);
 		contentPane.add(lblName);
 
 	}
