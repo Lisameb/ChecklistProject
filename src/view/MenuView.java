@@ -12,6 +12,7 @@ import controller.MenuController;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class MenuView extends JFrame{
 	
@@ -25,8 +26,10 @@ public class MenuView extends JFrame{
 	public JPanel panel_manageTemplates;
 	public JPanel panel_createItem;
 	public JPanel panel_logOut;
+	public JPanel panel_ChangePw;
 	private Color clBackground = new Color(191, 205, 219);
 	private Color clBorder = new Color(244, 247, 252);
+	private JLabel lblChangePw;
 	
 
 	/**
@@ -138,11 +141,25 @@ public class MenuView extends JFrame{
 		lblCreateItem.setBounds(10, 11, 267, 28);
 		panel_createItem.add(lblCreateItem);
 		
+		panel_ChangePw = new JPanel();
+		panel_ChangePw.addMouseListener(contro);
+		panel_ChangePw.setLayout(null);
+		panel_ChangePw.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
+		panel_ChangePw.setBackground(SystemColor.inactiveCaption);
+		panel_ChangePw.setBounds(66, 456, 287, 50);
+		panel.add(panel_ChangePw);
+		
+		lblChangePw = new JLabel("Change Password");
+		lblChangePw.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChangePw.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblChangePw.setBounds(10, 11, 267, 28);
+		panel_ChangePw.add(lblChangePw);
+		
 		panel_logOut = new JPanel();
 		panel_logOut.setLayout(null);
 		panel_logOut.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
 		panel_logOut.setBackground(clBackground);
-		panel_logOut.setBounds(229, 462, 287, 50);
+		panel_logOut.setBounds(383, 456, 287, 50);
 		panel.add(panel_logOut);
 		panel_logOut.addMouseListener(contro);
 		
@@ -159,6 +176,4 @@ public class MenuView extends JFrame{
 		
 		
 	}
-	
-
 }

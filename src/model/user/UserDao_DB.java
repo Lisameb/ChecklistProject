@@ -66,13 +66,6 @@ public class UserDao_DB implements IDaoUser{
 		
 	}
 
-	@Override
-	public UserVo getByUserID(UserVo user) {
-		// TODO Auto-generated method stub
-		// assign saved attributes from DB to user and return the same user
-		// calls method from Database Abstraction Layer -> JDBC
-		return user;
-	}
 	
 	public boolean checkPassword(UserVo user) {
 		

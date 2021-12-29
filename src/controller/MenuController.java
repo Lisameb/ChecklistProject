@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import view.ChangeChecklistView;
+import view.ChangePasswordView;
 import view.ChangeTemplateView;
 import view.ImportChecklistView;
 import view.ItemView;
@@ -75,14 +76,13 @@ public class MenuController implements MouseListener{
 			lgView.setVisible(true);
 			mView.dispose();
 			
-		}
-		
+		} else if(src == mView.panel_ChangePw) {
+			ChangePasswordView pwView = new ChangePasswordView();
+			pwView.setVisible(true);
+			mView.dispose();
+		} 	
 		
 	}
-
-
-
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
