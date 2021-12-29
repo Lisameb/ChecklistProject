@@ -5,14 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.pdmodel.*;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
-import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
-import org.apache.pdfbox.pdmodel.interactive.annotation.*;
 import org.apache.pdfbox.pdmodel.interactive.form.*;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
@@ -38,7 +34,6 @@ public class Export {
 	private Checklist_itemDao_DB checkItemDao;
 	private ItemDao_DB itemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
-	private PDCheckBox checkBox;
 
 	public Export(String checklist, String path) {
 		this.checklist = checklist;
@@ -48,6 +43,10 @@ public class Export {
 		this.checkItemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 	}
 
+	/*
+	 * Creates a PDF document with all items of the chosen checklist
+	 * and saves the PDF in the chosen file path
+	 */
 	public void createPDF() {
 		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user());
 		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
@@ -62,17 +61,13 @@ public class Export {
 			PDAcroForm acroForm = new PDAcroForm(document);
 			document.getDocumentCatalog().setAcroForm(acroForm);
 
-
 			PDPageContentStream content = new PDPageContentStream(document, firstPage );
 			content.beginText();
 			content.setFont(PDType1Font.HELVETICA_BOLD, 18);
-			content.newLineAtOffset(50, 750);
+			content.newLineAtOffset(50, 740);
 
 			content.showText(checklist);
 			content.endText();
-			ArrayList<PDAnnotationWidget> widgets = new ArrayList<>();
-			PDAppearanceCharacteristicsDictionary appearanceCharacteristics = new PDAppearanceCharacteristicsDictionary(new COSDictionary());
-			PDBorderStyleDictionary borderStyleDictionary = new PDBorderStyleDictionary();
 			
 			int j = 700;
 			for(int i = 0; i < allItems.size(); i++) {
@@ -80,50 +75,26 @@ public class Export {
 				ItemVo item = new ItemVo(allItems.get(i));
 				item.setItemID(itemDao.getItemID(item));
 				Checklist_itemVo checkItem = new Checklist_itemVo(checklistVo.getChecklistID(), item.getItemID());
+				
 				int amount = checkItemDao.getAmount(checkItem);
 				String itemName = allItems.get(i);
-				boolean checked = checkItemDao.getChecked(checkItem);
 
 				/*create new page if page is full*/
 				if (j<75) {
 					content.close();
 					firstPage = new PDPage();
 					document.addPage(firstPage);
-					j = 750;
+					j = 725;
 					content = new PDPageContentStream(document, firstPage );
 				}
 				
+				content.addRect(50, j-1, 10, 10);
+				content.stroke();
 				
-				checkBox = new PDCheckBox(acroForm);
-				checkBox.setPartialName(allItems.get(i));
-				PDAnnotationWidget widget = checkBox.getWidgets().get(0);
-
-				widget.setPage(firstPage);
-				firstPage.getAnnotations().add(widget);
-				PDRectangle rect = new PDRectangle(50, j-1, 10, 10);
-				widget.setRectangle(rect);
-
-				borderStyleDictionary.setWidth(1);
-				borderStyleDictionary.setStyle(PDBorderStyleDictionary.STYLE_SOLID);
-				widget.setBorderStyle(borderStyleDictionary);
-				appearanceCharacteristics.setBorderColour(new PDColor(new float[]{1, 1, 0}, PDDeviceRGB.INSTANCE));
-				appearanceCharacteristics.setNormalCaption("4");
-				widget.setAppearanceCharacteristics(appearanceCharacteristics);
-				widget.setPrinted(true);
-
-				//doesn't work yet -> comfort function
-				if(checked==true) {
-					checkBox.check();
-				} else {
-					checkBox.unCheck();
-				}
-				widgets.add(widget);  
-				acroForm.getFields().add(checkBox);
 				content.beginText();
 				content.setFont(PDType1Font.HELVETICA, 12);
 				content.newLine();
 				content.newLineAtOffset(75, j);
-
 				content.showText(itemName + " x" + amount);
 				j-=25;
 				content.endText();
@@ -137,33 +108,41 @@ public class Export {
 		}
 	}
 	
+	/*
+	 * Creates a XML document with all items of the chosen checklist
+	 * and saves the XML in the chosen file path
+	 */
 	public void createXML() {
+		
 		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user());
 		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
 		allItems = checkItemDao.getItemsC(checklistVo.getChecklistID());
 		Element root = new Element("checklist");
 		Document doc = new Document();
+		
 		for (int i = 0; i < allItems.size(); i++) {
 			Element child = new Element("item");
 			ItemVo item = new ItemVo(allItems.get(i));
 			item.setItemID(itemDao.getItemID(item));
+			
 			Checklist_itemVo checkItem = new Checklist_itemVo(checklistVo.getChecklistID(), item.getItemID());
 			int amount = checkItemDao.getAmount(checkItem);
 			item.setItemID(itemDao.getItemID(item));
+			
 			child.addContent(new Element("cat_id").addContent(itemDao.getCategoryID(item)));
 			child.addContent(new Element("name").addContent(allItems.get(i)));
 			child.addContent(new Element("amount").addContent(amount+""));
-			root.addContent(child);
-			
+			root.addContent(child);	
 		}
+		
 		doc.setRootElement(root);
 		XMLOutputter outter = new XMLOutputter();
 		outter.setFormat(Format.getPrettyFormat());
+		
 		try {
 			outter.output(doc, new FileWriter(new File(path)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 }
