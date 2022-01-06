@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.DaoFactory;
 import model.checklist.ChecklistDao_DB;
 import model.checklist.ChecklistVo;
@@ -119,11 +121,16 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 		if (src == view.btnSave) {
-			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user());
-			checklistDao.changeChecklistName(checklist, view.tfName.getText());
-			setComboBoxCheck();
-			view.tfName.setText("");
-			view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
+			
+			if(view.tfName.getText().equals("")) {
+				JOptionPane.showMessageDialog(null,"Type in a new name first!");
+			} else {
+				ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user());
+				checklistDao.changeChecklistName(checklist, view.tfName.getText());
+				setComboBoxCheck();
+				view.tfName.setText("");
+				view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
+			}
 		}
 		
 		if(src == view.comboBoxCat) {

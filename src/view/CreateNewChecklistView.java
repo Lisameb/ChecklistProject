@@ -19,6 +19,7 @@ public class CreateNewChecklistView extends JFrame{
 	public JPanel contentPane;
 	public JButton btnNew;
 	public JTextField tfName;
+	public JLabel lblNameError;
 	public CreateChecklistController contro;
 	
 
@@ -27,7 +28,6 @@ public class CreateNewChecklistView extends JFrame{
 		initialize();
 	}
 	public void initialize() {
-		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 300, 230);
@@ -67,6 +67,9 @@ public class CreateNewChecklistView extends JFrame{
 		lblCreateANew.setBounds(22, 13, 206, 16);
 		panel.add(lblCreateANew);
 		
-
+		lblNameError = new JLabel("");
+		lblNameError.setForeground(Color.RED);
+		lblNameError.setBounds(88, 89, 139, 16);
+		panel.add(lblNameError);
 	}
 }

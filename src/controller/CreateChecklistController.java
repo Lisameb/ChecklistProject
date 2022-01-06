@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.DaoFactory;
 import model.checklist.ChecklistDao_DB;
 import model.checklist.ChecklistVo;
@@ -42,6 +44,8 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		this.tempView = tempView;
 		newView = new CreateNewChecklistView(this);
 		newView.setVisible(true);
+		view = new CreateChecklistView(this);
+		
 		itemTemp = (Item_tempDao_DB) daofactory.getItem_tempDao();
 		checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
 		checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
@@ -144,16 +148,21 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		
 		if(src == newView.btnNew) {
 			createNewChecklist();
-			String name = newView.tfName.getText().toLowerCase();
-			view = new CreateChecklistView(this);
-			view.lblName.setText(name);
-			view.setVisible(true);
-			newView.dispose();
-			tempView.dispose();
-			saveAllTempItems(temp_id);
-			setComboBoxCat();
-			updateTextArea(name);
+			
+			if(newView.tfName.getText().equals("")) {
+				newView.lblNameError.setText("Type in a name first!");
+			} else {
+				String name = newView.tfName.getText().toLowerCase();
+				view.lblName.setText(name);
+				view.setVisible(true);
+				newView.dispose();
+				tempView.dispose();
+				saveAllTempItems(temp_id);
+				setComboBoxCat();
+				updateTextArea(name);
+			}	
 		}
+		
 		if(src == view.comboBoxCat) {
 			String cat = (String)view.comboBoxCat.getSelectedItem();
 			setComboBoxItems(cat);

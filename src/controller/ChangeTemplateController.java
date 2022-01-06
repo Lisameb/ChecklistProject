@@ -4,6 +4,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import model.DaoFactory;
 import model.item.CategoryVo;
 import model.item.ItemDao_DB;
@@ -127,16 +130,21 @@ public class ChangeTemplateController implements  ActionListener{
 			
 		}
 		if(createView!=null && src == createView.btnNew) {
-			TemplateVo temp = new TemplateVo(createView.tfName.getText().toLowerCase());
-			if(tempDao.getTemplateID(temp) == 0) {
-				tempDao.insert(temp);
-				setComboBoxTemp();
-				createView.dispose();
+			if(createView.tfName.getText().equals("")) {
+				createView.lblNameError.setText("Type in a name first!");
 			} else {
-				createView.tfNameExists.setText("Name already exists!");
+				TemplateVo temp = new TemplateVo(createView.tfName.getText().toLowerCase());
+				if(tempDao.getTemplateID(temp) == 0) {
+					tempDao.insert(temp);
+					setComboBoxTemp();
+					createView.dispose();
+				} else {
+					createView.lblNameError.setText("Name already exists!");
+				}
+				view.comboBoxTemp.setSelectedItem(temp.getTemplateName());
+				updateTextArea(temp.getTemplateName());
 			}
-			view.comboBoxTemp.setSelectedItem(temp.getTemplateName());
-			updateTextArea(temp.getTemplateName());
+			
 		}
 		if(src == view.btnDeleteTemp) {
 			TemplateVo temp = new TemplateVo(view.comboBoxTemp.getSelectedItem().toString());

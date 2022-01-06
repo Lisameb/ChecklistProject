@@ -83,34 +83,39 @@ public class ImportChecklistController implements ActionListener{
 		
 		if (src==view.btnImport) {
 			//....
-			ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user());
-			checklistDao.insert(check);
-			Document document;
-			try {
-				document = fileReader(fileToSave);
-				NodeList nList = document.getElementsByTagName("item");
-				for (int i = 0; i < nList.getLength(); i++) {
-	                Node nNode = nList.item(i);
-	                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-	                    Element eElement = (Element) nNode;
-	                    ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
-	                    for(int j = 0; j < itemsByC.size(); j++) {
-	                    	if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
-	                    		addItemtoChecklist(view.tfName.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
-	                    	}
-	                    }
-	                }
-	            }
-			} catch (ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SAXException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			view.dispose();
-			UseChecklistView use = new UseChecklistView();
-			use.setVisible(true);
+			if(view.tfName.getText().contentEquals("")) {
+				JOptionPane.showMessageDialog(null,"Type in a name first!");
+			} else {
+				ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user());
+				checklistDao.insert(check);
+				Document document;
+				try {
+					document = fileReader(fileToSave);
+					NodeList nList = document.getElementsByTagName("item");
+					for (int i = 0; i < nList.getLength(); i++) {
+						Node nNode = nList.item(i);
+						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+							Element eElement = (Element) nNode;
+							ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
+							for(int j = 0; j < itemsByC.size(); j++) {
+								if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
+									addItemtoChecklist(view.tfName.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
+								}
+							}
+						}
+					}
+				} catch (ParserConfigurationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SAXException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				view.dispose();
+				UseChecklistView use = new UseChecklistView();
+				use.setVisible(true);
+			} 
+			
 			
 		}
 		if (src == view.btnCancel) {
