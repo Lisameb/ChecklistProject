@@ -29,8 +29,8 @@ public class ItemView extends JFrame {
 	public JTextField tfItem;
 	private Image img_sidebar;
 	private Frame preView;
+	public JLabel lblListOfItems;
 	
-	//Nice to have: ausgewählte Category in Label anzeigen
 
 	public ItemView(Frame preView) {
 		this.preView = preView;
@@ -83,7 +83,7 @@ public class ItemView extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblListOfItems = new JLabel("Add Item");
+		lblListOfItems = new JLabel("Add Item");
 		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblListOfItems.setBounds(26, 35, 132, 16);
 		panel_1.add(lblListOfItems);

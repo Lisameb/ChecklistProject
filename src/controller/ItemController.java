@@ -48,12 +48,9 @@ public class ItemController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 
-		if (src == view.comboBoxCategory) {
-			String category = view.comboBoxCategory.getSelectedItem().toString();
-		}
-		
 		if (src == view.btnAddItemTo) {
 			String newItem = view.tfItem.getText().toLowerCase();
+			
 			if (checkItems(newItem)) {
 				ItemVo item = new ItemVo(newItem);
 				item.setCategory(view.comboBoxCategory.getSelectedItem().toString());
