@@ -2,8 +2,7 @@ package de.thu.project.main;
 
 import java.awt.EventQueue;
 
-//import view.LoginView;
-import view.LoginView;
+import de.thu.project.main.view.LoginView;
 
 /********************************************** 
  * 
