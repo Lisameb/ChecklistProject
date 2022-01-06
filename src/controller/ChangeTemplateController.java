@@ -20,6 +20,18 @@ import view.CreateTemplateView;
 import view.ItemView;
 import view.MenuView;
 
+/********************************************** 
+ * 
+ * only admin has access
+ * admin chooses a template and can show all items
+ * class to 
+ * 		- add item to a template, if item is already in the template, the amount is replaced, not added
+ * 		- delete items of a template, regardless of amount
+ * 		- delete template
+ * 		- create a new template
+ * 
+ **********************************************/
+
 public class ChangeTemplateController implements  ActionListener{
 
 	private CreateTemplateView createView;

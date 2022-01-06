@@ -31,7 +31,6 @@ import view.MenuView;
 import view.UseChecklistView;
 
 /**********************************************
- * ImportChecklistController-Class
  * 
  * class checks if imported XML is similar to our XML scheme (XSD);
  * class only inserts items, already included in our database, into the imported checklist

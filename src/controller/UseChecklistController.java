@@ -12,7 +12,6 @@ import model.checklist_item.*;
 import view.*;
 
 /**********************************************
- * UseChecklistController-Class
  * 
  * class fills combobox with names of a users checklists (setComboBoxCheck())
  * select a checklist through the combobox and display it or modify it again

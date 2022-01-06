@@ -19,6 +19,16 @@ import view.MenuView;
 import view.TemplateView;
 import view.UseChecklistView;
 
+/********************************************** 
+ * 
+ * user chooses one of their checklists, all items are displayed
+ * class to 
+ * 		- change the name of a checklist
+ * 		- add item to a checklist, if item is already in the checklist, the amount is replaced, not added
+ * 		- delete items of a checklist, regardless of amount
+ * 		- delete checklist
+ * 
+ **********************************************/
 
 public class ChangeChecklistController implements ActionListener, MouseListener{
 

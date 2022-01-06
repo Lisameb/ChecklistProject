@@ -14,7 +14,6 @@ import view.TemplateView;
 import view.UseChecklistView;
 
 /**********************************************
- * MenuController-Class
  * 
  * controller for MenuView, gets called in
  * MenuView.

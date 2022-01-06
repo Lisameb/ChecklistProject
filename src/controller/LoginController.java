@@ -10,6 +10,18 @@ import model.user.UserVo;
 import view.LoginView;
 import view.MenuView;
 
+/********************************************** 
+ * 
+ * class to login or register a new user
+ * 
+ * Login:	compares typed in password and username with database
+ * 			if correct: user is logged in
+ * Register: 	checks if typed in username already exists
+ * 				checks if password is valid
+ * 				saves user and password into the database
+ * 
+ **********************************************/
+
 public class LoginController implements ActionListener{
 
 	LoginView view;

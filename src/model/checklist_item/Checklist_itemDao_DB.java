@@ -7,6 +7,20 @@ import java.util.ArrayList;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'checklist_item' of our database
+ * methods:
+ * 		- get amount of a item in the checklist
+ * 		- checkCombo: check if item is already in the checklist
+ * 		- add item to checklist + update amount
+ * 		- delete item from checklist
+ * 		- get all Items of a checklist
+ * 		- toggleCheck: set if item is checked
+ * 		- get boolean if item is checked
+ * 
+ **********************************************/
+
 public class Checklist_itemDao_DB implements IDaoChecklist_item {
 
 	private DaoFactory daofactory = DaoFactory.getInstance();
@@ -89,11 +103,6 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 
 	}
 
-	/*
-	 * deleteItem needs a Checklist_itemVo with an amount value
-	 * which determines the amount of items to be deleted from the
-	 * checklist
-	 * */
 	@Override
 	public void deleteItem(Checklist_itemVo checklist_item) {
 		if(this.checkCombo(checklist_item)) {
@@ -116,16 +125,6 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 
 	}
 
-	/*
-	 * getItemsC only gets the item names in the checklist,
-	 * not the amount.
-	 * Use getAmount() from this class to get amount from database
-	 * seperately per item
-	 * 
-	 * if you need to get item id with this method, then contact JK or LE
-	 * we will change this method then
-	 */
-
 	@Override
 	public ArrayList<String> getItemsC(int checklist_id) {
 		String query = "SELECT i.name FROM item AS i INNER JOIN checklist_item AS ci ON i.item_ID = ci.item_ID WHERE ci.checklist_ID = "
@@ -146,12 +145,6 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	@Override
-	public void changeAmount(Checklist_itemVo checklist_item) {
-		// TODO write changeAmount and change deleteItem method
-
 	}
 
 	@Override

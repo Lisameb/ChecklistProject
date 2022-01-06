@@ -7,13 +7,24 @@ import java.util.ArrayList;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'item_temp' of our database
+ * methods:
+ * 		- get amount of an item in a template
+ * 		- checkCombo: check if item is in template
+ * 		- add Item to template + update amount
+ * 		- delete item from template
+ * 		- get all items of a template
+ * 
+ **********************************************/
+
 public class Item_tempDao_DB implements IDaoItem_temp {
 	
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	@Override
 	public int getAmount(Item_tempVo item_temp) {
-		// TODO Auto-generated method stub
 		String query = "SELECT amount FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
@@ -34,7 +45,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public boolean checkCombo(Item_tempVo item_temp) {
-		// TODO Auto-generated method stub
 		String query = "SELECT template_ID FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
@@ -53,10 +63,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	
 	@Override
 	public void addItem(Item_tempVo item_temp, int amountAdd) {
-		// TODO Auto-generated method stub
 		if(this.checkCombo(item_temp)) {
-			//int amount = this.getAmount(item_temp);
-			//amount++;
 			
 			String query = "UPDATE item_temp SET amount = " + amountAdd + " WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
 			try {
@@ -64,7 +71,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 				stmt.execute(query);
 				stmt.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.err.println("AddItem fehlgeschlagen!");
 				e.printStackTrace();
 			}
@@ -77,7 +83,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 				stmt.execute(query);
 				stmt.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.err.println("AddItem fehlgeschlagen!");
 				e.printStackTrace();
 			}
@@ -88,7 +93,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public void deleteItem(Item_tempVo item_temp) {
-		// TODO Auto-generated method stub
 		if(this.checkCombo(item_temp)) {
 				String query = "DELETE FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_id = " + item_temp.getItem_id();
 				try {
@@ -96,7 +100,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 					stmt.execute(query);
 					stmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					System.err.println("deleteItem fehlgeschlagen!");
 					e.printStackTrace();
 				}
@@ -111,7 +114,6 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public ArrayList<String> getItemsT(int temp_id) {
-		// TODO Auto-generated method stub
 		String query = "SELECT i.name FROM item AS i INNER JOIN item_temp AS it ON i.item_ID = it.item_ID WHERE it.template_ID = " + temp_id;
 		String itemname = "";
 		ArrayList<String> itemnames = new ArrayList<String>(); 
@@ -125,19 +127,9 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			stmt.close();
 			return itemnames;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("deleteItem fehlgeschlagen!");
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	@Override
-	public void changeAmount(Item_tempVo item_temp) {
-		// TODO write change amount and change deleteItem method.
-		
-	}
-	
-	
-	
 }

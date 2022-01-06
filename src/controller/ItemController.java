@@ -11,6 +11,14 @@ import model.item.ItemDao_DB;
 import model.item.ItemVo;
 import view.ItemView;
 
+/**********************************************
+ *  
+ * only admin has access
+ * class checks if typed in item already exists in chosen category
+ * 		saves item if not
+ * 
+ **********************************************/
+
 public class ItemController implements ActionListener{
 
 	private ItemView view;

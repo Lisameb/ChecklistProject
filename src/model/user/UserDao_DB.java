@@ -4,9 +4,21 @@ import java.sql.*;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'user' of our database
+ * methods:
+ * 		- insert new user
+ * 		- update password
+ * 		- delete user
+ * 		- check if typed in password is correct
+ * 		- validatePassowrd: check if password is valid (long enough)
+ * 		- check if username already exists
+ * 
+ **********************************************/
+
 public class UserDao_DB implements IDaoUser{
 	
-	//to test the code until we have a connection to the db
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	@Override
@@ -18,12 +30,9 @@ public class UserDao_DB implements IDaoUser{
 			stmt.execute(query);
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Insert fehlgeschlagen!");
 			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-		
+		}	
 	}
 
 	@Override
@@ -35,14 +44,9 @@ public class UserDao_DB implements IDaoUser{
 			stmt.execute(query);
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Update fehlgeschlagen!");
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-		// calls method from Database Abstraction Layer -> JDBC
-		// not tested yet
-		
 	}
 
 	@Override
@@ -53,23 +57,14 @@ public class UserDao_DB implements IDaoUser{
 			Statement stmt = daofactory.getCon().createStatement();
 			Boolean b = stmt.execute(query);
 			stmt.close();
-			if(b) {
-				//TODO more gui windows -> shows that delete was successful
-			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-		// not tested yet
-		
 	}
 
 	
 	public boolean checkPassword(UserVo user) {
-		
-		
 		String query = "SELECT password FROM user WHERE name = '" + user.getUsername() + "'";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
@@ -84,7 +79,6 @@ public class UserDao_DB implements IDaoUser{
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("checkPassword fehlgeschlagen!");
 			e.printStackTrace();
 		}
@@ -124,7 +118,6 @@ public class UserDao_DB implements IDaoUser{
 			stmt.close();
 			return foundUser;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("checkUsernameExists fehlgeschlagen!");
 			e.printStackTrace();
 		}

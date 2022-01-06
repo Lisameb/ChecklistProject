@@ -11,6 +11,15 @@ import model.user.UserVo;
 import view.ChangePasswordView;
 import view.MenuView;
 
+/********************************************** 
+ * 
+ * Class to change the password of the logged in user
+ * Checks current password of user.
+ * Checks if new password is valid.
+ * If checks are successful, password is updated in our database.
+ * 
+ **********************************************/
+
 public class PasswordController implements ActionListener{
 
 	ChangePasswordView view;
@@ -22,13 +31,7 @@ public class PasswordController implements ActionListener{
 		this.view = view;
 		this.userDao = (UserDao_DB) daoFactory.getUserDao();
 	}
-
-	/*
-	 * Checks current password of user.
-	 * Checks if new password is valid.
-	 * If checks are successful, password is updated in our database.
-	 */
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();

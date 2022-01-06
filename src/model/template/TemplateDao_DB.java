@@ -5,13 +5,25 @@ import java.util.ArrayList;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'template' of our database
+ * methods:
+ * 		- insert new template
+ * 		- delete template
+ * 		- get all templates
+ * 		- get templateID
+ * 		- get name of template by ID
+ * 
+ **********************************************/
+
 public class TemplateDao_DB implements IDaoTemplate {
 	
 	private DaoFactory daofactory = DaoFactory.getInstance();
 
 	@Override
 	public void insert(TemplateVo template) {
-		// TODO Auto-generated method stub
+		
 		String query = "INSERT INTO template (name) VALUES ('" + template.getTemplateName() + "')";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
@@ -27,17 +39,13 @@ public class TemplateDao_DB implements IDaoTemplate {
 
 	@Override
 	public void delete(TemplateVo template) {
-		// TODO Auto-generated method stub
+
 		String query = "DELETE FROM template WHERE name = '" + template.getTemplateName() + "'";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			Boolean b = stmt.execute(query);
 			stmt.close();
-			if(b) {
-				//TODO more gui windows -> shows that delete was successful 
-			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
 		}
@@ -55,7 +63,6 @@ public class TemplateDao_DB implements IDaoTemplate {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("getAll fehlgeschlagen!");
 			e.printStackTrace();
 		}
@@ -75,7 +82,6 @@ public class TemplateDao_DB implements IDaoTemplate {
 				return temp_id;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Get ID fehlgeschlagen!");
 			e.printStackTrace();
 		}
@@ -92,7 +98,6 @@ public class TemplateDao_DB implements IDaoTemplate {
 				return name;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Get Name fehlgeschlagen!");
 			e.printStackTrace();
 		}

@@ -20,6 +20,11 @@ import model.checklist.ChecklistVo;
 import model.item.ItemDao_DB;
 import model.item.ItemVo;
 
+/********************************************** 
+ * 
+ * class to export checklist as pdf or xml
+ * 
+ **********************************************/
 
 //Source: https://www.baeldung.com/java-pdf-creation
 // https://stackoverflow.com/questions/14602821/how-to-check-a-check-box-in-pdf-form-using-java-pdfbox-api

@@ -26,6 +26,16 @@ import view.MenuView;
 import view.TemplateView;
 import view.UseChecklistView;
 
+/********************************************** 
+ * 
+ * user chooses a template, all items are displayed
+ * class to create a checklist with
+ * 		- the items of the chosen template
+ * 		- a name, given by the user
+ * user can add more items or delete items
+ * 
+ **********************************************/
+
 public class CreateChecklistController implements ActionListener,MouseListener {
 
 	int temp_id;
@@ -147,11 +157,11 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		Object src = e.getSource();
 		
 		if(src == newView.btnNew) {
-			createNewChecklist();
-			
+
 			if(newView.tfName.getText().equals("")) {
 				newView.lblNameError.setText("Type in a name first!");
 			} else {
+				createNewChecklist();
 				String name = newView.tfName.getText().toLowerCase();
 				view.lblName.setText(name);
 				view.setVisible(true);

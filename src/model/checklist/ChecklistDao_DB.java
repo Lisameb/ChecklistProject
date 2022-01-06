@@ -7,6 +7,18 @@ import java.util.ArrayList;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'checklist' of our database
+ * methods:
+ * 		- insert new checklist
+ * 		- delete checklist
+ * 		- get checklistID
+ * 		- get all checklist of an user
+ * 		- change name of checklist
+ * 
+ **********************************************/
+
 public class ChecklistDao_DB implements IDaoChecklist {
 	
 	private DaoFactory daofactory = DaoFactory.getInstance();

@@ -10,6 +10,14 @@ import model.template.TemplateDao_DB;
 import model.template.TemplateVo;
 import view.MenuView;
 import view.TemplateView;
+//TODO remove icons
+
+/********************************************** 
+ * 
+ * class displays all templates
+ * template for a new checklist can be chosen
+ * 
+ **********************************************/
 
 public class TemplateController implements MouseListener {
 	

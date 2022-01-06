@@ -7,6 +7,21 @@ import java.util.ArrayList;
 
 import model.DaoFactory;
 
+/********************************************** 
+ * 
+ * class interacts with table 'item' of our database
+ * methods:
+ * 		- insert new item
+ * 		- delete item
+ * 		- update category of an item
+ * 		- get ItemID
+ * 		- geCategoryItems: get all items of a category
+ * 		- get all items
+ * 		- get all categories
+ * 		- get CategoryID
+ * 
+ **********************************************/
+
 public class ItemDao_DB implements IDaoItem {
 
 	private DaoFactory daofactory = DaoFactory.getInstance();
@@ -32,9 +47,6 @@ public class ItemDao_DB implements IDaoItem {
 			Statement stmt = daofactory.getCon().createStatement();
 			Boolean b = stmt.execute(query);
 			stmt.close();
-			if(b) {
-				//TODO more gui windows -> shows that delete was successful
-			}
 		} catch (SQLException e) {
 			System.err.println("Delete fehlgeschlagen!");
 			e.printStackTrace();
@@ -42,7 +54,7 @@ public class ItemDao_DB implements IDaoItem {
 	}
 
 	@Override
-	public void updateCategory(ItemVo item, CategoryVo category) { // überprüfen, ob database mit der Syntax klarkommt -> sonst mit category.getName() Name holen
+	public void updateCategory(ItemVo item, CategoryVo category) {
 		String query = "UPDATE item SET category = '" + category + "' WHERE name = '" + item.getItemName() + "'";
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
