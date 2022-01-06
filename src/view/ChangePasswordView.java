@@ -30,6 +30,7 @@ public class ChangePasswordView extends JFrame {
 	public JPasswordField tfNewPw1;
 	public JPasswordField tfNewPw2;
 	public JButton btnChange;
+	public JButton btnCancel;
 	public JLabel lblWrongNewPw;
 	public JLabel lblWrongPw;
 
@@ -95,6 +96,12 @@ public class ChangePasswordView extends JFrame {
 		btnChange.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnChange.setBounds(281, 234, 176, 29);
 		panel.add(btnChange);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(passCon);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCancel.setBounds(22, 234, 93, 29);
+		panel.add(btnCancel);
 		
 		lblWrongPw = new JLabel("");
 		lblWrongPw.setForeground(Color.RED);
