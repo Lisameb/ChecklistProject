@@ -129,7 +129,7 @@ public class Export {
 			int amount = checkItemDao.getAmount(checkItem);
 			item.setItemID(itemDao.getItemID(item));
 			
-			child.addContent(new Element("cat_id").addContent(itemDao.getCategoryID(item)));
+			child.addContent(new Element("category").addContent(itemDao.getCategoryID(item)));
 			child.addContent(new Element("name").addContent(allItems.get(i)));
 			child.addContent(new Element("amount").addContent(amount+""));
 			root.addContent(child);	
