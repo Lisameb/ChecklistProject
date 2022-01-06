@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 
@@ -201,9 +202,12 @@ public class TemplateView extends JFrame {
 		panel_2.add(lblSmallBack);
 		
 		taPreview = new JTextArea();
-		taPreview.setBounds(396, 16, 317, 459);
 		taPreview.setEditable(false);
 		contentPane.add(taPreview);
+		
+		JScrollPane spPreview = new JScrollPane(taPreview);
+		spPreview.setBounds(396, 16, 317, 459);
+		contentPane.add(spPreview);
 		
 		btnBack = new JButton("Main Menu");
 		btnBack.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));

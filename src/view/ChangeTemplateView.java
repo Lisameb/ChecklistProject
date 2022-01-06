@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -22,9 +23,9 @@ public class  ChangeTemplateView extends JFrame {
 
 	public JPanel contentPane;
 	public JTextField tfAmount;
-	public JComboBox comboBoxTemp;
-	public JComboBox comboBoxCategory;
-	public JComboBox comboBoxItem;
+	public JComboBox<String> comboBoxTemp;
+	public JComboBox<String> comboBoxCategory;
+	public JComboBox<String> comboBoxItem;
 	public JButton btnAddItemTo;
 	public JButton btnNewTemp;
 	public JButton btnDeleteTemp;
@@ -66,8 +67,6 @@ public class  ChangeTemplateView extends JFrame {
 		panel_1.setBounds(218, 0, 551, 546);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		//JScrollPane scrollPane = new JScrollPane(itemList);
-		//panel_1.add(scrollPane);
 		
 		JLabel lblChooseTemplate = new JLabel("Choose template");
 		lblChooseTemplate.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -166,10 +165,13 @@ public class  ChangeTemplateView extends JFrame {
 		
 		taItemList = new JTextArea();
 		taItemList.setText("Choose template");
-		taItemList.setBounds(46, 42, 456, 263);
+		taItemList.setEditable(false);
 		panel_1.add(taItemList);
-
 		
+		JScrollPane spItemList = new JScrollPane(taItemList);
+		spItemList.setBounds(46, 42, 456, 263);
+		panel_1.add(spItemList);
+
 		btnBack = new JButton("Main Menu");
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBack.setBackground(new Color(176, 224, 230));

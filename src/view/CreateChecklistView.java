@@ -10,10 +10,7 @@ import javax.swing.border.EmptyBorder;
 import controller.CreateChecklistController;
 
 import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
+
 import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
@@ -128,8 +125,11 @@ public class CreateChecklistView extends JFrame {
 		
 		taChecklist = new JTextArea();
 		taChecklist.setEditable(false);
-		taChecklist.setBounds(487, 129, 259, 401);
 		contentPane.add(taChecklist);
+		
+		JScrollPane spChecklist = new JScrollPane(taChecklist);
+		spChecklist.setBounds(487, 129, 259, 401);
+		contentPane.add(spChecklist);
 		
 		comboBoxCat = new JComboBox<String>();
 		comboBoxCat.addActionListener(clController);

@@ -15,7 +15,6 @@ public class ImportChecklistView extends JFrame{
 	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
 	
 	public JPanel contentPane;
-	//public JTextArea taChecklist;
 	public JTextField tfName;
 	public JLabel lblNameChecklist;
 	public JTextArea taItems;
@@ -79,8 +78,11 @@ public class ImportChecklistView extends JFrame{
 		panel.add(lblBack);
 		
 		taItems = new JTextArea();
-		//JScrollPane sp = new JScrollPane(textArea);
-		taItems.setBounds(247, 13, 305, 387);
+		taItems.setEditable(false);
 		contentPane.add(taItems);
+		
+		JScrollPane spItems = new JScrollPane(taItems);
+		spItems.setBounds(247, 13, 305, 387);
+		contentPane.add(spItems);
 	}
 }

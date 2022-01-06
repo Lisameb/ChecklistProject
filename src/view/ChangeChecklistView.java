@@ -141,8 +141,12 @@ private void initialize() {
 		contentPane.add(lblTitle);
 		
 		taChecklist = new JTextArea();
-		taChecklist.setBounds(489, 67, 259, 401);
+		taChecklist.setEditable(false);
 		contentPane.add(taChecklist);
+		
+		JScrollPane spChecklist = new JScrollPane(taChecklist);
+		spChecklist.setBounds(489, 67, 259, 401);
+		contentPane.add(spChecklist);
 		
 		JLabel lblName = new JLabel("Change name");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 16));

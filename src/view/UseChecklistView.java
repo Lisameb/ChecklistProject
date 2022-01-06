@@ -38,13 +38,13 @@ public class UseChecklistView extends JFrame{
 	public JButton btnExport;
 	public JButton btnCreatePdf;
 	public JCheckBox checkBox_checklist;
-	private JCheckBox item = new JCheckBox();
+	//private JCheckBox item;
 	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
 	public JPanel panel_1;
 	public JPanel panel_2;
 	public JPanel panel_3;
 	private UseChecklistController clcon;
-	private ChecklistVo clvo;
+	//private ChecklistVo clvo;
 	private Image img_sidebar;
 	
 
