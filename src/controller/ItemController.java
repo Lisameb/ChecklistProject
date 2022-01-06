@@ -29,7 +29,6 @@ public class ItemController implements ActionListener{
 		for(CategoryVo category : catList) {
 			view.comboBoxCategory.addItem(category.getCategoryName());
 		}
-
 	}
 
 	public boolean checkItems(String itemName) {
@@ -63,8 +62,6 @@ public class ItemController implements ActionListener{
 				view.tfItem.setText("");
 			}
 		}
-
 	}
-
 }
 
