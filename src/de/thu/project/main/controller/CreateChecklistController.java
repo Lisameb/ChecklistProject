@@ -185,6 +185,10 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 			
 			try {
 				amount =  Integer.parseInt(view.tfAmount.getText());
+				if(amount <= 0 ) {
+					amount = 1;
+					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
+				}
 			} catch(Exception ex) {
 				amount = 1;
 			}

@@ -19,6 +19,12 @@ import de.thu.project.main.view.MenuView;
 import de.thu.project.main.view.TemplateView;
 import de.thu.project.main.view.UseChecklistView;
 
+import de.thu.project.main.model.DaoFactory;
+import de.thu.project.main.model.checklist.*;
+import de.thu.project.main.model.checklist_item.*;
+import de.thu.project.main.view.*;
+
+
 /********************************************** 
  * 
  * user chooses one of their checklists, all items are displayed
@@ -37,6 +43,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	private ItemDao_DB itemDao;
 	private Checklist_itemDao_DB checklist_itemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
+	private ArrayList<String> checklistItems;
 
 	public ChangeChecklistController(ChangeChecklistView view) {
 		this.view = view;
@@ -155,6 +162,10 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			
 			try {
 				amount =  Integer.parseInt(view.tfAmount.getText());
+				if(amount <= 0 ) {
+					amount = 1;
+					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
+				}
 			} catch(Exception ex) {
 				amount = 1;
 			}
@@ -169,6 +180,19 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			
 			deleteItemFromChecklist(checklist, item);
 			updateTextArea(checklist);
+			
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+			int checklistID = checklistDao.getChecklistID(checklistVO);
+			checklistItems = new ArrayList<String>();
+			checklistItems = checklist_itemDao.getItemsC(checklistID);
+			
+			if(checklistItems.isEmpty() ) {
+				checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
+				checklistDao.delete(checklistVO);
+				setComboBoxCheck();
+				view.taChecklist.setText("");
+			}
 			
 		}
 		
