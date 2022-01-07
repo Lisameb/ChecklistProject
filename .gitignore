@@ -1,6 +1,6 @@
 /.classpath
 .DS_Store
-src/util/Config.java
+src/de/thu/project/main/util/Config.java
 bin/
 
 
