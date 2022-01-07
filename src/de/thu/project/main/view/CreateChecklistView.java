@@ -1,7 +1,8 @@
 package de.thu.project.main.view;
 
 
-
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +15,7 @@ import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+
 
 public class CreateChecklistView extends JFrame {
 
