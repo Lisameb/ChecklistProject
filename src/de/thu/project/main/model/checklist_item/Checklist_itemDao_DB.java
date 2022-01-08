@@ -1,5 +1,6 @@
 package de.thu.project.main.model.checklist_item;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,11 +28,13 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 
 	@Override
 	public int getAmount(Checklist_itemVo checklist_item) {
-		String query = "SELECT amount FROM checklist_item WHERE checklist_ID = "
-				+ checklist_item.getChecklist_id() + " AND item_ID = "
-				+ checklist_item.getItem_id();
+		String query = "SELECT amount FROM checklist_item WHERE checklist_ID = ? AND item_ID = ?";
+		
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_item.getChecklist_id());
+			stmt.setInt(2, checklist_item.getItem_id());
+			
 			ResultSet resultset = stmt.executeQuery(query);
 			int amount;
 			if(resultset.next()) {
@@ -39,9 +42,8 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				return amount;
 			}
 			stmt.close();
-
-		} catch(SQLException e) {
-			System.err.println("getAmount fehlgeschlagen!");
+		}catch(SQLException e) {
+			System.err.println("Get Amount failed!");
 			e.printStackTrace();
 		}
 		return 0;
@@ -49,11 +51,14 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 
 	@Override
 	public boolean checkCombo(Checklist_itemVo checklist_item) {
-		String query = "SELECT checklist_ID FROM checklist_item WHERE checklist_ID = "
-				+ checklist_item.getChecklist_id() + " AND item_ID = "
-				+ checklist_item.getItem_id();
+		
+		String query = "SELECT checklist_ID FROM checklist_item WHERE checklist_ID = ? AND item_ID = ?";
+		
+
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_item.getChecklist_id());
+			stmt.setInt(2, checklist_item.getItem_id());
 			ResultSet resultset = stmt.executeQuery(query);
 			if(resultset.next()) {
 				return true;
@@ -61,7 +66,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			stmt.close();
 
 		} catch(SQLException e) {
-			System.err.println("checkCombo fehlgeschlagen!");
+			System.err.println("Check Combination failed!");
 			e.printStackTrace();
 		}
 		return false;
@@ -71,68 +76,67 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 	public void addItem(Checklist_itemVo checklist_item, int amountAdd) {
 		if(this.checkCombo(checklist_item)) {
 
-			String query = "UPDATE checklist_item SET amount = "
-					+ amountAdd + " WHERE checklist_ID = "
-					+ checklist_item.getChecklist_id() + " AND item_ID = "
-					+ checklist_item.getItem_id();
+			String query = "UPDATE checklist_item SET amount = ? WHERE checklist_ID = ? AND item_ID = ?";
+			
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, amountAdd);
+				stmt.setInt(2, checklist_item.getChecklist_id());
+				stmt.setInt(3, checklist_item.getItem_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("AddItem fehlgeschlagen!");
+				System.err.println("Add Item failed!");
 				e.printStackTrace();
 			}
 		} else {
 
-
-			String query = "INSERT INTO checklist_item (item_ID, amount, checklist_ID) VALUES ("
-					+ checklist_item.getItem_id() + ", "
-					+ amountAdd + ","
-					+ checklist_item.getChecklist_id() + ")";
+			String query = "INSERT INTO checklist_item (item_ID, amount, checklist_ID) VALUES (?,?,?)";
+			
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, checklist_item.getItem_id());
+				stmt.setInt(2, amountAdd);
+				stmt.setInt(3, checklist_item.getChecklist_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("AddItem fehlgeschlagen!");
+				System.err.println("Add Item failed!");
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	@Override
 	public void deleteItem(Checklist_itemVo checklist_item) {
 		if(this.checkCombo(checklist_item)) {
-			String query = "DELETE FROM checklist_item WHERE checklist_ID = "
-					+ checklist_item.getChecklist_id() + " AND item_id = "
-					+ checklist_item.getItem_id();
+			String query = "DELETE FROM checklist_item WHERE checklist_ID = ? AND item_id = ?";
+			
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, checklist_item.getChecklist_id());
+				stmt.setInt(2, checklist_item.getItem_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("deleteItem fehlgeschlagen!");
+				System.err.println("Delete Item failed!");
 				e.printStackTrace();
 			}
 
 		} else {
 			System.out.println("The item was not in the list in the first place!!!");
-
 		}
-
 	}
 
 	@Override
 	public ArrayList<String> getItemsC(int checklist_id) {
-		String query = "SELECT i.name FROM item AS i INNER JOIN checklist_item AS ci ON i.item_ID = ci.item_ID WHERE ci.checklist_ID = "
-				+ checklist_id;
+		String query = "SELECT i.name FROM item AS i INNER JOIN checklist_item AS ci ON i.item_ID = ci.item_ID WHERE ci.checklist_ID = ?";
+		
 		String itemname = "";
 		ArrayList<String> itemnames = new ArrayList<String>(); 
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_id);
 			ResultSet resultset = stmt.executeQuery(query);
 			while(resultset.next()) {
 				itemname = resultset.getString("i.name");
@@ -141,7 +145,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			stmt.close();
 			return itemnames;
 		} catch (SQLException e) {
-			System.err.println("getItem fehlgeschlagen!");
+			System.err.println("Get Item failed!");
 			e.printStackTrace();
 		}
 		return null;
@@ -150,42 +154,41 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 	@Override
 	public void toggleCheck(Checklist_itemVo checklist_item) {
 		if(checklist_item.isChecked()) {
+			String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = ? AND item_ID = ?";
 
-			String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = "
-					+ checklist_item.getChecklist_id() + " AND item_ID = "
-					+ checklist_item.getItem_id();
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, checklist_item.getChecklist_id());
+				stmt.setInt(2, checklist_item.getItem_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("AddItem fehlgeschlagen!");
+				System.err.println("Toggle Item failed!");
 				e.printStackTrace();
 			}
 		} else {
 
+			String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = ? AND item_ID = ?";
 
-			String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = "
-					+ checklist_item.getChecklist_id() + " AND item_ID = "
-					+ checklist_item.getItem_id();
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, checklist_item.getChecklist_id());
+				stmt.setInt(2, checklist_item.getItem_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("ToggleItem fehlgeschlagen!");
+				System.err.println("Toggle Item failed!");
 				e.printStackTrace();
 			}
-
 		}
-
 	}
+	
 	public boolean getChecked(Checklist_itemVo checklist_item) {
-		String query = "SELECT checked FROM checklist_item WHERE checklist_ID = "
-				+ checklist_item.getChecklist_id() + " AND item_ID = "
-				+ checklist_item.getItem_id();
+		String query = "SELECT checked FROM checklist_item WHERE checklist_ID = ? AND item_ID = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_item.getChecklist_id());
+			stmt.setInt(2, checklist_item.getItem_id());
 			ResultSet resultset = stmt.executeQuery(query);
 			if(resultset.next()) {
 				int checked = resultset.getInt("checked");
@@ -198,7 +201,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			stmt.close();
 
 		} catch(SQLException e) {
-			System.err.println("checkCombo fehlgeschlagen!");
+			System.err.println("Check Combination failed!");
 			e.printStackTrace();
 		}
 		return false;
