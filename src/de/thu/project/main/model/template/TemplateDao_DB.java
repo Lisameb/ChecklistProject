@@ -24,14 +24,15 @@ public class TemplateDao_DB implements IDaoTemplate {
 	@Override
 	public void insert(TemplateVo template) {
 		
-		String query = "INSERT INTO template (name) VALUES ('" + template.getTemplateName() + "')";
+		String query = "INSERT INTO template (name) VALUES (?)";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, template.getTemplateName());
+			stmt.executeUpdate(query);
 			stmt.close();
 			
 		} catch(SQLException e) {
-			System.err.println("Insert fehlgeschlagen!");
+			System.err.println("Insert failed!");
 			e.printStackTrace();
 		}
 		
@@ -40,13 +41,14 @@ public class TemplateDao_DB implements IDaoTemplate {
 	@Override
 	public void delete(TemplateVo template) {
 
-		String query = "DELETE FROM template WHERE name = '" + template.getTemplateName() + "'";
+		String query = "DELETE FROM template WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			Boolean b = stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, template.getTemplateName());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Delete fehlgeschlagen!");
+			System.err.println("Delete failed!");
 			e.printStackTrace();
 		}
 		
@@ -63,7 +65,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("getAll fehlgeschlagen!");
+			System.err.println("Get all failed!");
 			e.printStackTrace();
 		}
 		return allTemp;
@@ -72,9 +74,10 @@ public class TemplateDao_DB implements IDaoTemplate {
 	
 	public int getTemplateID(TemplateVo template) {
 		
-		String query = "SELECT template_ID FROM template WHERE name = '" + template.getTemplateName() + "'";
+		String query = "SELECT template_ID FROM template WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, template.getTemplateName());
 			ResultSet resultset = stmt.executeQuery(query);
 			int temp_id;
 			if(resultset.next()) {
@@ -82,15 +85,16 @@ public class TemplateDao_DB implements IDaoTemplate {
 				return temp_id;
 			}
 		} catch (SQLException e) {
-			System.err.println("Get ID fehlgeschlagen!");
+			System.err.println("Get ID failed!");
 			e.printStackTrace();
 		}
 		return 0;
 	}
 	public String getTemplateName(int temp_id) {
-		String query = "SELECT name FROM template WHERE template_ID = " + temp_id;
+		String query = "SELECT name FROM template WHERE template_ID = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, temp_id);
 			ResultSet resultset = stmt.executeQuery(query);
 			String name;
 			if(resultset.next()) {
@@ -98,7 +102,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 				return name;
 			}
 		} catch (SQLException e) {
-			System.err.println("Get Name fehlgeschlagen!");
+			System.err.println("Get Name failed!");
 			e.printStackTrace();
 		}
 		return null;

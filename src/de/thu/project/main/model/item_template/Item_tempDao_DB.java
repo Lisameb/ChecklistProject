@@ -1,8 +1,8 @@
 package de.thu.project.main.model.item_template;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import de.thu.project.main.model.DaoFactory;
@@ -25,9 +25,11 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public int getAmount(Item_tempVo item_temp) {
-		String query = "SELECT amount FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
+		String query = "SELECT amount FROM item_temp WHERE template_ID = ? AND item_ID = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, item_temp.getTemplate_id());
+			stmt.setInt(2, item_temp.getItem_id());
 			ResultSet resultset = stmt.executeQuery(query);
 			int amount;
 			if(resultset.next()) {
@@ -37,7 +39,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			stmt.close();
 			
 		} catch(SQLException e) {
-			System.err.println("getAmount fehlgeschlagen!");
+			System.err.println("Get Amount failed!");
 			e.printStackTrace();
 		}
 		return 0;
@@ -45,9 +47,11 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public boolean checkCombo(Item_tempVo item_temp) {
-		String query = "SELECT template_ID FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
+		String query = "SELECT template_ID FROM item_temp WHERE template_ID = ? AND item_ID = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, item_temp.getTemplate_id());
+			stmt.setInt(2, item_temp.getItem_id());
 			ResultSet resultset = stmt.executeQuery(query);
 			if(resultset.next()) {
 				return true;
@@ -55,7 +59,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			stmt.close();
 			
 		} catch(SQLException e) {
-			System.err.println("checkCombo fehlgeschlagen!");
+			System.err.println("Check Combination failed!");
 			e.printStackTrace();
 		}
 		return false;
@@ -65,25 +69,30 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	public void addItem(Item_tempVo item_temp, int amountAdd) {
 		if(this.checkCombo(item_temp)) {
 			
-			String query = "UPDATE item_temp SET amount = " + amountAdd + " WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_ID = " + item_temp.getItem_id();
+			String query = "UPDATE item_temp SET amount = ? WHERE template_ID = ? AND item_ID = ?";
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, amountAdd);
+				stmt.setInt(2, item_temp.getTemplate_id());
+				stmt.setInt(3, item_temp.getItem_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("AddItem fehlgeschlagen!");
+				System.err.println("Add Item failed!");
 				e.printStackTrace();
 			}
 		} else {
 			
-			
-			String query = "INSERT INTO item_temp (item_ID, amount, template_ID) VALUES (" + item_temp.getItem_id() + ", " + amountAdd + "," + item_temp.getTemplate_id() + ")";
+			String query = "INSERT INTO item_temp (item_ID, amount, template_ID) VALUES (?, ?, ?)";
 			try {
-				Statement stmt = daofactory.getCon().createStatement();
-				stmt.execute(query);
+				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+				stmt.setInt(1, item_temp.getItem_id());
+				stmt.setInt(2, amountAdd);
+				stmt.setInt(3, item_temp.getTemplate_id());
+				stmt.executeUpdate(query);
 				stmt.close();
 			} catch (SQLException e) {
-				System.err.println("AddItem fehlgeschlagen!");
+				System.err.println("Add Item failed!");
 				e.printStackTrace();
 			}
 			
@@ -94,13 +103,16 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 	@Override
 	public void deleteItem(Item_tempVo item_temp) {
 		if(this.checkCombo(item_temp)) {
-				String query = "DELETE FROM item_temp WHERE template_ID = " + item_temp.getTemplate_id() + " AND item_id = " + item_temp.getItem_id();
+			
+				String query = "DELETE FROM item_temp WHERE template_ID = ? AND item_id = ?";
 				try {
-					Statement stmt = daofactory.getCon().createStatement();
-					stmt.execute(query);
+					PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+					stmt.setInt(1, item_temp.getTemplate_id());
+					stmt.setInt(2, item_temp.getItem_id());
+					stmt.executeUpdate(query);
 					stmt.close();
 				} catch (SQLException e) {
-					System.err.println("deleteItem fehlgeschlagen!");
+					System.err.println("Delete Item failed!");
 					e.printStackTrace();
 				}
 			
@@ -114,11 +126,12 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 
 	@Override
 	public ArrayList<String> getItemsT(int temp_id) {
-		String query = "SELECT i.name FROM item AS i INNER JOIN item_temp AS it ON i.item_ID = it.item_ID WHERE it.template_ID = " + temp_id;
+		String query = "SELECT i.name FROM item AS i INNER JOIN item_temp AS it ON i.item_ID = it.item_ID WHERE it.template_ID = ?";
 		String itemname = "";
 		ArrayList<String> itemnames = new ArrayList<String>(); 
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, temp_id);
 			ResultSet resultset = stmt.executeQuery(query);
 			while(resultset.next()) {
 				itemname = resultset.getString("i.name");
@@ -127,7 +140,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			stmt.close();
 			return itemnames;
 		} catch (SQLException e) {
-			System.err.println("deleteItem fehlgeschlagen!");
+			System.err.println("Get Items from Template failed!");
 			e.printStackTrace();
 		}
 		return null;
