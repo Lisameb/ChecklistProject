@@ -24,13 +24,15 @@ public class UserDao_DB implements IDaoUser{
 	@Override
 	public void insert(UserVo user) {
 		
-		String query = "INSERT INTO user (name, password) VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "')";
+		String query = "INSERT INTO user (name, password) VALUES (?, ?)";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Insert fehlgeschlagen!");
+			System.err.println("Insert failed!");
 			e.printStackTrace();
 		}	
 	}
@@ -38,13 +40,15 @@ public class UserDao_DB implements IDaoUser{
 	@Override
 	public void update(UserVo user) {
 		
-		String query = "UPDATE user SET password = '" + user.getPassword() + "' WHERE name = '" + user.getUsername() + "'";
+		String query = "UPDATE user SET password = ? WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, user.getPassword());
+			stmt.setString(2, user.getUsername());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Update fehlgeschlagen!");
+			System.err.println("Update failed!");
 			e.printStackTrace();
 		}
 	}
@@ -52,34 +56,36 @@ public class UserDao_DB implements IDaoUser{
 	@Override
 	public void delete(UserVo user) {
 	
-		String query = "DELETE FROM user WHERE name = '" + user.getUsername() + "'";
+		String query = "DELETE FROM user WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			Boolean b = stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, user.getUsername());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Delete fehlgeschlagen!");
+			System.err.println("Delete failed!");
 			e.printStackTrace();
 		}
 	}
 
 	
 	public boolean checkPassword(UserVo user) {
-		String query = "SELECT password FROM user WHERE name = '" + user.getUsername() + "'";
+		String query = "SELECT password FROM user WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, user.getUsername());
 			ResultSet resultset = stmt.executeQuery(query);
 			String pw = "";
 			if(resultset.next()) {
 				pw = resultset.getString("password");
 				
 			}
+			stmt.close();
 			if(user.getPassword().equals(pw) && !user.getPassword().isEmpty()) {
 				return true;
 			}
-			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("checkPassword fehlgeschlagen!");
+			System.err.println("Check Password failed!");
 			e.printStackTrace();
 		}
 		
@@ -103,11 +109,11 @@ public class UserDao_DB implements IDaoUser{
 		Boolean foundUser = false;
 		String resultString = "";
 		
-		String query = "SELECT name FROM user WHERE name='" + username + "';";
+		String query = "SELECT name FROM user WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
-			ResultSet result = stmt.getResultSet();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, username);
+			ResultSet result = stmt.executeQuery(query);
 			
 			if(result.next()) {
 				resultString = result.getString("name");
@@ -118,7 +124,7 @@ public class UserDao_DB implements IDaoUser{
 			stmt.close();
 			return foundUser;
 		} catch (SQLException e) {
-			System.err.println("checkUsernameExists fehlgeschlagen!");
+			System.err.println("Check Username exists failed!");
 			e.printStackTrace();
 		}
 		

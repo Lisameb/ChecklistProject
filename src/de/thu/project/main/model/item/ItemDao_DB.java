@@ -1,5 +1,6 @@
 package de.thu.project.main.model.item;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,40 +29,45 @@ public class ItemDao_DB implements IDaoItem {
 	
 	@Override
 	public void insert(ItemVo item) {
-		String query = "INSERT INTO item (name, category) VALUES ('" + item.getItemName() + "', '" + item.getCategory() + "')";
+		String query = "INSERT INTO item (name, category) VALUES (?, ?)";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, item.getItemName());
+			stmt.setString(2, item.getCategory());
+			stmt.executeUpdate(query);
 			stmt.close();
 			
 		} catch(SQLException e) {
-			System.err.println("Insert fehlgeschlagen!");
+			System.err.println("Insert failed!");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void delete(ItemVo item) {
-		String query = "DELETE FROM item WHERE name = '" + item.getItemName() + "'";
+		String query = "DELETE FROM item WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			Boolean b = stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, item.getItemName());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Delete fehlgeschlagen!");
+			System.err.println("Delete failed!");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void updateCategory(ItemVo item, CategoryVo category) {
-		String query = "UPDATE item SET category = '" + category + "' WHERE name = '" + item.getItemName() + "'";
+		String query = "UPDATE item SET category = ? WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, category.getCategoryName());
+			stmt.setString(2, item.getItemName());
+			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Update fehlgeschlagen!");
+			System.err.println("Update failed!");
 			e.printStackTrace();
 		}
 	}
@@ -69,9 +75,10 @@ public class ItemDao_DB implements IDaoItem {
 	@Override
 	public int getItemID(ItemVo item) {
 		
-		String query = "SELECT item_ID FROM item WHERE name = '" + item.getItemName() + "'";
+		String query = "SELECT item_ID FROM item WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, item.getItemName());
 			ResultSet resultset = stmt.executeQuery(query);
 			int item_id;
 			if(resultset.next()) {
@@ -79,24 +86,25 @@ public class ItemDao_DB implements IDaoItem {
 				return item_id;
 			}
 		} catch (SQLException e) {
-			System.err.println("Delete fehlgeschlagen!");
+			System.err.println("Delete failed!");
 			e.printStackTrace();
 		}
 		return 0;
 	}
 	
 	public ArrayList<String> getCategoryItems(String category) {
-		String query = "SELECT * FROM item WHERE category = '" + category + "'";
+		String query = "SELECT * FROM item WHERE category = ?";
 		ArrayList<String> allItems = new ArrayList<>();
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, category);
 			ResultSet resultset = stmt.executeQuery(query);
 			while(resultset.next()) {
 				allItems.add(resultset.getString("name"));	
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("getCategoryItems fehlgeschlagen!");
+			System.err.println("Get Category Items failed!");
 			e.printStackTrace();
 		}
 		return allItems;
@@ -104,8 +112,8 @@ public class ItemDao_DB implements IDaoItem {
 	}
 	
 	public ArrayList<String> getAllItems(){
-		ArrayList<String> allItems = new ArrayList<>();
 		String query = "SELECT * FROM item";
+		ArrayList<String> allItems = new ArrayList<>();
 		try {
 			Statement stmt = daofactory.getCon().createStatement();
 			ResultSet resultset = stmt.executeQuery(query);
@@ -114,7 +122,7 @@ public class ItemDao_DB implements IDaoItem {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("getAllItems fehlgeschlagen!");
+			System.err.println("Get all Items failed!");
 			e.printStackTrace();
 		}
 		return allItems;
@@ -132,8 +140,7 @@ public class ItemDao_DB implements IDaoItem {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.err.println("getAll fehlgeschlagen!");
+			System.err.println("Get all Categories failed!");
 			e.printStackTrace();
 		}
 		return allCat;
@@ -141,9 +148,10 @@ public class ItemDao_DB implements IDaoItem {
 	
 	public String getCategoryID(ItemVo item) {
 
-		String query = "SELECT category FROM item WHERE name = '" + item.getItemName() + "'";
+		String query = "SELECT category FROM item WHERE name = ?";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, item.getItemName());
 			ResultSet resultset = stmt.executeQuery(query);
 			String category;
 			if(resultset.next()) {
@@ -151,7 +159,7 @@ public class ItemDao_DB implements IDaoItem {
 				return category;
 			}
 		} catch (SQLException e) {
-			System.err.println("getCategory fehlgeschlagen!");
+			System.err.println("Get Category failed!");
 			e.printStackTrace();
 		}
 		return null;
