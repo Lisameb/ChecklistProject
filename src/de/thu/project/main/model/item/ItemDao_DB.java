@@ -34,7 +34,7 @@ public class ItemDao_DB implements IDaoItem {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, item.getItemName());
 			stmt.setString(2, item.getCategory());
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 			stmt.close();
 			
 		} catch(SQLException e) {
@@ -49,7 +49,7 @@ public class ItemDao_DB implements IDaoItem {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, item.getItemName());
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("Delete failed!");
@@ -64,7 +64,7 @@ public class ItemDao_DB implements IDaoItem {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, category.getCategoryName());
 			stmt.setString(2, item.getItemName());
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("Update failed!");
@@ -79,7 +79,7 @@ public class ItemDao_DB implements IDaoItem {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, item.getItemName());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			int item_id;
 			if(resultset.next()) {
 				item_id = resultset.getInt("item_ID");
@@ -98,7 +98,7 @@ public class ItemDao_DB implements IDaoItem {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, category);
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			while(resultset.next()) {
 				allItems.add(resultset.getString("name"));	
 			}
@@ -152,7 +152,7 @@ public class ItemDao_DB implements IDaoItem {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, item.getItemName());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			String category;
 			if(resultset.next()) {
 				category = resultset.getString("category");

@@ -28,7 +28,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, template.getTemplateName());
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 			stmt.close();
 			
 		} catch(SQLException e) {
@@ -45,7 +45,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, template.getTemplateName());
-			stmt.executeUpdate(query);
+			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("Delete failed!");
@@ -78,7 +78,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, template.getTemplateName());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			int temp_id;
 			if(resultset.next()) {
 				temp_id = resultset.getInt("template_ID");
@@ -95,7 +95,7 @@ public class TemplateDao_DB implements IDaoTemplate {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, temp_id);
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			String name;
 			if(resultset.next()) {
 				name = resultset.getString("name");

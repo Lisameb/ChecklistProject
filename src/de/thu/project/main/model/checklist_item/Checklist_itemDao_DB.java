@@ -35,7 +35,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			stmt.setInt(1, checklist_item.getChecklist_id());
 			stmt.setInt(2, checklist_item.getItem_id());
 			
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			int amount;
 			if(resultset.next()) {
 				amount = resultset.getInt("amount");
@@ -59,7 +59,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, checklist_item.getChecklist_id());
 			stmt.setInt(2, checklist_item.getItem_id());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			if(resultset.next()) {
 				return true;
 			}
@@ -83,7 +83,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				stmt.setInt(1, amountAdd);
 				stmt.setInt(2, checklist_item.getChecklist_id());
 				stmt.setInt(3, checklist_item.getItem_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Add Item failed!");
@@ -98,7 +98,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				stmt.setInt(1, checklist_item.getItem_id());
 				stmt.setInt(2, amountAdd);
 				stmt.setInt(3, checklist_item.getChecklist_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Add Item failed!");
@@ -116,7 +116,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 				stmt.setInt(1, checklist_item.getChecklist_id());
 				stmt.setInt(2, checklist_item.getItem_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Delete Item failed!");
@@ -137,7 +137,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, checklist_id);
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			while(resultset.next()) {
 				itemname = resultset.getString("i.name");
 				itemnames.add(itemname);
@@ -160,7 +160,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 				stmt.setInt(1, checklist_item.getChecklist_id());
 				stmt.setInt(2, checklist_item.getItem_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Toggle Item failed!");
@@ -174,7 +174,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 				stmt.setInt(1, checklist_item.getChecklist_id());
 				stmt.setInt(2, checklist_item.getItem_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Toggle Item failed!");
@@ -189,7 +189,7 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, checklist_item.getChecklist_id());
 			stmt.setInt(2, checklist_item.getItem_id());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			if(resultset.next()) {
 				int checked = resultset.getInt("checked");
 				if(checked == 1) {

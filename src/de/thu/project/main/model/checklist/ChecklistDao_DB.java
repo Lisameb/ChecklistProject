@@ -70,7 +70,7 @@ public class ChecklistDao_DB implements IDaoChecklist {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, checklist.getChecklistName());
 			stmt.setString(2, checklist.getUsername());
-			ResultSet resultset = stmt.executeQuery();
+			ResultSet resultset = stmt.executeQuery(); 
 			
 			int checklist_id;
 			if(resultset.next()) {

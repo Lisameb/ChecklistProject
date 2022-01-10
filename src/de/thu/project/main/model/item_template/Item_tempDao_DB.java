@@ -30,7 +30,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, item_temp.getTemplate_id());
 			stmt.setInt(2, item_temp.getItem_id());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			int amount;
 			if(resultset.next()) {
 				amount = resultset.getInt("amount");
@@ -52,7 +52,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, item_temp.getTemplate_id());
 			stmt.setInt(2, item_temp.getItem_id());
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			if(resultset.next()) {
 				return true;
 			}
@@ -75,7 +75,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 				stmt.setInt(1, amountAdd);
 				stmt.setInt(2, item_temp.getTemplate_id());
 				stmt.setInt(3, item_temp.getItem_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Add Item failed!");
@@ -89,7 +89,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 				stmt.setInt(1, item_temp.getItem_id());
 				stmt.setInt(2, amountAdd);
 				stmt.setInt(3, item_temp.getTemplate_id());
-				stmt.executeUpdate(query);
+				stmt.executeUpdate();
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Add Item failed!");
@@ -109,7 +109,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 					PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 					stmt.setInt(1, item_temp.getTemplate_id());
 					stmt.setInt(2, item_temp.getItem_id());
-					stmt.executeUpdate(query);
+					stmt.executeUpdate();
 					stmt.close();
 				} catch (SQLException e) {
 					System.err.println("Delete Item failed!");
@@ -132,7 +132,7 @@ public class Item_tempDao_DB implements IDaoItem_temp {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setInt(1, temp_id);
-			ResultSet resultset = stmt.executeQuery(query);
+			ResultSet resultset = stmt.executeQuery();
 			while(resultset.next()) {
 				itemname = resultset.getString("i.name");
 				itemnames.add(itemname);
