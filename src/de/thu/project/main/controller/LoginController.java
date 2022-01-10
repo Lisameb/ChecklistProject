@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import de.thu.project.main.model.DaoFactory;
+import de.thu.project.main.model.user.RoleVo;
 import de.thu.project.main.model.user.UserDao_DB;
 import de.thu.project.main.model.user.UserVo;
 import de.thu.project.main.view.LoginView;
@@ -44,6 +45,8 @@ public class LoginController implements ActionListener{
 		UserVo logUser = new UserVo(un, pas);
 		if(userDao.checkPassword(logUser) && !logUser.getUsername().isEmpty()) {
 			daofactory.setCurrent_user(un);
+			RoleVo role = userDao.hasRole(daofactory.getCurrent_user());
+			daofactory.getCurrent_user().setRole(role);
 			return true;
 		}
 		return false;

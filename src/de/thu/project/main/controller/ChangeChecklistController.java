@@ -55,7 +55,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	public void setComboBoxCheck() {
 		view.comboBoxChecklist.removeAllItems();
 		ArrayList<String> checkList = new ArrayList<>(); 
-		checkList = checklistDao.getAllChecklist(daofactory.getCurrent_user());
+		checkList = checklistDao.getAllChecklist(daofactory.getCurrent_user_name());
 
 		for(String name : checkList) {
 			view.comboBoxChecklist.addItem(name);
@@ -85,7 +85,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 
 	public void addItemtoChecklist(String checklistName, String item, int amount) {
 
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 
 		ItemVo itemVo = new ItemVo(item);
@@ -97,7 +97,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	
 	public void deleteItemFromChecklist(String checklistName, String item) {
 
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 		
 		ItemVo itemVo = new ItemVo(item);
@@ -113,7 +113,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		ArrayList<String> list = new ArrayList<String>();
 		int amount;	
 		
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		int checklist_id = checklistDao.getChecklistID(checklistVo);
 		list = checklist_itemDao.getItemsC(checklist_id);
 		
@@ -142,7 +142,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			if(view.tfName.getText().equals("")) {
 				JOptionPane.showMessageDialog(null,"Type in a new name first!");
 			} else {
-				ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user());
+				ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user_name());
 				checklistDao.changeChecklistName(checklist, view.tfName.getText());
 				setComboBoxCheck();
 				view.tfName.setText("");
@@ -182,7 +182,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			updateTextArea(checklist);
 			
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 			int checklistID = checklistDao.getChecklistID(checklistVO);
 			checklistItems = new ArrayList<String>();
 			checklistItems = checklist_itemDao.getItemsC(checklistID);
@@ -197,7 +197,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 		if(src == view.btnDeleteChecklist) {
-			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user());
+			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user_name());
 			checklist.setChecklistID(checklistDao.getChecklistID(checklist));
 			checklistDao.delete(checklist);
 			setComboBoxCheck();
@@ -230,6 +230,10 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		}
 		
 	}
+	
+	public Boolean hasCreateItemPermission() {
+		return daofactory.getCurrent_user().getRole().getCreateItem();
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -254,4 +258,5 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

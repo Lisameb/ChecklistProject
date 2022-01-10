@@ -3,6 +3,7 @@ package de.thu.project.main.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import de.thu.project.main.model.DaoFactory;
 import de.thu.project.main.view.ChangeChecklistView;
 import de.thu.project.main.view.ChangePasswordView;
 import de.thu.project.main.view.ChangeTemplateView;
@@ -27,7 +28,7 @@ public class MenuController implements MouseListener{
 	
 
 	private MenuView mView;
-
+	private DaoFactory daofactory = DaoFactory.getInstance();
 	
 	public MenuController(MenuView mView) {
 		this.mView = mView;
@@ -61,9 +62,12 @@ public class MenuController implements MouseListener{
 			mView.dispose();
 			
 		}else if(src == mView.panel_manageTemplates) {
-			ChangeTemplateView ctView = new ChangeTemplateView();
-			ctView.setVisible(true);
-			mView.dispose();
+			if(daofactory.getCurrent_user().getRole().getManageTemplates()) {
+				ChangeTemplateView ctView = new ChangeTemplateView();
+				ctView.setVisible(true);
+				mView.dispose();
+				
+			}
 			
 		}else if(src == mView.panel_createItem) {
 			ItemView iView = new ItemView(mView);
@@ -106,15 +110,17 @@ public class MenuController implements MouseListener{
 		
 	}
 
-
-
-
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
+	
+	public Boolean hasManageTemplatesPermission() {
+		return daofactory.getCurrent_user().getRole().getManageTemplates();
+	}
+	
+	public Boolean hasCreateItemPermission() {
+		return daofactory.getCurrent_user().getRole().getCreateItem();
+	}
 }

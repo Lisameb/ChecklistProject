@@ -85,7 +85,7 @@ public class ImportChecklistController implements ActionListener{
 			if(view.tfName.getText().contentEquals("")) {
 				JOptionPane.showMessageDialog(null,"Type in a name first!");
 			} else {
-				ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user());
+				ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user_name());
 				checklistDao.insert(check);
 				Document document;
 				try {
@@ -154,7 +154,7 @@ public class ImportChecklistController implements ActionListener{
 	
 	public void addItemtoChecklist(String checklistName, String item, int amount) {
 
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 
 		ItemVo itemVo = new ItemVo(item);

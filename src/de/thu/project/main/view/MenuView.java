@@ -113,33 +113,14 @@ public class MenuView extends JFrame{
 		lblImportChecklist.setBounds(10, 11, 267, 28);
 		panel_importChecklist.add(lblImportChecklist);
 		
-		panel_manageTemplates = new JPanel();
-		panel_manageTemplates.setLayout(null);
-		panel_manageTemplates.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
-		panel_manageTemplates.setBackground(clBackground);
-		panel_manageTemplates.setBounds(229, 283, 287, 50);
-		panel.add(panel_manageTemplates);
-		panel_manageTemplates.addMouseListener(contro);
+		if(contro.hasManageTemplatesPermission()) {
+			initManageTemplates();
+		}
+				
+		if(contro.hasCreateItemPermission()) {
+			initCreateItem();
+		}
 		
-		JLabel lblManageTemplates = new JLabel("Manage Templates");
-		lblManageTemplates.setHorizontalAlignment(SwingConstants.CENTER);
-		lblManageTemplates.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblManageTemplates.setBounds(10, 11, 267, 28);
-		panel_manageTemplates.add(lblManageTemplates);
-		
-		panel_createItem = new JPanel();
-		panel_createItem.setLayout(null);
-		panel_createItem.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
-		panel_createItem.setBackground(clBackground);
-		panel_createItem.setBounds(229, 344, 287, 50);
-		panel.add(panel_createItem);
-		panel_createItem.addMouseListener(contro);
-		
-		JLabel lblCreateItem = new JLabel("Create Item");
-		lblCreateItem.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreateItem.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblCreateItem.setBounds(10, 11, 267, 28);
-		panel_createItem.add(lblCreateItem);
 		
 		panel_ChangePw = new JPanel();
 		panel_ChangePw.addMouseListener(contro);
@@ -175,5 +156,37 @@ public class MenuView extends JFrame{
 		lblBackground.setIcon(new ImageIcon(img_back));
 		
 		
+	}
+	
+	public void initCreateItem() {
+		panel_createItem = new JPanel();
+		panel_createItem.setLayout(null);
+		panel_createItem.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
+		panel_createItem.setBackground(clBackground);
+		panel_createItem.setBounds(229, 344, 287, 50);
+		panel.add(panel_createItem);
+		panel_createItem.addMouseListener(contro);
+		
+		JLabel lblCreateItem = new JLabel("Create Item");
+		lblCreateItem.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreateItem.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblCreateItem.setBounds(10, 11, 267, 28);
+		panel_createItem.add(lblCreateItem);
+	}
+	
+	public void initManageTemplates() {
+		panel_manageTemplates = new JPanel();
+		panel_manageTemplates.setLayout(null);
+		panel_manageTemplates.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
+		panel_manageTemplates.setBackground(clBackground);
+		panel_manageTemplates.setBounds(229, 283, 287, 50);
+		panel.add(panel_manageTemplates);
+		panel_manageTemplates.addMouseListener(contro);
+		
+		JLabel lblManageTemplates = new JLabel("Manage Templates");
+		lblManageTemplates.setHorizontalAlignment(SwingConstants.CENTER);
+		lblManageTemplates.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblManageTemplates.setBounds(10, 11, 267, 28);
+		panel_manageTemplates.add(lblManageTemplates);
 	}
 }

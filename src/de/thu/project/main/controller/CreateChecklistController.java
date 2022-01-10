@@ -64,7 +64,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	}
 	
 	public void createNewChecklist() {
-		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user());
+		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user_name());
 		checklistDao.insert(checkVo);
 	}
 	
@@ -72,7 +72,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		
 		ArrayList<String> list=new ArrayList<String>();
 		list = itemTemp.getItemsT(temp_id);	
-		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user());
+		ChecklistVo checkVo = new ChecklistVo(newView.tfName.getText(), daofactory.getCurrent_user_name());
 		checkVo.setChecklistID(checklistDao.getChecklistID(checkVo));
 		
 		
@@ -110,7 +110,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	}	
 	public void addItemtoChecklist(String checklistName, String item, int amount) {
 
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 
 		ItemVo itemVo = new ItemVo(item);
@@ -122,7 +122,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 	
 	public void deleteItemFromChecklist(String checklistName, String item) {
 
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
 		
 		ItemVo itemVo = new ItemVo(item);
@@ -138,7 +138,7 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		ArrayList<String> list = new ArrayList<String>();
 		int amount;	
 		
-		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		int checklist_id = checklistDao.getChecklistID(checklistVo);
 		list = checklist_itemDao.getItemsC(checklist_id);
 		

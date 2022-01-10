@@ -5,7 +5,7 @@ public class UserVo{
 	private int userID;
 	private String username;
 	private String password;
-	private int role;
+	private RoleVo role;
 	
 	
 	public UserVo(String username, String password) {
@@ -50,11 +50,15 @@ public class UserVo{
 		return this;
 	}
 
-	public int getRole() {
+
+	public RoleVo getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+
+	public void setRole(RoleVo role) {
 		this.role = role;
 	}
+
+
 }

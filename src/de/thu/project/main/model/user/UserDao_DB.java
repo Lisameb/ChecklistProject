@@ -1,6 +1,7 @@
 package de.thu.project.main.model.user;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import de.thu.project.main.model.DaoFactory;
 
@@ -129,6 +130,60 @@ public class UserDao_DB implements IDaoUser{
 		}
 		
 		return foundUser;
+	}
+	
+	public RoleVo hasRole(UserVo user) {
+		
+		RoleVo role;
+		String query = "SELECT r.* FROM role AS r INNER JOIN user_has_role AS uhr ON r.role_ID = uhr.role_ID WHERE uhr.user_name = ?";
+		
+		try {
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, user.getUsername());
+			ResultSet result = stmt.executeQuery();
+			
+			String role_name;
+			int role_id;
+			if(result.next()) {
+				role_id = result.getInt("role_ID");
+				role_name = result.getString("name");
+				role = new RoleVo(role_id, role_name);
+				hasPermissions(role);
+				stmt.close();
+				return role;
+			}
+		} catch (SQLException e) {
+			System.err.println("Has role failed!");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void hasPermissions(RoleVo role) {
+		
+		ArrayList<String> rights = new ArrayList<String>();
+		String query = "SELECT ri.name FROM rights AS ri INNER JOIN role_has_rights AS rhr ON rhr.right_ID = ri.`rights-ID` WHERE rhr.role_ID = ?";
+		try {
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, role.getId());
+			ResultSet result = stmt.executeQuery();
+			
+			while(result.next()) {
+				rights.add(result.getString("name"));
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			System.err.println("Has permissions failed!");
+			e.printStackTrace();
+		}
+		for(String permission : rights) {
+			if(permission.equals("manage_template")) {
+				role.setManageTemplates(true);
+			}else if(permission.equals("create_item")) {
+				role.setCreateItem(true);
+			}
+		}
+		
 	}
 
 }

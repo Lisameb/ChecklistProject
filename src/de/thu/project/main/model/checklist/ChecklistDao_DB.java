@@ -32,7 +32,7 @@ public class ChecklistDao_DB implements IDaoChecklist {
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, checklist.getChecklistName());
-			stmt.setString(2, daofactory.getCurrent_user());
+			stmt.setString(2, daofactory.getCurrent_user_name());
 			
 			stmt.executeUpdate();
 			stmt.close();

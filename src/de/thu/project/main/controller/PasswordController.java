@@ -48,7 +48,7 @@ public class PasswordController implements ActionListener{
 			}else {
 				view.lblWrongPw.setText("");
 				view.lblWrongNewPw.setText("");
-				UserVo userVo = new UserVo(daoFactory.getCurrent_user(), currPw);
+				UserVo userVo = new UserVo(daoFactory.getCurrent_user_name(), currPw);
 				if(userDao.checkPassword(userVo)) {
 					if(newPw1.equals(newPw2)) {
 						userVo.setPassword(newPw1);

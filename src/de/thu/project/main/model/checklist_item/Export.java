@@ -53,7 +53,7 @@ public class Export {
 	 * and saves the PDF in the chosen file path
 	 */
 	public void createPDF() {
-		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
 
 		allItems = checkItemDao.getItemsC(checklistVo.getChecklistID());
@@ -119,7 +119,7 @@ public class Export {
 	 */
 	public void createXML() {
 		
-		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user());
+		ChecklistVo checklistVo = new ChecklistVo(checklist, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checkDao.getChecklistID(checklistVo));
 		allItems = checkItemDao.getItemsC(checklistVo.getChecklistID());
 		Element root = new Element("checklist");

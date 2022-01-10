@@ -40,7 +40,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	public void setComboBoxCheck() {
 		view.comboBoxChecklist.removeAllItems();
 		ArrayList<String> checklist = new ArrayList<String>();
-		checklist = checklistDao.getAllChecklist(daofactory.getCurrent_user());
+		checklist = checklistDao.getAllChecklist(daofactory.getCurrent_user_name());
 		
 		for(String name : checklist) {
 			view.comboBoxChecklist.addItem(name);
@@ -66,7 +66,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		
 		if(src == view.btnOpen) {
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-			ChecklistVo checklist = new ChecklistVo(checklistName, daofactory.getCurrent_user());
+			ChecklistVo checklist = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 			int checklistID = checklistDao.getChecklistID(checklist);
 			checklistItems = new ArrayList<String>();
 			checklistItems = checklist_itemDao.getItemsC(checklistID);
