@@ -73,6 +73,19 @@ public class ItemDao_DB implements IDaoItem {
 	}
 	
 	@Override
+	public void insertCategory(String category) {
+		String query = "INSERT INTO category (name) VALUES ('" + category + "')";
+		try {
+			Statement stmt = daofactory.getCon().createStatement();
+			stmt.execute(query);
+			stmt.close();
+			
+		} catch(SQLException e) {
+			System.err.println("Insert fehlgeschlagen!");
+			e.printStackTrace();
+		}
+	}
+	@Override
 	public int getItemID(ItemVo item) {
 		
 		String query = "SELECT item_ID FROM item WHERE name = ?";

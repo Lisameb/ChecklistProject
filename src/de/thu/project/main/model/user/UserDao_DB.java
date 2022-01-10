@@ -15,6 +15,8 @@ import de.thu.project.main.model.DaoFactory;
  * 		- check if typed in password is correct
  * 		- validatePassowrd: check if password is valid (long enough)
  * 		- check if username already exists
+ * 		- check user role
+ * 		- check permissions for roles
  * 
  **********************************************/
 

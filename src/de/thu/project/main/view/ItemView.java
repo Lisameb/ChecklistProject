@@ -30,6 +30,9 @@ public class ItemView extends JFrame {
 	private Image img_sidebar;
 	private Frame preView;
 	public JLabel lblListOfItems;
+	private JLabel lblAddCategory;
+	public JTextField tfCategory;
+	public JButton btnAddCategoryTo;
 	
 
 	public ItemView(Frame preView) {
@@ -66,14 +69,14 @@ public class ItemView extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblCategories = new JLabel("Categories");
-		lblCategories.setBounds(22, 24, 110, 34);
+		lblCategories.setBounds(22, 131, 110, 34);
 		lblCategories.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel.add(lblCategories);
 		
 		comboBoxCategory = new JComboBox<String>();
 		comboBoxCategory.addActionListener(itemCon);
 		comboBoxCategory.setBackground(new Color(169, 169, 169));
-		comboBoxCategory.setBounds(22, 74, 110, 22);
+		comboBoxCategory.setBounds(22, 178, 110, 22);
 		itemCon.setComboBoxCat();
 		panel.add(comboBoxCategory);
 		
@@ -85,7 +88,7 @@ public class ItemView extends JFrame {
 		
 		lblListOfItems = new JLabel("Add Item");
 		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblListOfItems.setBounds(26, 35, 132, 16);
+		lblListOfItems.setBounds(26, 143, 132, 16);
 		panel_1.add(lblListOfItems);
 		
 		JLabel lblBack = new JLabel("");
@@ -98,13 +101,30 @@ public class ItemView extends JFrame {
 		btnAddItemTo.addActionListener(itemCon);
 		btnAddItemTo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAddItemTo.setBackground(new Color(176, 224, 230));
-		btnAddItemTo.setBounds(149, 230, 182, 25);
+		btnAddItemTo.setBounds(149, 217, 182, 25);
 		panel_1.add(btnAddItemTo);
 		
 		tfItem = new JTextField();
-		tfItem.setBounds(26, 75, 200, 22);
+		tfItem.setBounds(26, 182, 200, 22);
 		panel_1.add(tfItem);
 		tfItem.setColumns(10);
+		
+		lblAddCategory = new JLabel("Add Category");
+		lblAddCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblAddCategory.setBounds(27, 25, 173, 25);
+		panel_1.add(lblAddCategory);
+		
+		tfCategory = new JTextField();
+		tfCategory.setColumns(10);
+		tfCategory.setBounds(26, 63, 200, 22);
+		panel_1.add(tfCategory);
+		
+		btnAddCategoryTo = new JButton("Add Category to database");
+		btnAddCategoryTo.addActionListener(itemCon);
+		btnAddCategoryTo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnAddCategoryTo.setBackground(new Color(176, 224, 230));
+		btnAddCategoryTo.setBounds(129, 98, 212, 25);
+		panel_1.add(btnAddCategoryTo);
 		
 	}
 }

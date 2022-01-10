@@ -30,8 +30,10 @@ import de.thu.project.main.view.*;
  * user chooses one of their checklists, all items are displayed
  * class to 
  * 		- change the name of a checklist
- * 		- add item to a checklist, if item is already in the checklist, the amount is replaced, not added
- * 		- delete items of a checklist, regardless of amount
+ * 		- add item to a checklist, if item is already in the checklist amount is added not replaced
+ *      - if user wants to add 0 items, amount is automatically set to 1 
+ * 		- delete items of a checklist with amount
+ * 		- if amount is 0, item is deleted from the checklist
  * 		- delete checklist
  * 
  **********************************************/
@@ -44,6 +46,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	private Checklist_itemDao_DB checklist_itemDao;
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private ArrayList<String> checklistItems;
+	private int result;
 
 	public ChangeChecklistController(ChangeChecklistView view) {
 		this.view = view;
@@ -159,17 +162,60 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
 			int amount = 1;
+
 			
 			try {
 				amount =  Integer.parseInt(view.tfAmount.getText());
 				if(amount <= 0 ) {
-					amount = 1;
+					result = 1;
 					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
+					
+					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+					int checklistID = checklistDao.getChecklistID(checklistVO);
+					checklistItems = new ArrayList<String>();
+					checklistItems = checklist_itemDao.getItemsC(checklistID);
+					
+					for(int i = 0; checklistItems.size() > i; i++) {
+						if(checklistItems.get(i).equals(item)) {
+							checklistItems.get(i);
+							ItemVo itemVO = new ItemVo (checklistItems.get(i));
+							itemVO.setItemID(itemDao.getItemID(itemVO));
+							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+							int amount2 = checklist_itemDao.getAmount(finalItem);
+							System.out.print(finalItem);
+							result = amount2 + amount; 
+						}
+					}
+					if(checklistItems.isEmpty() ) {
+						checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
+						checklistDao.delete(checklistVO);
+						setComboBoxCheck();
+						view.taChecklist.setText("");
+					}
+				} else {
+					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+					int checklistID = checklistDao.getChecklistID(checklistVO);
+					checklistItems = new ArrayList<String>();
+					checklistItems = checklist_itemDao.getItemsC(checklistID);
+					
+					for(int i = 0; checklistItems.size() > i; i++) {
+						if(checklistItems.get(i).equals(item)) {
+							checklistItems.get(i);
+							ItemVo itemVO = new ItemVo (checklistItems.get(i));
+							itemVO.setItemID(itemDao.getItemID(itemVO));
+							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+							int amount2 = checklist_itemDao.getAmount(finalItem);
+							System.out.print(finalItem);
+							result = amount2 + amount; 
+						}
+					}
 				}
 			} catch(Exception ex) {
-				amount = 1;
+				result = 1;
 			}
-			addItemtoChecklist(checklist, item, amount);
+			addItemtoChecklist(checklist, item, result);
 			updateTextArea(checklist);
 			view.tfAmount.setText("");
 		}
@@ -177,23 +223,71 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		if(src == view.btnDelete) {
 			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
-			
-			deleteItemFromChecklist(checklist, item);
-			updateTextArea(checklist);
-			
-			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-			int checklistID = checklistDao.getChecklistID(checklistVO);
-			checklistItems = new ArrayList<String>();
-			checklistItems = checklist_itemDao.getItemsC(checklistID);
-			
-			if(checklistItems.isEmpty() ) {
-				checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
-				checklistDao.delete(checklistVO);
-				setComboBoxCheck();
-				view.taChecklist.setText("");
+
+			int amount = 1;
+
+			try {
+				amount =  Integer.parseInt(view.tfAmount.getText());
+				if(amount <= 0 ) {
+					result = 1;
+					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
+				
+					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+					int checklistID = checklistDao.getChecklistID(checklistVO);
+					checklistItems = new ArrayList<String>();
+					checklistItems = checklist_itemDao.getItemsC(checklistID);
+				
+					for(int i = 0; checklistItems.size() > i; i++) {
+						if(checklistItems.get(i).equals(item)) {
+							checklistItems.get(i);
+							ItemVo itemVO = new ItemVo (checklistItems.get(i));
+							itemVO.setItemID(itemDao.getItemID(itemVO));
+							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+							int amount2 = checklist_itemDao.getAmount(finalItem);
+							System.out.print(finalItem);
+							result = amount2 - amount; 						
+						}
+					}
+					
+					if(checklistItems.isEmpty() ) {
+						checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
+						checklistDao.delete(checklistVO);
+						setComboBoxCheck();
+						view.taChecklist.setText("");
+					}
+				} else {
+					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+					int checklistID = checklistDao.getChecklistID(checklistVO);
+					checklistItems = new ArrayList<String>();
+					checklistItems = checklist_itemDao.getItemsC(checklistID);
+				
+					for(int i = 0; checklistItems.size() > i; i++) {
+						if(checklistItems.get(i).equals(item)) {
+							checklistItems.get(i);
+							ItemVo itemVO = new ItemVo (checklistItems.get(i));
+							itemVO.setItemID(itemDao.getItemID(itemVO));
+							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+							int amount2 = checklist_itemDao.getAmount(finalItem);
+							System.out.print(finalItem);
+							result = amount2 - amount; 
+						}
+					}
+				}
+			} catch(Exception ex) {
+				result = 1;
 			}
-			
+			System.out.print(result);
+			if(result >= 1) {
+				addItemtoChecklist(checklist, item, result);
+				updateTextArea(checklist);
+				view.tfAmount.setText("");
+			} else {
+				deleteItemFromChecklist(checklist,item);
+				updateTextArea(checklist);
+				view.tfAmount.setText("");
+			}
 		}
 		
 		if(src == view.btnDeleteChecklist) {
