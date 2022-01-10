@@ -74,7 +74,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			for(int i = 0; i < checklistItems.size(); i++) {
 				view.createrCheckBox(i, checklistItems);
 			}
-			view.panel_1.updateUI();;
+			view.panel_1.updateUI();
 			
 		}
 		if(src == view.btnExport) {

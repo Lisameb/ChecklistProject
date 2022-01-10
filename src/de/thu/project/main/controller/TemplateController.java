@@ -1,15 +1,20 @@
 package de.thu.project.main.controller;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import de.thu.project.main.model.*;
 import de.thu.project.main.model.item_template.Item_tempDao_DB;
 import de.thu.project.main.model.template.TemplateDao_DB;
 import de.thu.project.main.model.template.TemplateVo;
 import de.thu.project.main.view.MenuView;
 import de.thu.project.main.view.TemplateView;
+import de.thu.project.main.view.UseChecklistView;
 
 /********************************************** 
  * 
@@ -18,7 +23,7 @@ import de.thu.project.main.view.TemplateView;
  * 
  **********************************************/
 
-public class TemplateController implements MouseListener {
+public class TemplateController implements MouseListener, ActionListener {
 	
 	
 	TemplateView tempview;
@@ -27,66 +32,70 @@ public class TemplateController implements MouseListener {
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private TemplateDao_DB tempDao;
 	private Item_tempDao_DB item_tempDao;
-	int temp_id = 0;
+	private TemplateVo tempVo;
 	
 	public TemplateController(TemplateView view) {
 		this.tempview = view;
 		this.tempDao = (TemplateDao_DB) daofactory.getTemplateDao();
-		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();
+		this.item_tempDao = (Item_tempDao_DB) daofactory.getItem_tempDao();	
+	}
+	
+	public void showTemplates() {
+		ArrayList<String> templates = new ArrayList<String>();
+			templates = tempDao.getAllTemplate();
+			
+			for(int i = 0; i < templates.size(); i++) {
+				tempview.createRadioButton(i, templates);
+			}
+			tempview.contentPane.updateUI();
+			
+			int paneLength = 150 + templates.size()*30;
+			tempview.contentPane.setPreferredSize(new Dimension(730, paneLength));
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent evt) {
-		// TODO Auto-generated method stub
-		Object src = evt.getSource();
-		ArrayList<String> list = new ArrayList<String>();
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
 		
-		tempview.taPreview.setText("");
+		tempview.taTempItems.setText("");
 		
-		if(src == tempview.lblEmpty) {
-			template = new TemplateVo("empty");
-			this.temp_id = tempDao.getTemplateID(template);
-			list = item_tempDao.getItemsT(temp_id); 
-			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(list.get(i) + "\n");
-			}
-		}
-		if(src == tempview.lblDest) {
-			template = new TemplateVo("destination");
-			this.temp_id = tempDao.getTemplateID(template);
-			list = item_tempDao.getItemsT(temp_id); 
-			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(" - " + list.get(i) + "\n");
-			}
-		}
-		if(src == tempview.lblGroc) {
-			template = new TemplateVo("groceries");
-			this.temp_id = tempDao.getTemplateID(template);
-			list = item_tempDao.getItemsT(temp_id); 
-			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(" - " + list.get(i) + "\n");
-			}
-		}
-		if(src == tempview.lblParty) {
-			template = new TemplateVo("party");
-			this.temp_id = tempDao.getTemplateID(template);
-			list = item_tempDao.getItemsT(temp_id); 
-			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(" - " + list.get(i) + "\n");
-			}
-		}
-		if(src == tempview.lblVaca) {
-			template = new TemplateVo("vacation");
-			this.temp_id = tempDao.getTemplateID(template);
-			list = item_tempDao.getItemsT(temp_id); 
-			for(int i = 0; i < list.size(); i++) {
-				tempview.taPreview.append(" - " + list.get(i) + "\n");
-			}
-		}
-		if(src == tempview.btnSelect && temp_id != 0) {
-			CreateChecklistController createCheckContro = new CreateChecklistController(tempview,temp_id);
+		if(src == tempview.btnShowTemp) {
+			String template = tempview.group.getSelection().getActionCommand().toString();
 			
-		}if(src == tempview.btnBack) {
+			if(template.equals("")) {
+				JOptionPane.showMessageDialog(null, "Please select a template!");
+			} else {
+				tempVo = new TemplateVo(template);
+				tempVo.setTemplateID(tempDao.getTemplateID(tempVo));
+
+				ArrayList<String> allItems = item_tempDao.getItemsT(tempVo.getTemplateID());
+
+				for(int i = 0; i<allItems.size(); i++ ) {
+					tempview.taTempItems.append(allItems.get(i) + "\n");
+				}
+			}	
+		}
+		
+		if(src == tempview.btnSelect) {
+			
+			if(tempVo.getTemplateID() != 0) {
+				CreateChecklistController createCheckContro = new CreateChecklistController(tempview, tempVo.getTemplateID());
+			}else {
+				JOptionPane.showMessageDialog(null, "Select a template!");
+			}
+		} 
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object src = e.getSource();
+		
+		if(src == tempview.panMenCheck) {
+			UseChecklistView uclView = new UseChecklistView();
+			uclView.setVisible(true);
+			tempview.dispose();
+		}
+		if(src == tempview.panMenBack) {
 			MenuView mView = new MenuView();
 			mView.setVisible(true);
 			tempview.dispose();

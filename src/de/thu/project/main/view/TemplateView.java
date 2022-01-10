@@ -6,216 +6,163 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import de.thu.project.main.controller.TemplateController;
-
-
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.SwingConstants;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.SystemColor;
+import java.util.ArrayList;
+
 
 
 public class TemplateView extends JFrame {
 
-	private JPanel contentPane;	
-	private TemplateController tempcon;
+	public JPanel contentPane;
+
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_icon = new ImageIcon(this.getClass().getResource("/new.png")).getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
+
+	public JTextField tfName;
+	public JLabel lblMenCheck;
+	public JLabel lblMenBack;
+	public JPanel panMenCheck;
+	public JPanel panMenBack; 
 	
-	private Image img_white = new ImageIcon(this.getClass().getResource("/weisss.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_dest = new ImageIcon(this.getClass().getResource("/destinations.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_groc = new ImageIcon(this.getClass().getResource("/shopping.jpg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_vaca = new ImageIcon(this.getClass().getResource("/vacation.jpeg")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	private Image img_cake = new ImageIcon(this.getClass().getResource("/cake.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	
-	public JLabel lblEmpty;
-	public JLabel lblDest;
-	public JLabel lblGroc;
-	public JLabel lblParty;
-	public JLabel lblVaca;
+	public JTextArea taTempItems;
 	public JButton btnSelect;
-	public JButton btnBack;
-	public JTextArea taPreview;
+	public JButton btnReset;
+	public JButton btnShowTemp;
+	private TemplateController tempcon;
 
+	private ArrayList<JRadioButton> radioButtons = new ArrayList<JRadioButton>();
+	private JLabel lblSelectATemplate;
+	private JRadioButton rdbtnNewRadioButton;
+	public ButtonGroup group;
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TemplateView frame = new TemplateView();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public TemplateView() {
-		
+		initialize();
+		tempcon.showTemplates();
+	}
+	public void initialize() {
+	
 		tempcon = new TemplateController(this);
 		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 578);
+		setBounds(100, 100, 785, 585);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		contentPane.setBounds(100, 100, 785, 585);	
 		contentPane.setLayout(null);
 		
+		JScrollPane scrollFrame = new JScrollPane(contentPane);
+		contentPane.setAutoscrolls(true);
+		scrollFrame.setPreferredSize(new Dimension(785, 585));
+		getContentPane().add(scrollFrame);
+        
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 78, 381, 450);
-		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(0, 0, 220, 530);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panEmpty = new JPanel();
-		panEmpty.setBackground(SystemColor.activeCaption);
-		panEmpty.setBounds(37, 57, 90, 90);
-		panel.add(panEmpty);
-		panEmpty.setLayout(null);
+		panMenCheck = new JPanel();
+		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenCheck.setBackground(SystemColor.inactiveCaptionBorder);
+		panMenCheck.setBounds(0, 188, 219, 60);
+		panel.add(panMenCheck);
+		panMenCheck.setLayout(null);
+		panMenCheck.addMouseListener(tempcon);
 		
-		lblEmpty = new JLabel("");
-		lblEmpty.addMouseListener(tempcon);
-		lblEmpty.setBounds(0, 0, 87, 87);
-		lblEmpty.setIcon(new ImageIcon(img_white));
-		panEmpty.add(lblEmpty);
+		lblMenCheck = new JLabel("your checklists");
+		lblMenCheck.setBounds(15, 21, 134, 20);
+		panMenCheck.add(lblMenCheck);
+		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JPanel panDest = new JPanel();
-		panDest.setBackground(SystemColor.activeCaption);
-		panDest.setBounds(228, 57, 90, 90);
-		panel.add(panDest);
-		panDest.setLayout(null);
+		panMenBack = new JPanel();
+		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
+		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
+		panMenBack.setBounds(0, 249, 219, 60);
+		panel.add(panMenBack);
+		panMenBack.setLayout(null);
+		panMenBack.addMouseListener(tempcon);
 		
-		lblDest = new JLabel("");
-		lblDest.addMouseListener(tempcon);
-		lblDest.setBounds(0, 0, 87, 87);
-		lblDest.setIcon(new ImageIcon(img_dest));
-		panDest.add(lblDest);
+		lblMenBack = new JLabel("back to menu");
+		lblMenBack.setBounds(15, 21, 136, 20);
+		panMenBack.add(lblMenBack);
+		lblMenBack.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JPanel panGroc = new JPanel();
-		panGroc.setBackground(SystemColor.activeCaption);
-		panGroc.setBounds(37, 204, 90, 90);
-		panel.add(panGroc);
-		panGroc.setLayout(null);
+		JLabel lblGoTo = new JLabel("Go To...");
+		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
+		lblGoTo.setBounds(15, 124, 178, 37);
+		panel.add(lblGoTo);
 		
-		lblGroc = new JLabel("");
-		lblGroc.addMouseListener(tempcon);
-		lblGroc.setBounds(0, 0, 87, 87);
-		lblGroc.setIcon(new ImageIcon(img_groc));
-		panGroc.add(lblGroc);
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setBounds(15, 16, 80, 69);
+		lblIcon.setIcon(new ImageIcon(img_icon));
+		panel.add(lblIcon);
 		
-		JPanel panParty = new JPanel();
-		panParty.setLayout(null);
-		panParty.setBackground(SystemColor.activeCaption);
-		panParty.setBounds(37, 344, 90, 90);
-		panel.add(panParty);
+		JLabel lblBack = new JLabel("");
+		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+		lblBack.setBounds(0, 0, 220, 530);
+		lblBack.setIcon(new ImageIcon(img_back));
+		panel.add(lblBack);
 		
-		lblParty = new JLabel("");
-		lblParty.addMouseListener(tempcon);
-		lblParty.setBounds(0, 0, 87, 87);
-		lblParty.setIcon(new ImageIcon(img_cake));
-		panParty.add(lblParty);
+		taTempItems = new JTextArea();
+		taTempItems.setEditable(false);
+		contentPane.add(taTempItems);
 		
-		JPanel panVaca = new JPanel();
-		panVaca.setBackground(SystemColor.activeCaption);
-		panVaca.setBounds(228, 204, 90, 90);
-		panel.add(panVaca);
-		panVaca.setLayout(null);
+		JScrollPane spTempItems = new JScrollPane(taTempItems);
+		spTempItems.setBounds(470, 105, 259, 401);
+		contentPane.add(spTempItems);
 		
-		lblVaca = new JLabel("");
-		lblVaca.addMouseListener(tempcon);
-		lblVaca.setBounds(0, 0, 87, 87);
-		lblVaca.setIcon(new ImageIcon(img_vaca));
-		panVaca.add(lblVaca);
-		ImageIcon blue = new ImageIcon(this.getClass().getResource("/blue.jpg"));
-		
-		JLabel lblEmpty_1 = new JLabel("Empty");
-		lblEmpty_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpty_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEmpty_1.setBounds(37, 33, 90, 20);
-		panel.add(lblEmpty_1);
-		
-		JLabel lblDest2 = new JLabel("Destinations");
-		lblDest2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDest2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDest2.setBounds(228, 33, 90, 20);
-		panel.add(lblDest2);
-		
-		JLabel lblVaca2 = new JLabel("Vacation");
-		lblVaca2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVaca2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblVaca2.setBounds(228, 182, 90, 20);
-		panel.add(lblVaca2);
-		
-		JLabel lblGroc2 = new JLabel("Groceries");
-		lblGroc2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGroc2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblGroc2.setBounds(37, 182, 90, 20);
-		panel.add(lblGroc2);
-		
-		JLabel lblParty2 = new JLabel("B-day Party");
-		lblParty2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblParty2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblParty2.setBounds(37, 321, 90, 20);
-		panel.add(lblParty2);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(355, 0, 26, 450);
-		panel.add(scrollBar);
-		
-		JLabel lblFU = new JLabel("");
-		lblFU.setBackground(Color.BLACK);
-		lblFU.setBounds(0, 0, 381, 450);
-		lblFU.setIcon(blue);
-		panel.add(lblFU);
+		btnShowTemp = new JButton("Show template");
+		btnShowTemp.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowTemp.addActionListener(tempcon);
+		btnShowTemp.setBounds(470, 60, 149, 29);
+		contentPane.add(btnShowTemp);
 		
 		btnSelect = new JButton("Select");
-		btnSelect.addMouseListener(tempcon);
-		btnSelect.setBackground(Color.WHITE);
-		btnSelect.setBounds(563, 486, 150, 42);
-		btnSelect.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
+		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnSelect.addActionListener(tempcon);
+		btnSelect.setBounds(629, 63, 100, 29);
 		contentPane.add(btnSelect);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(SystemColor.inactiveCaption);
-		panel_2.setBounds(0, 0, 381, 80);
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
+		lblSelectATemplate = new JLabel("Select a template");
+		lblSelectATemplate.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
+		lblSelectATemplate.setBounds(229, 25, 220, 20);
+		contentPane.add(lblSelectATemplate);
 		
-		JLabel lblTempl = new JLabel("Choose a template");
-		lblTempl.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTempl.setBounds(0, 0, 381, 80);
-		panel_2.add(lblTempl);
-		lblTempl.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		
-		JLabel lblSmallBack = new JLabel("");
-		lblSmallBack.setBounds(0, 0, 381, 80);
-		lblSmallBack.setIcon(blue);
-		panel_2.add(lblSmallBack);
-		
-		taPreview = new JTextArea();
-		taPreview.setEditable(false);
-		contentPane.add(taPreview);
-		
-		JScrollPane spPreview = new JScrollPane(taPreview);
-		spPreview.setBounds(396, 16, 317, 459);
-		contentPane.add(spPreview);
-		
-		btnBack = new JButton("Main Menu");
-		btnBack.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 16));
-		btnBack.addMouseListener(tempcon);
-		btnBack.setBackground(Color.WHITE);
-		btnBack.setBounds(396, 486, 150, 42);
-		contentPane.add(btnBack);
-		
+		group = new ButtonGroup();
+
 	}
+	
+	public void createRadioButton(int i, ArrayList<String> list) { 		
+		
+		JRadioButton radioBtn = new JRadioButton();
+	    radioBtn.setText(list.get(i).toString());
+	    radioBtn.setActionCommand(radioBtn.getText());
+	    
+	    // add the radioButton to the ArrayList
+	    radioButtons.add(radioBtn);
+	    radioButtons.get(i).setLocation(235,129+i*30); 
+	    radioButtons.get(i).setSize(128,23);
+	    radioButtons.get(i).setText(list.get(i));
+	    radioButtons.get(i).setSelected(false);
+	    radioButtons.get(i).setVisible(true);
+	    group.add(radioBtn);
+	    contentPane.add(radioButtons.get(i)); 
+	    
+    } 
 }

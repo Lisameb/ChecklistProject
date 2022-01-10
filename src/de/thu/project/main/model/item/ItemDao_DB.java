@@ -14,7 +14,7 @@ import de.thu.project.main.model.DaoFactory;
  * methods:
  * 		- insert new item
  * 		- delete item
- * 		- update category of an item
+ * 		- insert new category
  * 		- get ItemID
  * 		- geCategoryItems: get all items of a category
  * 		- get all items
@@ -57,6 +57,7 @@ public class ItemDao_DB implements IDaoItem {
 		}
 	}
 
+	// TODO: delete? is not used
 	@Override
 	public void updateCategory(ItemVo item, CategoryVo category) {
 		String query = "UPDATE item SET category = ? WHERE name = ?";
@@ -74,14 +75,15 @@ public class ItemDao_DB implements IDaoItem {
 	
 	@Override
 	public void insertCategory(String category) {
-		String query = "INSERT INTO category (name) VALUES ('" + category + "')";
+		String query = "INSERT INTO item (name) VALUES (?)";
 		try {
-			Statement stmt = daofactory.getCon().createStatement();
-			stmt.execute(query);
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, category);
+			stmt.executeUpdate();
 			stmt.close();
 			
 		} catch(SQLException e) {
-			System.err.println("Insert fehlgeschlagen!");
+			System.err.println("Insert failed!");
 			e.printStackTrace();
 		}
 	}
