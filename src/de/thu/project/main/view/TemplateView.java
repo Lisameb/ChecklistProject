@@ -90,13 +90,12 @@ public class TemplateView extends JFrame {
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		panMenBack = new JPanel();
-		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenBack.setBounds(0, 249, 219, 60);
-		panel.add(panMenBack);
-		panMenBack.setLayout(null);
-		panMenBack.addMouseListener(tempcon);
+		JPanel panDest = new JPanel();
+		panDest.addMouseListener(tempcon);
+		panDest.setBackground(SystemColor.activeCaption);
+		panDest.setBounds(228, 57, 90, 90);
+		panel.add(panDest);
+		panDest.setLayout(null);
 		
 		lblMenBack = new JLabel("back to menu");
 		lblMenBack.setBounds(15, 21, 136, 20);

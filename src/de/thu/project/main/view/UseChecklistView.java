@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -18,6 +19,8 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JCheckBox;
 
 /**********************************************
@@ -39,7 +42,8 @@ public class UseChecklistView extends JFrame{
 	public JButton btnCreatePdf;
 	public JCheckBox checkBox_checklist;
 	//private JCheckBox item;
-	private ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
+	public ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
+	public JCheckBox checkbox;
 	public JPanel panel_1;
 	public JPanel panel_2;
 	public JPanel panel_3;
@@ -138,28 +142,46 @@ public class UseChecklistView extends JFrame{
 		panel.add(lblBack);
 		
 		panel_1 = new JPanel();
-		panel_1.setBounds(216, 0, 551, 546);
+		panel_1.setPreferredSize(new Dimension(551, 546));
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
+		
+		JScrollPane itemScroll = new JScrollPane(panel_1);
+		panel_1.setAutoscrolls(true);
+		itemScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		itemScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		itemScroll.setBounds(216, 0, 551, 546);
+		getContentPane().add(itemScroll);
 		
 		JLabel lblNewLabel = new JLabel("Checklist");
 		lblNewLabel.setBounds(91, 6, 113, 16);
 		panel_1.add(lblNewLabel);
 	}
 	
-	public void createrCheckBox(int i, ArrayList<String> list)
+	public void createrCheckBox(int i, ArrayList<String> list, boolean boo)
     { 		
-		JCheckBox checkbox = new JCheckBox();
+		checkbox = new JCheckBox();
 	    checkbox.setText(list.get(i).toString());
 	    checkbox.setSelected(true);
 
 	    // add the checkbox to the ArrayList
 	    boxes.add(checkbox);
-	    boxes.get(i).setLocation(20,34+i*25); 
-	    boxes.get(i).setSize(128,23);
+	    if(i > 19) {
+	    	boxes.get(i).setLocation(200,34+(i-20)*25);
+	    } else if(i > 39) {
+	    	boxes.get(i).setLocation(380,34+(i-40)*25);
+	    } else {
+	    	boxes.get(i).setLocation(20,34+i*25);
+	    } 
+	    boxes.get(i).setSize(150,23);
 	    boxes.get(i).setText(list.get(i));
-	    boxes.get(i).setSelected(false);
+	    if(boo) {
+	    	boxes.get(i).setSelected(true);
+	    } else {
+	    	boxes.get(i).setSelected(false);
+	    }
 	    boxes.get(i).setVisible(true);
+	    boxes.get(i).addActionListener(clcon);
 	    panel_1.add(boxes.get(i)); 
 	    
     } 

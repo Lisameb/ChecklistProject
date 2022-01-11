@@ -151,35 +151,65 @@ public class Checklist_itemDao_DB implements IDaoChecklist_item {
 		return null;
 	}
 
-	@Override
-	public void toggleCheck(Checklist_itemVo checklist_item) {
-		if(checklist_item.isChecked()) {
-			String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = ? AND item_ID = ?";
+//	@Override
+//	public void toggleCheck(Checklist_itemVo checklist_item) {
+//		if(!checklist_item.isChecked()) {
+//			String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = ? AND item_ID = ?";
+//
+//			try {
+//				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+//				stmt.setInt(1, checklist_item.getChecklist_id());
+//				stmt.setInt(2, checklist_item.getItem_id());
+//				stmt.executeUpdate();
+//				stmt.close();
+//			} catch (SQLException e) {
+//				System.err.println("Toggle Item failed!");
+//				e.printStackTrace();
+//			}
+//		} else {
+//
+//			String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = ? AND item_ID = ?";
+//
+//			try {
+//				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+//				stmt.setInt(1, checklist_item.getChecklist_id());
+//				stmt.setInt(2, checklist_item.getItem_id());
+//				stmt.executeUpdate();
+//				stmt.close();
+//			} catch (SQLException e) {
+//				System.err.println("Toggle Item failed!");
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+	
+	public void toggleUnchecked(Checklist_itemVo checklist_item) {
+		String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = ? AND item_ID = ?";
 
-			try {
-				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
-				stmt.setInt(1, checklist_item.getChecklist_id());
-				stmt.setInt(2, checklist_item.getItem_id());
-				stmt.executeUpdate();
-				stmt.close();
-			} catch (SQLException e) {
-				System.err.println("Toggle Item failed!");
-				e.printStackTrace();
-			}
-		} else {
+		try {
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_item.getChecklist_id());
+			stmt.setInt(2, checklist_item.getItem_id());
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.err.println("Toggle Item failed!");
+			e.printStackTrace();
+		}
+	}
+	
+	public void toggleCheck2(Checklist_itemVo checklist_item) {
+		String query = "UPDATE checklist_item SET checked = 1 WHERE checklist_ID = ? AND item_ID = ?";
 
-			String query = "UPDATE checklist_item SET checked = 0 WHERE checklist_ID = ? AND item_ID = ?";
-
-			try {
-				PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
-				stmt.setInt(1, checklist_item.getChecklist_id());
-				stmt.setInt(2, checklist_item.getItem_id());
-				stmt.executeUpdate();
-				stmt.close();
-			} catch (SQLException e) {
-				System.err.println("Toggle Item failed!");
-				e.printStackTrace();
-			}
+		try {
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setInt(1, checklist_item.getChecklist_id());
+			stmt.setInt(2, checklist_item.getItem_id());
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.err.println("Toggle Item failed!");
+			e.printStackTrace();
 		}
 	}
 	
