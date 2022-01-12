@@ -48,6 +48,8 @@ public class TemplateView extends JFrame {
 	private JLabel lblSelectATemplate;
 	private JRadioButton rdbtnNewRadioButton;
 	public ButtonGroup group;
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 	
 
 	public TemplateView() {
@@ -62,10 +64,11 @@ public class TemplateView extends JFrame {
 		setBounds(100, 100, 785, 585);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(clBackground);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBounds(100, 100, 785, 585);	
 		contentPane.setLayout(null);
+
 		
 		JScrollPane scrollFrame = new JScrollPane(contentPane);
 		contentPane.setAutoscrolls(true);
@@ -79,8 +82,8 @@ public class TemplateView extends JFrame {
 		
 		panMenCheck = new JPanel();
 		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
-		panMenCheck.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenCheck.setBounds(0, 188, 219, 60);
+		panMenCheck.setBackground(clBorder);
+		panMenCheck.setBounds(0, 382, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
 		panMenCheck.addMouseListener(tempcon);
@@ -89,13 +92,22 @@ public class TemplateView extends JFrame {
 		lblMenCheck.setBounds(15, 21, 134, 20);
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		JPanel panDest = new JPanel();
-		panDest.addMouseListener(tempcon);
-		panDest.setBackground(SystemColor.activeCaption);
-		panDest.setBounds(228, 57, 90, 90);
-		panel.add(panDest);
-		panDest.setLayout(null);
+
+
+//		JPanel panDest = new JPanel(); //Really Jonas? What is dis?
+//		panDest.addMouseListener(tempcon); 
+//		panDest.setBackground(clBorder);
+//		panDest.setBounds(228, 57, 90, 90);
+//		panel.add(panDest);
+//		panDest.setLayout(null);
+
+		panMenBack = new JPanel();
+		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenBack.setBackground(clBorder);
+		panMenBack.setBounds(0, 443, 219, 60);
+		panel.add(panMenBack);
+		panMenBack.setLayout(null);
+		panMenBack.addMouseListener(tempcon);
 		
 		lblMenBack = new JLabel("back to menu");
 		lblMenBack.setBounds(15, 21, 136, 20);
@@ -104,7 +116,7 @@ public class TemplateView extends JFrame {
 		
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(15, 124, 178, 37);
+		lblGoTo.setBounds(15, 301, 178, 37);
 		panel.add(lblGoTo);
 		
 		JLabel lblIcon = new JLabel("");
@@ -119,23 +131,24 @@ public class TemplateView extends JFrame {
 		panel.add(lblBack);
 		
 		taTempItems = new JTextArea();
+		taTempItems.setBounds(1, 1, 220, 399); //BIGGER
 		taTempItems.setEditable(false);
 		contentPane.add(taTempItems);
 		
 		JScrollPane spTempItems = new JScrollPane(taTempItems);
-		spTempItems.setBounds(470, 105, 259, 401);
+		spTempItems.setBounds(425, 105, 304, 401);
 		contentPane.add(spTempItems);
 		
 		btnShowTemp = new JButton("Show template");
-		btnShowTemp.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnShowTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnShowTemp.addActionListener(tempcon);
-		btnShowTemp.setBounds(470, 60, 149, 29);
+		btnShowTemp.setBounds(425, 63, 161, 29);
 		contentPane.add(btnShowTemp);
 		
 		btnSelect = new JButton("Select");
-		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnSelect.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSelect.addActionListener(tempcon);
-		btnSelect.setBounds(629, 63, 100, 29);
+		btnSelect.setBounds(631, 63, 98, 29);
 		contentPane.add(btnSelect);
 		
 		lblSelectATemplate = new JLabel("Select a template");

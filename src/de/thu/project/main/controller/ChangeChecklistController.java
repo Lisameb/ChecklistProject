@@ -32,7 +32,7 @@ import de.thu.project.main.view.*;
  * 		- change the name of a checklist
  * 		- add item to a checklist, if item is already in the checklist amount is added not replaced
  *      - if user wants to add 0 items, amount is automatically set to 1 
- * 		- delete items of a checklist with amount
+ * 		- delete items of a checklist considering amount
  * 		- if amount is 0, item is deleted from the checklist
  * 		- delete checklist
  * 
@@ -325,10 +325,6 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		
 	}
 	
-	public Boolean hasCreateItemPermission() {
-		return daofactory.getCurrent_user().getRole().getCreateItem();
-	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub

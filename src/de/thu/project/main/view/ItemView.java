@@ -33,6 +33,8 @@ public class ItemView extends JFrame {
 	private JLabel lblAddCategory;
 	public JTextField tfCategory;
 	public JButton btnAddCategoryTo;
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 	
 
 	public ItemView(Frame preView) {
@@ -75,13 +77,12 @@ public class ItemView extends JFrame {
 		
 		comboBoxCategory = new JComboBox<String>();
 		comboBoxCategory.addActionListener(itemCon);
-		comboBoxCategory.setBackground(new Color(169, 169, 169));
 		comboBoxCategory.setBounds(22, 178, 110, 22);
 		itemCon.setComboBoxCat();
 		panel.add(comboBoxCategory);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(211, 211, 211));
+		panel_1.setBackground(clBackground);
 		panel_1.setBounds(155, 0, 353, 287);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -100,7 +101,6 @@ public class ItemView extends JFrame {
 		btnAddItemTo = new JButton("Add Item to database");
 		btnAddItemTo.addActionListener(itemCon);
 		btnAddItemTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddItemTo.setBackground(new Color(176, 224, 230));
 		btnAddItemTo.setBounds(149, 217, 182, 25);
 		panel_1.add(btnAddItemTo);
 		
@@ -122,7 +122,6 @@ public class ItemView extends JFrame {
 		btnAddCategoryTo = new JButton("Add Category to database");
 		btnAddCategoryTo.addActionListener(itemCon);
 		btnAddCategoryTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddCategoryTo.setBackground(new Color(176, 224, 230));
 		btnAddCategoryTo.setBounds(129, 98, 212, 25);
 		panel_1.add(btnAddCategoryTo);
 		

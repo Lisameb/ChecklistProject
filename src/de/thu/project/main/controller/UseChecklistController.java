@@ -187,13 +187,13 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent evt) {
 		Object src = evt.getSource();
-		if(src == view.panel_2) {
+		if(src == view.panCreate) {
 			tview = new TemplateView();
 			tview.setVisible(true);
 			view.dispose();
 		}
 		
-		if(src == view.panel_3) {
+		if(src == view.panMenBack) {
 			mview = new MenuView();
 			mview.setVisible(true);
 			view.dispose();

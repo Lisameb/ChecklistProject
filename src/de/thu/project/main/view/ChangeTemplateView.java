@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextArea;
+import java.awt.SystemColor;
 
 public class  ChangeTemplateView extends JFrame {
 
@@ -33,11 +34,13 @@ public class  ChangeTemplateView extends JFrame {
 	public JButton btnAddNewItem;
 	public JTextArea taItemList;
 	private Image img_sidebar;
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 	
 	
 	public ChangeTemplateController contro;
 	public JButton btnShowItems;
-	public JButton btnBack;
+	public JPanel btnBack;
 	
 
 	public ChangeTemplateView() {
@@ -63,14 +66,14 @@ public class  ChangeTemplateView extends JFrame {
 		
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(211, 211, 211));
+		panel_1.setBackground(clBackground);
 		panel_1.setBounds(218, 0, 551, 546);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblChooseTemplate = new JLabel("Choose template");
-		lblChooseTemplate.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblChooseTemplate.setBounds(24, 13, 131, 23);
+		lblChooseTemplate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblChooseTemplate.setBounds(24, 13, 168, 23);
 		panel.add(lblChooseTemplate);
 		
 		comboBoxTemp = new JComboBox<String>();
@@ -80,27 +83,25 @@ public class  ChangeTemplateView extends JFrame {
 		
 		btnNewTemp = new JButton("New template");
 		btnNewTemp.addActionListener(contro);
-		btnNewTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewTemp.setBackground(new Color(176, 224, 230));
+		btnNewTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewTemp.setBounds(24, 266, 168, 36);
 		panel.add(btnNewTemp);
 		
 		btnDeleteTemp = new JButton("Delete template");
 		btnDeleteTemp.addActionListener(contro);
-		btnDeleteTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnDeleteTemp.setBackground(new Color(176, 224, 230));
+		btnDeleteTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDeleteTemp.setBounds(24, 313, 168, 38);
 		panel.add(btnDeleteTemp);
 		
 		btnAddNewItem = new JButton("Create Item");
 		btnAddNewItem.addActionListener(contro);
-		btnAddNewItem.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddNewItem.setBackground(new Color(176, 224, 230));
+		btnAddNewItem.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddNewItem.setBounds(24, 192, 168, 25);
 		panel.add(btnAddNewItem);
 		
 		JLabel lblAddNewItem = new JLabel("Add to global list");
-		lblAddNewItem.setBounds(24, 168, 119, 23);
+		lblAddNewItem.setBounds(24, 168, 131, 23);
+		lblAddNewItem.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblAddNewItem);
 		
 		btnShowItems = new JButton("Show Items");
@@ -112,17 +113,16 @@ public class  ChangeTemplateView extends JFrame {
 		comboBoxItem = new JComboBox<String>();
 		comboBoxItem.setToolTipText("");
 		comboBoxItem.addActionListener(contro);
-		comboBoxItem.setBackground(new Color(169, 169, 169));
-		comboBoxItem.setBounds(158, 389, 344, 22);
+		comboBoxItem.setBounds(158, 389, 347, 22);
 		panel_1.add(comboBoxItem);
 		
 		JLabel lblListOfItems = new JLabel("List of Items");
-		lblListOfItems.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblListOfItems.setBounds(36, 390, 112, 16);
 		panel_1.add(lblListOfItems);
 		
 		JLabel lblAmount = new JLabel("Amount");
-		lblAmount.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAmount.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAmount.setBounds(36, 443, 75, 22);
 		panel_1.add(lblAmount);
 		
@@ -133,8 +133,7 @@ public class  ChangeTemplateView extends JFrame {
 		
 		btnAddItemTo = new JButton("Add Item");
 		btnAddItemTo.addActionListener(contro);
-		btnAddItemTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddItemTo.setBackground(new Color(176, 224, 230));
+		btnAddItemTo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAddItemTo.setBounds(377, 443, 125, 25);
 		panel_1.add(btnAddItemTo);
 		
@@ -145,21 +144,18 @@ public class  ChangeTemplateView extends JFrame {
 		
 		comboBoxCategory = new JComboBox<String>();
 		comboBoxCategory.addActionListener(contro);
-		comboBoxCategory.setBounds(155, 354, 347, 22);
+		comboBoxCategory.setBounds(158, 354, 347, 22);
 		contro.setComboBoxCat();
-		panel_1.add(comboBoxCategory);
-		comboBoxCategory.setBackground(new Color(169, 169, 169));
-		
+		panel_1.add(comboBoxCategory);	
 		
 		JLabel lblTemplateItems = new JLabel("Template Items");
-		lblTemplateItems.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTemplateItems.setBounds(36, 13, 234, 16);
+		lblTemplateItems.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
+		lblTemplateItems.setBounds(45, 16, 234, 22);
 		panel_1.add(lblTemplateItems);
 		
 		btnDeleteItemTo = new JButton("Delete Item");
 		btnDeleteItemTo.addActionListener(contro);
-		btnDeleteItemTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnDeleteItemTo.setBackground(new Color(176, 224, 230));
+		btnDeleteItemTo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnDeleteItemTo.setBounds(377, 478, 125, 25);
 		panel_1.add(btnDeleteItemTo);
 		
@@ -171,19 +167,26 @@ public class  ChangeTemplateView extends JFrame {
 		JScrollPane spItemList = new JScrollPane(taItemList);
 		spItemList.setBounds(46, 42, 456, 263);
 		panel_1.add(spItemList);
-
-		btnBack = new JButton("Main Menu");
-		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnBack.setBackground(new Color(176, 224, 230));
-		btnBack.setBounds(24, 480, 168, 38);
-		btnBack.addActionListener(contro);
+		
+		btnBack = new JPanel();
+		btnBack.setLayout(null);
+		btnBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		btnBack.setBackground(clBorder);
+		btnBack.setBounds(0, 446, 219, 60);
+		btnBack.addMouseListener(contro);
 		panel.add(btnBack);
-
-		JLabel lblBack = new JLabel("");
-		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 220, 546);
-		lblBack.setIcon(new ImageIcon(img_sidebar));
-		panel.add(lblBack);
+		
+		JLabel label = new JLabel("back to menu");
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(15, 21, 136, 20);
+		btnBack.add(label);
+		
+		
+				JLabel lblBack = new JLabel("");
+				lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+				lblBack.setBounds(0, 0, 220, 546);
+				lblBack.setIcon(new ImageIcon(img_sidebar));
+				panel.add(lblBack);
 		
 	}
 }

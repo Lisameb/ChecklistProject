@@ -35,6 +35,8 @@ public class CreateChecklistView extends JFrame {
 	public JPanel panMenCheck;
 	public JPanel panMenBack; 
 	
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 	
 	public JTextArea taChecklist;
 	public JComboBox<String> comboBoxCat;
@@ -59,7 +61,7 @@ public class CreateChecklistView extends JFrame {
 		setBounds(100, 100, 785, 585);
 //		setExtendedState(JFrame.);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(clBackground);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -71,8 +73,8 @@ public class CreateChecklistView extends JFrame {
 		
 		panMenTemp = new JPanel();
 		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenTemp.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenTemp.setBounds(0, 183, 219, 60);
+		panMenTemp.setBackground(clBorder);
+		panMenTemp.setBounds(0, 334, 219, 60);
 		panel.add(panMenTemp);
 		panMenTemp.setLayout(null);
 		panMenTemp.addMouseListener(clController);
@@ -84,8 +86,8 @@ public class CreateChecklistView extends JFrame {
 		
 		panMenCheck = new JPanel();
 		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
-		panMenCheck.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenCheck.setBounds(0, 243, 219, 60);
+		panMenCheck.setBackground(clBorder);
+		panMenCheck.setBounds(0, 394, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
 		panMenCheck.addMouseListener(clController);
@@ -96,9 +98,9 @@ public class CreateChecklistView extends JFrame {
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		panMenBack = new JPanel();
-		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenBack.setBounds(0, 303, 219, 60);
+		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenBack.setBackground(clBorder);
+		panMenBack.setBounds(0, 454, 219, 60);
 		panel.add(panMenBack);
 		panMenBack.setLayout(null);
 		panMenBack.addMouseListener(clController);
@@ -110,7 +112,7 @@ public class CreateChecklistView extends JFrame {
 		
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(15, 124, 178, 37);
+		lblGoTo.setBounds(15, 275, 178, 37);
 		panel.add(lblGoTo);
 		
 		JLabel lblIcon = new JLabel("");

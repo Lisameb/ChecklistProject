@@ -3,6 +3,8 @@ package de.thu.project.main.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -32,7 +34,7 @@ import de.thu.project.main.view.MenuView;
  * 
  **********************************************/
 
-public class ChangeTemplateController implements  ActionListener{
+public class ChangeTemplateController implements  ActionListener, MouseListener{
 
 	private CreateTemplateView createView;
 	private ChangeTemplateView view;
@@ -189,11 +191,43 @@ public class ChangeTemplateController implements  ActionListener{
 			String cat = (String)view.comboBoxCategory.getSelectedItem();
 			setComboBoxItem(cat);
 		}
+		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object src = e.getSource();
+		
 		if(src == view.btnBack) {
 			MenuView mView = new MenuView();
 			mView.setVisible(true);
 			view.dispose();
 		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

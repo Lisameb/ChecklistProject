@@ -9,6 +9,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import de.thu.project.main.controller.ImportChecklistController;
+import java.awt.Font;
 
 
 public class ImportChecklistView extends JFrame{
@@ -21,6 +22,8 @@ public class ImportChecklistView extends JFrame{
 	public JButton btnImport;
 	public JButton btnChooseFile;
 	public JButton btnCancel;
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 	private ImportChecklistController importCo;
 	
 
@@ -36,7 +39,7 @@ public class ImportChecklistView extends JFrame{
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 595, 585);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(clBackground);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -47,11 +50,13 @@ public class ImportChecklistView extends JFrame{
 		panel.setLayout(null);
 		
 		btnChooseFile = new JButton("Choose File");
-		btnChooseFile.setBounds(12, 34, 143, 25);
+		btnChooseFile.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnChooseFile.setBounds(12, 34, 172, 25);
 		panel.add(btnChooseFile);
 		btnChooseFile.addActionListener(importCo);
 		
 		btnImport = new JButton("Import");
+		btnImport.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnImport.setBounds(12, 460, 97, 25);
 		panel.add(btnImport);
 		btnImport.addActionListener(importCo);
@@ -62,12 +67,14 @@ public class ImportChecklistView extends JFrame{
 		tfName.setColumns(10);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCancel.setBounds(12, 500, 97, 25);
 		btnCancel.addActionListener(importCo);
 		panel.add(btnCancel);
 		
 		lblNameChecklist = new JLabel("Name your Checklist:");
-		lblNameChecklist.setBounds(12, 404, 172, 16);
+		lblNameChecklist.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNameChecklist.setBounds(12, 404, 196, 16);
 		panel.add(lblNameChecklist);
 		
 		

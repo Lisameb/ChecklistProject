@@ -40,6 +40,8 @@ public class ChangeChecklistView extends JFrame{
 	public JButton btnAdd;
 	public JButton btnDeleteChecklist;
 	private String chosenChecklist;
+	private Color clBackground = new Color(191, 205, 219);
+	private Color clBorder = new Color(244, 247, 252);
 
 	private ChangeChecklistController changeCo;
 
@@ -58,7 +60,7 @@ public class ChangeChecklistView extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 585);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(clBackground);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -69,9 +71,9 @@ public class ChangeChecklistView extends JFrame{
 		panel.setLayout(null);
 
 		panMenTemp = new JPanel();
-		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenTemp.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenTemp.setBounds(0, 183, 219, 60);
+		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenTemp.setBackground(clBorder);
+		panMenTemp.setBounds(0, 322, 219, 60);
 		panel.add(panMenTemp);
 		panMenTemp.setLayout(null);
 		panMenTemp.addMouseListener(changeCo);
@@ -83,8 +85,8 @@ public class ChangeChecklistView extends JFrame{
 
 		panMenCheck = new JPanel();
 		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
-		panMenCheck.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenCheck.setBounds(0, 243, 219, 60);
+		panMenCheck.setBackground(clBorder);
+		panMenCheck.setBounds(0, 382, 219, 60);
 		panel.add(panMenCheck);
 		panMenCheck.setLayout(null);
 		panMenCheck.addMouseListener(changeCo);
@@ -95,9 +97,9 @@ public class ChangeChecklistView extends JFrame{
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 		panMenBack = new JPanel();
-		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenBack.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenBack.setBounds(0, 365, 219, 60);
+		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenBack.setBackground(clBorder);
+		panMenBack.setBounds(0, 443, 219, 60);
 		panel.add(panMenBack);
 		panMenBack.setLayout(null);
 		panMenBack.addMouseListener(changeCo);
@@ -109,12 +111,8 @@ public class ChangeChecklistView extends JFrame{
 
 		JLabel lblGoTo = new JLabel("Go To...");
 		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
-		lblGoTo.setBounds(15, 124, 178, 37);
+		lblGoTo.setBounds(15, 226, 178, 37);
 		panel.add(lblGoTo);
-		
-		if(changeCo.hasCreateItemPermission()) {
-			initCreateItem();
-		}
 
 		JLabel lblIcon = new JLabel("");
 		lblIcon.setBounds(15, 16, 80, 69);
@@ -148,7 +146,7 @@ public class ChangeChecklistView extends JFrame{
 		btnSave = new JButton("Save name");
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSave.addActionListener(changeCo);
-		btnSave.setForeground(SystemColor.windowText);
+		btnSave.setForeground(Color.BLACK);
 		btnSave.setBounds(245, 169, 127, 29);
 		contentPane.add(btnSave);
 
@@ -192,6 +190,7 @@ public class ChangeChecklistView extends JFrame{
 
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(changeCo);
+		btnAdd.setForeground(Color.BLACK);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAdd.setBounds(248, 496, 100, 29);
 		contentPane.add(btnAdd);
@@ -199,12 +198,14 @@ public class ChangeChecklistView extends JFrame{
 		btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnDelete.addActionListener(changeCo);
+		btnDelete.setForeground(Color.BLACK);
 		btnDelete.setBounds(365, 496, 100, 29);
 		contentPane.add(btnDelete);
 
 		btnDeleteChecklist = new JButton("Delete checklist");
 		btnDeleteChecklist.addActionListener(changeCo);
 		btnDeleteChecklist.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnDelete.setForeground(Color.BLACK);
 		btnDeleteChecklist.setBounds(538, 496, 210, 29);
 		contentPane.add(btnDeleteChecklist);
 
@@ -215,21 +216,6 @@ public class ChangeChecklistView extends JFrame{
 		comboBoxChecklist.setSelectedItem(chosenChecklist);
 		contentPane.add(comboBoxChecklist);
 
-	}
-
-	public void initCreateItem() {
-		panMenItem = new JPanel();
-		panMenItem.setLayout(null);
-		panMenItem.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
-		panMenItem.setBackground(SystemColor.inactiveCaptionBorder);
-		panMenItem.setBounds(0, 304, 219, 60);
-		panel.add(panMenItem);
-		panMenItem.addMouseListener(changeCo);
-		
-		JLabel lblMenItem = new JLabel("create new item");
-		lblMenItem.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblMenItem.setBounds(15, 21, 136, 20);
-		panMenItem.add(lblMenItem);
 	}
 
 	public String getChosenChecklist() {
