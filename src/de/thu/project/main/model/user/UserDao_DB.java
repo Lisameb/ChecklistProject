@@ -27,17 +27,26 @@ public class UserDao_DB implements IDaoUser{
 	@Override
 	public void insert(UserVo user) {
 		
-		String query = "INSERT INTO user (name, password) VALUES (?, ?)";
+		String query_1 = "INSERT INTO user (name, password) VALUES (?, ?)";
+		String query_2 = "INSERT INTO user_has_role (role_ID, user_name) VALUES (1, ?)";
 		try {
-			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
-			stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getPassword());
-			stmt.executeUpdate();
-			stmt.close();
+			PreparedStatement stmt1 = daofactory.getCon().prepareStatement(query_1);
+			stmt1.setString(1, user.getUsername());
+			stmt1.setString(2, user.getPassword());
+			stmt1.executeUpdate();
+			stmt1.close();
+			PreparedStatement stmt2 = daofactory.getCon().prepareStatement(query_2);
+			stmt2.setString(1, user.getUsername());
+			stmt2.executeUpdate();
+			stmt2.close();
 		} catch (SQLException e) {
 			System.err.println("Insert failed!");
 			e.printStackTrace();
-		}	
+		}
+		
+		
+
+
 	}
 
 	@Override

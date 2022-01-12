@@ -1,6 +1,5 @@
 package de.thu.project.main.model.user;
 
-import java.util.HashMap;
 
 public class RoleVo {
 	

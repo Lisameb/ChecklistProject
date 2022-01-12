@@ -5,9 +5,9 @@ The project starts at de.thu.project.main/StartProject.java.
 
 **To be able to run this you need to make sure that:**
 
-* Driver in /jar subfolder is listed in external libraries path.
+* Drivers in /jar subfolder are listed in external libraries path.
 * Subfolder /img and /src in class path.
-* Make a Config.java file under \src\util with these variables:
+* Make a Config.java file under \src\de\thu\project\main\util with these variables:
 
 >package util;
 >
