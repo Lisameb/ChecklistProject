@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import de.thu.project.main.model.DaoFactory;
 import de.thu.project.main.model.checklist.*;
 import de.thu.project.main.model.checklist_item.*;
+import de.thu.project.main.model.item.ItemDao_DB;
+import de.thu.project.main.model.item.ItemVo;
 import de.thu.project.main.view.*;
 
 /**********************************************
@@ -28,13 +30,16 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private ChecklistDao_DB checklistDao;
 	private Checklist_itemDao_DB checklist_itemDao;
+	private ItemDao_DB itemDao;
 	
 	private ArrayList<String> checklistItems;
+	private ArrayList<String> checklistItems2;
 	
 	public UseChecklistController(UseChecklistView view) {
 		this.view = view;
 		this.checklistDao = (ChecklistDao_DB) daofactory.getChecklistDao();
 		this.checklist_itemDao = (Checklist_itemDao_DB) daofactory.getChecklist_itemDao();
+		this.itemDao = (ItemDao_DB) daofactory.getItemDao();
 	}
 	
 	public void setComboBoxCheck() {
@@ -72,7 +77,10 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			checklistItems = checklist_itemDao.getItemsC(checklistID);
 			
 			for(int i = 0; i < checklistItems.size(); i++) {
-				view.createrCheckBox(i, checklistItems);
+				ItemVo itemVO = new ItemVo(checklistItems.get(i));
+				itemVO.setItemID(itemDao.getItemID(itemVO));
+				Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+				view.createrCheckBox(i, checklistItems, checklist_itemDao.getChecked(finalItem));
 			}
 			view.panel_1.updateUI();
 			
@@ -119,7 +127,61 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	        }
 		}
 		
+		for(int k = 0; k < view.boxes.size(); k++) {
+			if (src == view.boxes.get(k)) {
+				String name;
+				String checklistName;
+				int checklistID;
+				for(int i = 0; i < view.boxes.size(); i++) {
+					if(view.boxes.get(i).isSelected()) {
+						name = view.boxes.get(i).getText();
+						checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+						ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+						checklistID = checklistDao.getChecklistID(checklistVO);
+						checklistItems = new ArrayList<String>();
+						checklistItems = checklist_itemDao.getItemsC(checklistID);
+						
+						for(int j = 0; checklistItems.size() > j; j++) {
+							if(checklistItems.get(j).equals(name)) {
+								ItemVo itemVO = new ItemVo(checklistItems.get(j));
+								itemVO.setItemID(itemDao.getItemID(itemVO));
+								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+								checklist_itemDao.toggleCheck2(finalItem);
+								//result = amount2 + amount; 
+						}
+						
+//						for(int j = 0; j < checklistItems2.size(); j++) {
+//							if(checklistItems2.get(j).equals(name)) {
+//								ItemVo itemVO = new ItemVo(checklistItems2.get(j));
+//								System.out.println(itemDao.getItemID(itemVO));
+//								itemVO.setItemID(itemDao.getItemID(itemVO));
+//								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+//								checklist_itemDao.toggleCheck(finalItem);
+//							}
+//						}
+					}
+				} else {
+					name = view.boxes.get(i).getText();
+					checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+					checklistID = checklistDao.getChecklistID(checklistVO);
+					checklistItems = new ArrayList<String>();
+					checklistItems = checklist_itemDao.getItemsC(checklistID);
+					
+					for(int j = 0; checklistItems.size() > j; j++) {
+						if(checklistItems.get(j).equals(name)) {
+							ItemVo itemVO = new ItemVo(checklistItems.get(j));
+							itemVO.setItemID(itemDao.getItemID(itemVO));
+							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+							checklist_itemDao.toggleUnchecked(finalItem);
+							//result = amount2 + amount; 
+						}
+					}
+				}
+				}
+			}
 		
+		}
 	}
 
 	@Override
