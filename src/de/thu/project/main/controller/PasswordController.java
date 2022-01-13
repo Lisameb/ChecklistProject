@@ -9,6 +9,7 @@ import de.thu.project.main.model.DaoFactory;
 import de.thu.project.main.model.user.UserDao_DB;
 import de.thu.project.main.model.user.UserVo;
 import de.thu.project.main.view.ChangePasswordView;
+import de.thu.project.main.view.LoginView;
 import de.thu.project.main.view.MenuView;
 
 /********************************************** 
@@ -81,6 +82,26 @@ public class PasswordController implements ActionListener{
 			view.dispose();
 			MenuView menu = new MenuView();
 			menu.setVisible(true);
+		}
+		
+		if (src==view.btnDeleteUser) {
+			String currPw = view.tfCurrPw.getText().toString();
+			if (currPw.equals("")) {
+				view.lblWrongPw.setText("Please type in your password!");	
+			} else { 
+				UserVo userVo = new UserVo(daoFactory.getCurrent_user_name(), currPw);
+				if(userDao.checkPassword(userVo)) {
+					view.lblWrongPw.setText("");
+					userDao.delete(userVo);
+					JOptionPane.showMessageDialog(null,"User successfully deleted");
+					view.dispose();
+					LoginView menu = new LoginView();
+					menu.setVisible(true);
+				} else {
+					view.lblWrongPw.setText("Wrong password");
+					view.tfCurrPw.setText("");
+				}
+			}
 		}
 	}
 }

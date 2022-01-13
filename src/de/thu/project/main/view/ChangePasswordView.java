@@ -31,6 +31,7 @@ public class ChangePasswordView extends JFrame {
 	public JPasswordField tfNewPw2;
 	public JButton btnChange;
 	public JButton btnCancel;
+	public JButton btnDeleteUser;
 	public JLabel lblWrongNewPw;
 	public JLabel lblWrongPw;
 
@@ -41,10 +42,10 @@ public class ChangePasswordView extends JFrame {
 	private void initialize() {
 		
 		passCon = new PasswordController(this);
-		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(508, 287, Image.SCALE_SMOOTH);
+		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(530, 348, Image.SCALE_SMOOTH);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 526, 334);
+		setBounds(100, 100, 528, 348);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,34 +74,34 @@ public class ChangePasswordView extends JFrame {
 		
 		JLabel lblNewPw1 = new JLabel("Type in new password:");
 		lblNewPw1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewPw1.setBounds(22, 139, 176, 19);
+		lblNewPw1.setBounds(22, 159, 176, 19);
 		panel.add(lblNewPw1);
 		
 		tfNewPw1 = new JPasswordField();
 		tfNewPw1.setColumns(10);
-		tfNewPw1.setBounds(233, 135, 224, 28);
+		tfNewPw1.setBounds(233, 155, 224, 28);
 		panel.add(tfNewPw1);
 		
 		JLabel lblNewPw2 = new JLabel("Repeat new password:");
 		lblNewPw2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewPw2.setBounds(22, 178, 176, 19);
+		lblNewPw2.setBounds(22, 198, 176, 19);
 		panel.add(lblNewPw2);
 		
 		tfNewPw2 = new JPasswordField();
 		tfNewPw2.setColumns(10);
-		tfNewPw2.setBounds(233, 174, 224, 28);
+		tfNewPw2.setBounds(233, 194, 224, 28);
 		panel.add(tfNewPw2);
 		
 		btnChange = new JButton("Save password");
 		btnChange.addActionListener(passCon);
 		btnChange.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnChange.setBounds(281, 234, 176, 29);
+		btnChange.setBounds(281, 242, 176, 29);
 		panel.add(btnChange);
 		
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(passCon);
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCancel.setBounds(22, 234, 93, 29);
+		btnCancel.setBounds(22, 242, 93, 29);
 		panel.add(btnCancel);
 		
 		lblWrongPw = new JLabel("");
@@ -110,12 +111,18 @@ public class ChangePasswordView extends JFrame {
 		
 		lblWrongNewPw = new JLabel("");
 		lblWrongNewPw.setForeground(Color.RED);
-		lblWrongNewPw.setBounds(243, 202, 200, 16);
+		lblWrongNewPw.setBounds(243, 222, 200, 16);
 		panel.add(lblWrongNewPw);
+		
+		btnDeleteUser = new JButton("Delete User");
+		btnDeleteUser.addActionListener(passCon);
+		btnDeleteUser.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnDeleteUser.setBounds(309, 121, 148, 29);
+		panel.add(btnDeleteUser);
 		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 509, 287);
+		lblBack.setBounds(0, 0, 529, 297);
 		lblBack.setIcon(new ImageIcon(img_sidebar));
 		panel.add(lblBack);
 		

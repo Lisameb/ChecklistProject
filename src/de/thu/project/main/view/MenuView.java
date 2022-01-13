@@ -130,7 +130,7 @@ public class MenuView extends JFrame{
 		panel_ChangePw.setBounds(66, 456, 287, 50);
 		panel.add(panel_ChangePw);
 		
-		lblChangePw = new JLabel("Change Password");
+		lblChangePw = new JLabel("User");
 		lblChangePw.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChangePw.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblChangePw.setBounds(10, 11, 267, 28);
