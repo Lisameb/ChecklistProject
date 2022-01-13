@@ -33,7 +33,6 @@ public class UseChecklistController implements ActionListener, MouseListener {
 	private ItemDao_DB itemDao;
 	
 	private ArrayList<String> checklistItems;
-	private ArrayList<String> checklistItems2;
 	
 	public UseChecklistController(UseChecklistView view) {
 		this.view = view;
@@ -64,7 +63,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		if(src == view.btnModify) {
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			cclview = new ChangeChecklistView(checklistName);
-			cclview.setVisible(true); // I am Confusion: America explain -> geht das so auch oder muss man ein Controller-Objekt erstellen in changeChecklistView?
+			cclview.setVisible(true); 
 			view.dispose();
 			
 		}
@@ -147,40 +146,27 @@ public class UseChecklistController implements ActionListener, MouseListener {
 								itemVO.setItemID(itemDao.getItemID(itemVO));
 								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
 								checklist_itemDao.toggleCheck2(finalItem);
-								//result = amount2 + amount; 
+							}
 						}
-						
-//						for(int j = 0; j < checklistItems2.size(); j++) {
-//							if(checklistItems2.get(j).equals(name)) {
-//								ItemVo itemVO = new ItemVo(checklistItems2.get(j));
-//								System.out.println(itemDao.getItemID(itemVO));
-//								itemVO.setItemID(itemDao.getItemID(itemVO));
-//								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-//								checklist_itemDao.toggleCheck(finalItem);
-//							}
-//						}
-					}
-				} else {
-					name = view.boxes.get(i).getText();
-					checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-					checklistID = checklistDao.getChecklistID(checklistVO);
-					checklistItems = new ArrayList<String>();
-					checklistItems = checklist_itemDao.getItemsC(checklistID);
-					
-					for(int j = 0; checklistItems.size() > j; j++) {
-						if(checklistItems.get(j).equals(name)) {
-							ItemVo itemVO = new ItemVo(checklistItems.get(j));
-							itemVO.setItemID(itemDao.getItemID(itemVO));
-							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-							checklist_itemDao.toggleUnchecked(finalItem);
-							//result = amount2 + amount; 
+					} else {
+						name = view.boxes.get(i).getText();
+						checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+						ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+						checklistID = checklistDao.getChecklistID(checklistVO);
+						checklistItems = new ArrayList<String>();
+						checklistItems = checklist_itemDao.getItemsC(checklistID);
+
+						for(int j = 0; checklistItems.size() > j; j++) {
+							if(checklistItems.get(j).equals(name)) {
+								ItemVo itemVO = new ItemVo(checklistItems.get(j));
+								itemVO.setItemID(itemDao.getItemID(itemVO));
+								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+								checklist_itemDao.toggleUnchecked(finalItem);
+							}
 						}
 					}
-				}
 				}
 			}
-		
 		}
 	}
 
@@ -224,19 +210,5 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	// first idea to create the checkboxes for the checklist
-//	public void createrCheckBox(int i)
-//    {
-//        view.boxes[i] = new JCheckBox();
-//        //proper locations will be solved later
-//        view.boxes[i].setLocation(87,34+i*25); 
-//        view.boxes[i].setSize(100,50);
-//        view.boxes[i].setText(checklistItems.get(i));
-//        view.boxes[i].setSelected(false);
-//        view.boxes[i].setVisible(true);
-//        view.frame.getContentPane().add(view.boxes[i]);
-//    } 
-
 	
 }

@@ -58,7 +58,7 @@ public class ImportChecklistController implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==view.btnChooseFile) {
-			//PLZ DONT TOUCH THE EXHIBITS
+			
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showOpenDialog(null);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -68,13 +68,10 @@ public class ImportChecklistController implements ActionListener{
 				try {
 					importXML();
 				} catch (ParserConfigurationException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SAXException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 	        } else {
 	        	JOptionPane.showMessageDialog(null,"Path not found :(");
 	        }
@@ -104,10 +101,8 @@ public class ImportChecklistController implements ActionListener{
 						}
 					}
 				} catch (ParserConfigurationException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SAXException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				view.dispose();
