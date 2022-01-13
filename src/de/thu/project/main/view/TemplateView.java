@@ -93,14 +93,6 @@ public class TemplateView extends JFrame {
 		panMenCheck.add(lblMenCheck);
 		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
 
-
-//		JPanel panDest = new JPanel(); //Really Jonas? What is dis?
-//		panDest.addMouseListener(tempcon); 
-//		panDest.setBackground(clBorder);
-//		panDest.setBounds(228, 57, 90, 90);
-//		panel.add(panDest);
-//		panDest.setLayout(null);
-
 		panMenBack = new JPanel();
 		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
 		panMenBack.setBackground(clBorder);
@@ -131,7 +123,7 @@ public class TemplateView extends JFrame {
 		panel.add(lblBack);
 		
 		taTempItems = new JTextArea();
-		taTempItems.setBounds(1, 1, 220, 399); //BIGGER
+		taTempItems.setBounds(1, 1, 220, 399);
 		taTempItems.setEditable(false);
 		contentPane.add(taTempItems);
 		

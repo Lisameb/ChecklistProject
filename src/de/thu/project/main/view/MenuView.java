@@ -167,7 +167,7 @@ public class MenuView extends JFrame{
 		panel.add(panel_createItem);
 		panel_createItem.addMouseListener(contro);
 		
-		JLabel lblCreateItem = new JLabel("Create Item");
+		JLabel lblCreateItem = new JLabel("Manage Items");
 		lblCreateItem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreateItem.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblCreateItem.setBounds(10, 11, 267, 28);

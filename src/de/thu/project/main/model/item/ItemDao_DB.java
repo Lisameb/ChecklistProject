@@ -59,11 +59,11 @@ public class ItemDao_DB implements IDaoItem {
 
 	// TODO: delete? is not used
 	@Override
-	public void updateCategory(ItemVo item, CategoryVo category) {
+	public void updateCategory(ItemVo item, String category) {
 		String query = "UPDATE item SET category = ? WHERE name = ?";
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
-			stmt.setString(1, category.getCategoryName());
+			stmt.setString(1, category);
 			stmt.setString(2, item.getItemName());
 			stmt.executeUpdate();
 			stmt.close();
@@ -84,6 +84,19 @@ public class ItemDao_DB implements IDaoItem {
 			
 		} catch(SQLException e) {
 			System.err.println("Insert failed!");
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void deleteCategory(String category) {
+		String query = "DELETE FROM category WHERE name = ?";
+		try {
+			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
+			stmt.setString(1, category);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.err.println("Delete failed!");
 			e.printStackTrace();
 		}
 	}

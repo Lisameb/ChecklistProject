@@ -2,6 +2,8 @@ package de.thu.project.main.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -11,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
+import java.awt.SystemColor;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -22,108 +25,201 @@ import java.awt.event.WindowEvent;
 
 public class ItemView extends JFrame {
 
-	private JPanel contentPane;
-	public JComboBox<String> comboBoxCategory;
-	public JButton btnAddItemTo;
-	private ItemController itemCon;
-	public JTextField tfItem;
-	private Image img_sidebar;
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_icon = new ImageIcon(this.getClass().getResource("/new.png")).getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
+
 	private Frame preView;
-	public JLabel lblListOfItems;
+	private JPanel contentPane;
+	private Image img_sidebar;
+	
+	public JTextArea taGloballist;
+	public JComboBox<String> comboBoxCat;
+	
+	public JButton btnDelete;
+	public JButton btnAdd;
+	public JButton btnAddCategory;
+	public JButton btnDeleteCategory;
+	
+	private ItemController itemCon;
+	
 	private JLabel lblAddCategory;
-	public JTextField tfCategory;
-	public JButton btnAddCategoryTo;
+	public JTextField tfNewItem;
+	public JLabel lblAddNewCategory;
+	public JTextField tfAddCategory;
+	
 	private Color clBackground = new Color(191, 205, 219);
 	private Color clBorder = new Color(244, 247, 252);
 	
+	public JPanel panMenTemp; 
+	public JPanel panMenCheck;
+	public JPanel panMenBack; 
+	public JLabel lblMenTemp;
+	public JLabel lblMenCheck;
+	public JLabel lblMenBack;
+	public JButton btnShowGloballistOf;
+	private JLabel lblGlobalListOf;
+	public JButton btnChangeCategory;
+
 
 	public ItemView(Frame preView) {
 		this.preView = preView;
 		initialize();
+		itemCon.setGloballist();
+		
 	}
 	
 	private void initialize() {
 		
 		itemCon = new ItemController(this);
-		img_sidebar = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(153, 287, Image.SCALE_SMOOTH);
 		
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 526, 334);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 785, 585);
+
 		contentPane = new JPanel();
+		contentPane.setBackground(clBackground);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		addWindowListener(new WindowAdapter() {
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				dispose();
-				preView.setVisible(true);
-				super.windowClosing(e);
-			}
-			
-		});
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(176, 224, 230));
-		panel.setBounds(0, 0, 153, 287);
+		panel.setBounds(0, 0, 220, 530);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblCategories = new JLabel("Categories");
-		lblCategories.setBounds(22, 131, 110, 34);
-		lblCategories.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel.add(lblCategories);
+		panMenTemp = new JPanel();
+		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
+		panMenTemp.setBackground(clBorder);
+		panMenTemp.setBounds(0, 334, 219, 60);
+		panel.add(panMenTemp);
+		panMenTemp.setLayout(null);
+		panMenTemp.addMouseListener(itemCon);
 		
-		comboBoxCategory = new JComboBox<String>();
-		comboBoxCategory.addActionListener(itemCon);
-		comboBoxCategory.setBounds(22, 178, 110, 22);
-		itemCon.setComboBoxCat();
-		panel.add(comboBoxCategory);
+		lblMenTemp = new JLabel("templates");
+		lblMenTemp.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMenTemp.setBounds(15, 21, 112, 20);
+		panMenTemp.add(lblMenTemp);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(clBackground);
-		panel_1.setBounds(155, 0, 353, 287);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		panMenCheck = new JPanel();
+		panMenCheck.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenCheck.setBackground(clBorder);
+		panMenCheck.setBounds(0, 394, 219, 60);
+		panel.add(panMenCheck);
+		panMenCheck.setLayout(null);
+		panMenCheck.addMouseListener(itemCon);
 		
-		lblListOfItems = new JLabel("Add Item");
-		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblListOfItems.setBounds(26, 143, 132, 16);
-		panel_1.add(lblListOfItems);
+		lblMenCheck = new JLabel("your checklists");
+		lblMenCheck.setBounds(15, 21, 134, 20);
+		panMenCheck.add(lblMenCheck);
+		lblMenCheck.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		panMenBack = new JPanel();
+		panMenBack.setBorder(new BevelBorder(BevelBorder.LOWERED, null, new Color(153, 180, 209), null, null));
+		panMenBack.setBackground(clBorder);
+		panMenBack.setBounds(0, 454, 219, 60);
+		panel.add(panMenBack);
+		panMenBack.setLayout(null);
+		panMenBack.addMouseListener(itemCon);
+		
+		lblMenBack = new JLabel("back to menu");
+		lblMenBack.setBounds(15, 21, 136, 20);
+		panMenBack.add(lblMenBack);
+		lblMenBack.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		JLabel lblGoTo = new JLabel("Go To...");
+		lblGoTo.setFont(new Font("Goudy Stout", Font.BOLD, 21));
+		lblGoTo.setBounds(15, 275, 178, 37);
+		panel.add(lblGoTo);
+		
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setBounds(15, 16, 80, 69);
+		lblIcon.setIcon(new ImageIcon(img_icon));
+		panel.add(lblIcon);
 		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 153, 287);
-		lblBack.setIcon(new ImageIcon(img_sidebar));
+		lblBack.setBounds(0, 0, 220, 530);
+		lblBack.setIcon(new ImageIcon(img_back));
 		panel.add(lblBack);
 		
-		btnAddItemTo = new JButton("Add Item to database");
-		btnAddItemTo.addActionListener(itemCon);
-		btnAddItemTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddItemTo.setBounds(149, 217, 182, 25);
-		panel_1.add(btnAddItemTo);
+		taGloballist = new JTextArea();
+		taGloballist.setEditable(false);
+		contentPane.add(taGloballist);
 		
-		tfItem = new JTextField();
-		tfItem.setBounds(26, 182, 200, 22);
-		panel_1.add(tfItem);
-		tfItem.setColumns(10);
+		JScrollPane spChecklist = new JScrollPane(taGloballist);
+		spChecklist.setBounds(232, 158, 235, 345);
+		contentPane.add(spChecklist);
 		
-		lblAddCategory = new JLabel("Add Category");
-		lblAddCategory.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblAddCategory.setBounds(27, 25, 173, 25);
-		panel_1.add(lblAddCategory);
 		
-		tfCategory = new JTextField();
-		tfCategory.setColumns(10);
-		tfCategory.setBounds(26, 63, 200, 22);
-		panel_1.add(tfCategory);
+		comboBoxCat = new JComboBox<String>();
+		comboBoxCat.addActionListener(itemCon);
+		comboBoxCat.setBounds(514, 347, 220, 26);
+		contentPane.add(comboBoxCat);
+		itemCon.setComboBoxCat();
 		
-		btnAddCategoryTo = new JButton("Add Category to database");
-		btnAddCategoryTo.addActionListener(itemCon);
-		btnAddCategoryTo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAddCategoryTo.setBounds(129, 98, 212, 25);
-		panel_1.add(btnAddCategoryTo);
+		JLabel lblCategory = new JLabel("Category");
+		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblCategory.setBounds(514, 319, 103, 20);
+		contentPane.add(lblCategory);
+		
+		JLabel lblListOfItems = new JLabel("Name of item");
+		lblListOfItems.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblListOfItems.setBounds(514, 386, 115, 20);
+		contentPane.add(lblListOfItems);
+		
+		JLabel lblTitle = new JLabel("Manage categories and items");
+		lblTitle.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
+		lblTitle.setBounds(307, 16, 365, 20);
+		contentPane.add(lblTitle);
+		
+		btnAdd = new JButton("Add item");
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnAdd.addActionListener(itemCon);
+		btnAdd.setBounds(594, 445, 125, 26);
+		contentPane.add(btnAdd);
+		
+		btnDelete = new JButton("Delete item");
+		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnDelete.addActionListener(itemCon);
+		btnDelete.setBounds(594, 477, 125, 26);
+		contentPane.add(btnDelete);
+		
+		tfNewItem = new JTextField();
+		tfNewItem.setBounds(514, 410, 215, 22);
+		contentPane.add(tfNewItem);
+		tfNewItem.setColumns(10);
+		
+		lblAddNewCategory = new JLabel("Name of category");
+		lblAddNewCategory.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAddNewCategory.setBounds(514, 160, 173, 20);
+		contentPane.add(lblAddNewCategory);
+		
+		tfAddCategory = new JTextField();
+		tfAddCategory.setBounds(514, 187, 215, 22);
+		contentPane.add(tfAddCategory);
+		tfAddCategory.setColumns(10);
+		
+		btnAddCategory = new JButton("Add category");
+		btnAddCategory.addActionListener(itemCon);
+		btnAddCategory.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnAddCategory.setBounds(580, 222, 154, 26);
+		contentPane.add(btnAddCategory);
+		
+		btnDeleteCategory = new JButton("Delete category");
+		btnDeleteCategory.addActionListener(itemCon);
+		btnDeleteCategory.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnDeleteCategory.setBounds(580, 252, 154, 26);
+		contentPane.add(btnDeleteCategory);
+		
+		lblGlobalListOf = new JLabel("Global list of items");
+		lblGlobalListOf.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblGlobalListOf.setBounds(233, 125, 173, 20);
+		contentPane.add(lblGlobalListOf);
+		
+		btnChangeCategory = new JButton("Change category");
+		btnChangeCategory.addActionListener(itemCon);
+		btnChangeCategory.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnChangeCategory.setBounds(575, 508, 159, 26);
+		contentPane.add(btnChangeCategory);
 		
 	}
 }
