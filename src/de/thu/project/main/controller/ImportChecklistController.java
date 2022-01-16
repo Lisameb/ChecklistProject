@@ -24,6 +24,7 @@ import de.thu.project.main.model.checklist.ChecklistDao_DB;
 import de.thu.project.main.model.checklist.ChecklistVo;
 import de.thu.project.main.model.checklist_item.Checklist_itemDao_DB;
 import de.thu.project.main.model.checklist_item.Checklist_itemVo;
+import de.thu.project.main.model.checklist_item.Import;
 import de.thu.project.main.model.item.ItemDao_DB;
 import de.thu.project.main.model.item.ItemVo;
 import de.thu.project.main.view.ImportChecklistView;
@@ -58,7 +59,7 @@ public class ImportChecklistController implements ActionListener{
 		Object src = e.getSource();
 		
 		if (src==view.btnChooseFile) {
-			
+			Import importClass = new Import(view);
 			JFileChooser file = new JFileChooser();
 			int returnVal = file.showOpenDialog(null);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -66,7 +67,7 @@ public class ImportChecklistController implements ActionListener{
 	            fileToSave = new File(path);
 	            fileToSave.getAbsolutePath();
 				try {
-					importXML();
+					importClass.importXML(fileToSave);
 				} catch (ParserConfigurationException e1) {
 					e1.printStackTrace();
 				} catch (SAXException e1) {
@@ -116,34 +117,6 @@ public class ImportChecklistController implements ActionListener{
 			view.dispose();
 			MenuView menu = new MenuView();
 			menu.setVisible(true);
-		}
-	}
-	
-	public void importXML() throws ParserConfigurationException, SAXException {
-		try {
-			Document document = fileReader(fileToSave);
-    		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    		Source schemaFile = new StreamSource(new File("XSD/OurSchema.xsd"));
-    		Schema schema = schemaFactory.newSchema(schemaFile);
-    	    Validator validator = schema.newValidator();
-    	    validator.validate(new DOMSource(document));
-            //document.getDocumentElement().normalize();
-           	view.taItems.append(document.getDocumentElement().getNodeName() + "\n");
-           	NodeList nList = document.getElementsByTagName("item");
-           	view.taItems.append("----------------------------");
-           	for (int i = 0; i < nList.getLength(); i++) {
-                Node nNode = nList.item(i);
-                view.taItems.append("\nCurrent Element : " + nNode.getNodeName() + "\n");
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    view.taItems.append("category : " + eElement.getElementsByTagName("category").item(0).getTextContent() + "\n");
-                    view.taItems.append("item name : " + eElement.getElementsByTagName("name").item(0).getTextContent() + "\n");
-                    view.taItems.append("amount : " + eElement.getElementsByTagName("amount").item(0).getTextContent() + "\n");
-                }
-            }
-           	
-		} catch(IOException e) {
-			JOptionPane.showMessageDialog(null,"Error: XML file could not be imported!");
 		}
 	}
 	
