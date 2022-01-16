@@ -1,5 +1,6 @@
 package de.thu.project.main.controller;
 
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		}
 		
 		if(src == view.btnOpen) {
+			view.contentPane.removeAll();
+			view.contentPane.add(view.panelSide);
+			view.contentPane.add(view.lblNewLabel);
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			ChecklistVo checklist = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 			int checklistID = checklistDao.getChecklistID(checklist);
@@ -81,8 +85,10 @@ public class UseChecklistController implements ActionListener, MouseListener {
 				Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
 				view.createrCheckBox(i, checklistItems, checklist_itemDao.getChecked(finalItem));
 			}
-			view.panel_1.updateUI();
+			view.contentPane.updateUI();
 			
+			int paneLength = 150 + checklistItems.size()*30;
+			view.contentPane.setPreferredSize(new Dimension(730, paneLength));
 		}
 		if(src == view.btnExport) {
 
