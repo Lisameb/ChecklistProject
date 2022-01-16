@@ -15,7 +15,7 @@ import de.thu.project.main.controller.ChangeChecklistController;
 public class ChangeChecklistView extends JFrame{
 	public JPanel contentPane;
 
-	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 560, Image.SCALE_SMOOTH);
 	private Image img_icon = new ImageIcon(this.getClass().getResource("/new.png")).getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
 
 	public JTextField tfName;
@@ -66,7 +66,7 @@ public class ChangeChecklistView extends JFrame{
 		contentPane.setLayout(null);
 
 		panel = new JPanel();
-		panel.setBounds(0, 0, 220, 530);
+		panel.setBounds(0, 0, 220, 560);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -121,7 +121,7 @@ public class ChangeChecklistView extends JFrame{
 
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 220, 530);
+		lblBack.setBounds(0, 0, 220, 560);
 		lblBack.setIcon(new ImageIcon(img_back));
 		panel.add(lblBack);
 

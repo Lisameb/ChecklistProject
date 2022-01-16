@@ -25,7 +25,7 @@ import java.awt.event.WindowEvent;
 
 public class ItemView extends JFrame {
 
-	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 560, Image.SCALE_SMOOTH);
 	private Image img_icon = new ImageIcon(this.getClass().getResource("/new.png")).getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
 
 	private Frame preView;
@@ -82,12 +82,12 @@ public class ItemView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 220, 530);
+		panel.setBounds(0, 0, 220, 560);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		panMenTemp = new JPanel();
-		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, SystemColor.activeCaption, null, null));
+		panMenTemp.setBorder(new BevelBorder(BevelBorder.LOWERED, null, clBorder, null, null));
 		panMenTemp.setBackground(clBorder);
 		panMenTemp.setBounds(0, 334, 219, 60);
 		panel.add(panMenTemp);
@@ -137,9 +137,10 @@ public class ItemView extends JFrame {
 		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 220, 530);
+		lblBack.setBounds(0, 0, 220, 560);
 		lblBack.setIcon(new ImageIcon(img_back));
 		panel.add(lblBack);
+		
 		
 		taGloballist = new JTextArea();
 		taGloballist.setEditable(false);

@@ -21,6 +21,7 @@ public class CreateNewChecklistView extends JFrame{
 	public JTextField tfName;
 	public JLabel lblNameError;
 	public CreateChecklistController contro;
+	private Color clBorder = new Color(244, 247, 252);
 	
 
 	public CreateNewChecklistView(CreateChecklistController contro) {
@@ -32,7 +33,7 @@ public class CreateNewChecklistView extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 300, 230);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.inactiveCaption);
+		contentPane.setBackground(clBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -52,6 +53,7 @@ public class CreateNewChecklistView extends JFrame{
 		panel.add(btnNew);
 		
 		tfName = new JTextField();
+		tfName.setBackground(Color.WHITE);
 		tfName.setToolTipText("Enter name");
 		tfName.setBounds(88, 66, 140, 22);
 		panel.add(tfName);

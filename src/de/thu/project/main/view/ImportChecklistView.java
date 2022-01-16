@@ -13,7 +13,7 @@ import java.awt.Font;
 
 
 public class ImportChecklistView extends JFrame{
-	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 560, Image.SCALE_SMOOTH);
 	
 	public JPanel contentPane;
 	public JTextField tfName;
@@ -45,7 +45,7 @@ public class ImportChecklistView extends JFrame{
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 223, 538);
+		panel.setBounds(0, 0, 223, 560);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -80,7 +80,7 @@ public class ImportChecklistView extends JFrame{
 		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 235, 538);
+		lblBack.setBounds(0, 0, 235, 560);
 		lblBack.setIcon(new ImageIcon(img_back));
 		panel.add(lblBack);
 		

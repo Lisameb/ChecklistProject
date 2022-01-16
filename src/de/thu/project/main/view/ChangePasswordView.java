@@ -53,7 +53,7 @@ public class ChangePasswordView extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(176, 224, 230));
-		panel.setBounds(0, 0, 508, 287);
+		panel.setBounds(0, 0, 528, 348);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -122,7 +122,7 @@ public class ChangePasswordView extends JFrame {
 		
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 529, 297);
+		lblBack.setBounds(0, 0, 513, 294);
 		lblBack.setIcon(new ImageIcon(img_sidebar));
 		panel.add(lblBack);
 		

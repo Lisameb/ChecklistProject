@@ -71,7 +71,7 @@ public class TemplateController implements MouseListener, ActionListener {
 				ArrayList<String> allItems = item_tempDao.getItemsT(tempVo.getTemplateID());
 
 				for(int i = 0; i<allItems.size(); i++ ) {
-					tempview.taTempItems.append(allItems.get(i) + "\n");
+					tempview.taTempItems.append(" " + allItems.get(i) + "\n"); 
 				}
 			}	
 		}

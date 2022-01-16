@@ -182,11 +182,11 @@ public class  ChangeTemplateView extends JFrame {
 		btnBack.add(label);
 		
 		
-				JLabel lblBack = new JLabel("");
-				lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-				lblBack.setBounds(0, 0, 220, 546);
-				lblBack.setIcon(new ImageIcon(img_sidebar));
-				panel.add(lblBack);
+		JLabel lblBack = new JLabel("");
+		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+		lblBack.setBounds(0, 0, 220, 546);
+		lblBack.setIcon(new ImageIcon(img_sidebar));
+		panel.add(lblBack);
 		
 	}
 }

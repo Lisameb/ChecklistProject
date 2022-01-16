@@ -126,7 +126,7 @@ public class MenuView extends JFrame{
 		panel_ChangePw.addMouseListener(contro);
 		panel_ChangePw.setLayout(null);
 		panel_ChangePw.setBorder(new BevelBorder(BevelBorder.RAISED, null, clBorder, null, null));
-		panel_ChangePw.setBackground(SystemColor.inactiveCaption);
+		panel_ChangePw.setBackground(clBackground);
 		panel_ChangePw.setBounds(66, 456, 287, 50);
 		panel.add(panel_ChangePw);
 		
@@ -151,7 +151,7 @@ public class MenuView extends JFrame{
 		panel_logOut.add(lblLogOut);
 		
 		JLabel lblBackground = new JLabel("");
-		lblBackground.setBounds(0, 5, 734, 539);
+		lblBackground.setBounds(0, 0, 734, 539);
 		panel.add(lblBackground);
 		lblBackground.setIcon(new ImageIcon(img_back));
 		

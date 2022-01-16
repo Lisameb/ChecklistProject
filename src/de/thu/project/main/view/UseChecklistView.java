@@ -54,7 +54,7 @@ public class UseChecklistView extends JFrame{
 	public JLabel lblNewLabel;
 	private UseChecklistController clcon;
 	//private ChecklistVo clvo;
-	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 530, Image.SCALE_SMOOTH);
+	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 560, Image.SCALE_SMOOTH);
 	private Color clBackground = new Color(191, 205, 219);
 	private Color clBorder = new Color(244, 247, 252);
 	
@@ -85,7 +85,7 @@ public class UseChecklistView extends JFrame{
 		panelSide = new JPanel();
 	
 		panelSide.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelSide.setBounds(0, 0, 220, 530);
+		panelSide.setBounds(0, 0, 220, 560);
 		contentPane.add(panelSide);
 		panelSide.setLayout(null);
 		
@@ -159,7 +159,7 @@ public class UseChecklistView extends JFrame{
 				
 		JLabel lblBack = new JLabel("");
 		lblBack.setBorder(new BevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		lblBack.setBounds(0, 0, 220, 530);
+		lblBack.setBounds(0, 0, 220, 560);
 		lblBack.setIcon(new ImageIcon(img_back));
 		panelSide.add(lblBack);
 		
