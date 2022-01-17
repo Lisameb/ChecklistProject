@@ -2,12 +2,9 @@ package de.thu.project.main.view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.SystemColor;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-
 import de.thu.project.main.controller.ImportChecklistController;
 import java.awt.Font;
 

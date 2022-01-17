@@ -6,22 +6,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-
 import de.thu.project.main.controller.ItemController;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.SystemColor;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class ItemView extends JFrame {
 

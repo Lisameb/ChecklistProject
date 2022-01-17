@@ -14,7 +14,9 @@ import de.thu.project.main.model.DaoFactory;
  * methods:
  * 		- insert new item
  * 		- delete item
+ * 		- update category of an item
  * 		- insert new category
+ * 		- delete category
  * 		- get ItemID
  * 		- geCategoryItems: get all items of a category
  * 		- get all items

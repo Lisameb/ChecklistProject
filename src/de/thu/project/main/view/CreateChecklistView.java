@@ -1,18 +1,11 @@
 package de.thu.project.main.view;
 
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
+import java.awt.BorderLayout;
 import de.thu.project.main.controller.CreateChecklistController;
-
-import java.awt.SystemColor;
-
 import javax.swing.border.BevelBorder;
-
 import java.awt.Color;
 import java.awt.Font;
 

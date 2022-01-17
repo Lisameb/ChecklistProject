@@ -13,12 +13,9 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
 
-import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class ChangePasswordView extends JFrame {
 

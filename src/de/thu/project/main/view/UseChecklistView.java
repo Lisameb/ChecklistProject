@@ -2,7 +2,6 @@ package de.thu.project.main.view;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.SystemColor;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -24,15 +23,6 @@ import java.awt.Dimension;
 
 import javax.swing.JCheckBox;
 
-/**********************************************
- * UseChecklistView-Class
- * 
- * class creates the GUI for checklist uses;
- * options for displaying or modifying checklists are available;
- * on the bottom left, you can find a small menu
- * 
- **********************************************/
-
 public class UseChecklistView extends JFrame{
 
 
@@ -42,7 +32,6 @@ public class UseChecklistView extends JFrame{
 	public JButton btnExport;
 	public JButton btnCreatePdf;
 	public JCheckBox checkBox_checklist;
-	//private JCheckBox item;
 	public ArrayList<JCheckBox> boxes = new ArrayList<JCheckBox>();
 	public JCheckBox checkbox;
 	public JPanel contentPane;
@@ -53,7 +42,6 @@ public class UseChecklistView extends JFrame{
 	public JLabel lblMenBack;
 	public JLabel lblNewLabel;
 	private UseChecklistController clcon;
-	//private ChecklistVo clvo;
 	private Image img_back = new ImageIcon(this.getClass().getResource("/blue.jpg")).getImage().getScaledInstance(220, 560, Image.SCALE_SMOOTH);
 	private Color clBackground = new Color(191, 205, 219);
 	private Color clBorder = new Color(244, 247, 252);
@@ -163,25 +151,6 @@ public class UseChecklistView extends JFrame{
 		lblBack.setIcon(new ImageIcon(img_back));
 		panelSide.add(lblBack);
 		
-//		JPanel panel_1 = new JPanel();
-//		panel_1.setBounds(216, 0, 551, 546);
-//		getContentPane().add(panel_1);
-//		panel_1.setBackground(clBackground);
-//		panel_1.setLayout(null);
-//		panelSide.add(panel_1);
-		
-//		JScrollPane scrollFrame = new JScrollPane(panel_1);
-//		panel_1.setAutoscrolls(true);
-//		scrollFrame.setPreferredSize(new Dimension(551, 546));
-//		getContentPane().add(scrollFrame);
-		
-//		JScrollPane sp1 = new JScrollPane( 
-//	            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-//	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		sp1.setBounds(panel_1.getBounds());
-//        sp1.setViewportView(panel_1);
-//        panel.add(sp1);
-		
 		lblNewLabel = new JLabel("Checklist");
 		lblNewLabel.setBounds(450, 6, 113, 16);
 		contentPane.add(lblNewLabel);
@@ -195,19 +164,7 @@ public class UseChecklistView extends JFrame{
 
 	    // add the checkbox to the ArrayList
 	    boxes.add(checkbox);
-	    //if(i > 19) {
-	    	//boxes.get(i).setLocation(200,34+(i-20)*25);
-//	    	int paneLength = 150 + boxes.size()*30;
-//			panel_1.setPreferredSize(new Dimension(551, paneLength));
-//			panel_1.updateUI();
-	    //} else if(i > 39) {
-	    	//boxes.get(i).setLocation(380,34+(i-40)*25);
-//	    	int paneLength = 150 + boxes.size()*30;
-//			panel_1.setPreferredSize(new Dimension(551, paneLength));
-//			panel_1.updateUI();
-	    //} else {
 	    boxes.get(i).setLocation(450,34+i*25);
-	    //} 
 	    boxes.get(i).setSize(150,23);
 	    boxes.get(i).setText(list.get(i));
 	    if(boo) {
@@ -218,8 +175,6 @@ public class UseChecklistView extends JFrame{
 	    boxes.get(i).setVisible(true);
 	    boxes.get(i).addActionListener(clcon);
 	    contentPane.add(boxes.get(i));
-	    contentPane.updateUI();
-	    
+	    contentPane.updateUI();  
     } 
-
 }

@@ -20,9 +20,7 @@ import javax.swing.JRadioButton;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.SystemColor;
 import java.util.ArrayList;
-
 
 
 public class TemplateView extends JFrame {

@@ -12,7 +12,6 @@ import de.thu.project.main.controller.MenuController;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.SystemColor;
 
 public class MenuView extends JFrame{
 	
