@@ -97,36 +97,36 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
 		checklist_itemDao.addItem(checklistItem, amount);
 	}
-	
+
 	public void deleteItemFromChecklist(String checklistName, String item) {
 
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		checklistVo.setChecklistID(checklistDao.getChecklistID(checklistVo));
-		
+
 		ItemVo itemVo = new ItemVo(item);
 		itemVo.setItemID(itemDao.getItemID(itemVo));
-		
+
 		Checklist_itemVo checklistItem = new Checklist_itemVo(checklistVo.getChecklistID(), itemVo.getItemID());
 		checklist_itemDao.deleteItem(checklistItem);
 	}
-	
+
 	public void updateTextArea(String checklistName) {
 
 		view.taChecklist.setText("");		
 		ArrayList<String> list = new ArrayList<String>();
 		int amount;	
-		
+
 		ChecklistVo checklistVo = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 		int checklist_id = checklistDao.getChecklistID(checklistVo);
 		list = checklist_itemDao.getItemsC(checklist_id);
-		
+
 		for(int i = 0; i < list.size(); i++) {
 			ItemVo item  = new ItemVo(list.get(i));
 			int item_id = itemDao.getItemID(item);
 			Checklist_itemVo checkitem = new Checklist_itemVo(checklist_id, item_id);
 			amount = checklist_itemDao.getAmount(checkitem);
 			view.taChecklist.append(amount + " " + list.get(i) +"\n");
-			
+
 		}
 	}
 
@@ -134,21 +134,21 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		
+
 		if (src == view.comboBoxChecklist) {
 			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 			updateTextArea(checklistName);
 		}
-		
+
 		if (src == view.btnSave) {
-			
+
 			if(view.tfName.getText().equals("")) {
 				JOptionPane.showMessageDialog(null,"Type in a new name first!");
 			} else {
 				ChecklistVo oldChecklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user_name());
 				String newName = view.tfName.getText().toString().toLowerCase();
 				ChecklistVo newNameChecklist = new ChecklistVo(newName, daofactory.getCurrent_user_name());
-				
+
 				if(checklistDao.getChecklistID(newNameChecklist) == 0) {
 					checklistDao.changeChecklistName(oldChecklist, newName);
 					setComboBoxCheck();
@@ -160,133 +160,89 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 				}
 			}
 		}
-		
+
 		if(src == view.comboBoxCat) {
 			String cat = (String)view.comboBoxCat.getSelectedItem();
 			setComboBoxItems(cat);
 		}
-		
+
 		if(src == view.btnAdd) {
 			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
-			int amount = 1;
+			int amount;
 
-			
 			try {
 				amount =  Integer.parseInt(view.tfAmount.getText());
-				if(amount <= 0 ) {
-					result = 1;
-					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
-					
-					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-					int checklistID = checklistDao.getChecklistID(checklistVO);
-					checklistItems = new ArrayList<String>();
-					checklistItems = checklist_itemDao.getItemsC(checklistID);
-					
-					for(int i = 0; checklistItems.size() > i; i++) {
-						if(checklistItems.get(i).equals(item)) {
-							checklistItems.get(i);
-							ItemVo itemVO = new ItemVo (checklistItems.get(i));
-							itemVO.setItemID(itemDao.getItemID(itemVO));
-							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-							int amount2 = checklist_itemDao.getAmount(finalItem);
-							System.out.print(finalItem);
-							result = amount2 + amount; 
-						}
-					}
-					if(checklistItems.isEmpty() ) {
-						checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
-						checklistDao.delete(checklistVO);
-						setComboBoxCheck();
-						view.taChecklist.setText("");
-					}
-				} else {
-					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-					int checklistID = checklistDao.getChecklistID(checklistVO);
-					checklistItems = new ArrayList<String>();
-					checklistItems = checklist_itemDao.getItemsC(checklistID);
-					
-					for(int i = 0; checklistItems.size() > i; i++) {
-						if(checklistItems.get(i).equals(item)) {
-							checklistItems.get(i);
-							ItemVo itemVO = new ItemVo (checklistItems.get(i));
-							itemVO.setItemID(itemDao.getItemID(itemVO));
-							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-							int amount2 = checklist_itemDao.getAmount(finalItem);
-							System.out.print(finalItem);
-							result = amount2 + amount; 
-						}
-					}
-				}
 			} catch(Exception ex) {
-				result = 1;
+				amount = 1;
+				JOptionPane.showMessageDialog(null, "Amount cannot <= 0! Will be set to 1 automatically");
 			}
+
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+			int checklistID = checklistDao.getChecklistID(checklistVO);
+			checklistItems = new ArrayList<String>();
+			checklistItems = checklist_itemDao.getItemsC(checklistID);
+
+			for(int i = 0; checklistItems.size() > i; i++) {
+				if(checklistItems.get(i).equals(item)) {
+					checklistItems.get(i);
+					ItemVo itemVO = new ItemVo (checklistItems.get(i));
+					itemVO.setItemID(itemDao.getItemID(itemVO));
+					Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+					int amount2 = checklist_itemDao.getAmount(finalItem);
+					result = amount2 + amount;
+				}
+
+			}
+			if(checklistItems.isEmpty() ) {
+				checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
+				checklistDao.delete(checklistVO);
+				setComboBoxCheck();
+				view.taChecklist.setText("");
+			}
+
 			addItemtoChecklist(checklist, item, result);
 			updateTextArea(checklist);
 			view.tfAmount.setText("");
 		}
-		
+
+
 		if(src == view.btnDelete) {
 			String checklist = (String)view.comboBoxChecklist.getSelectedItem();
 			String item = (String)view.comboBoxItems.getSelectedItem();
-
-			int amount = 1;
+			int amount;
 
 			try {
 				amount =  Integer.parseInt(view.tfAmount.getText());
-				if(amount <= 0 ) {
-					result = 1;
-					JOptionPane.showMessageDialog(null, "Amount cannot be 0! Will be set to 1 automatically");
-				
-					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-					int checklistID = checklistDao.getChecklistID(checklistVO);
-					checklistItems = new ArrayList<String>();
-					checklistItems = checklist_itemDao.getItemsC(checklistID);
-				
-					for(int i = 0; checklistItems.size() > i; i++) {
-						if(checklistItems.get(i).equals(item)) {
-							checklistItems.get(i);
-							ItemVo itemVO = new ItemVo (checklistItems.get(i));
-							itemVO.setItemID(itemDao.getItemID(itemVO));
-							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-							int amount2 = checklist_itemDao.getAmount(finalItem);
-							System.out.print(finalItem);
-							result = amount2 - amount; 						
-						}
-					}
-					
-					if(checklistItems.isEmpty() ) {
-						checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
-						checklistDao.delete(checklistVO);
-						setComboBoxCheck();
-						view.taChecklist.setText("");
-					}
-				} else {
-					String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
-					ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
-					int checklistID = checklistDao.getChecklistID(checklistVO);
-					checklistItems = new ArrayList<String>();
-					checklistItems = checklist_itemDao.getItemsC(checklistID);
-				
-					for(int i = 0; checklistItems.size() > i; i++) {
-						if(checklistItems.get(i).equals(item)) {
-							checklistItems.get(i);
-							ItemVo itemVO = new ItemVo (checklistItems.get(i));
-							itemVO.setItemID(itemDao.getItemID(itemVO));
-							Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
-							int amount2 = checklist_itemDao.getAmount(finalItem);
-							System.out.print(finalItem);
-							result = amount2 - amount; 
-						}
-					}
-				}
 			} catch(Exception ex) {
-				result = 1;
+				amount = 1;
+				JOptionPane.showMessageDialog(null, "Amount needs to be >=1! Will be set to 1 automatically");
+			}			
+
+			String checklistName = (String) view.comboBoxChecklist.getSelectedItem();
+			ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
+			int checklistID = checklistDao.getChecklistID(checklistVO);
+			checklistItems = new ArrayList<String>();
+			checklistItems = checklist_itemDao.getItemsC(checklistID);
+
+			for(int i = 0; checklistItems.size() > i; i++) {
+				if(checklistItems.get(i).equals(item)) {
+					checklistItems.get(i);
+					ItemVo itemVO = new ItemVo (checklistItems.get(i));
+					itemVO.setItemID(itemDao.getItemID(itemVO));
+					Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
+					int amount2 = checklist_itemDao.getAmount(finalItem);
+					result = amount2 - amount; 						
+				}
 			}
-			System.out.print(result);
+
+			if(checklistItems.isEmpty() ) {
+				checklistVO.setChecklistID(checklistDao.getChecklistID(checklistVO));
+				checklistDao.delete(checklistVO);
+				setComboBoxCheck();
+				view.taChecklist.setText("");
+			}
 			if(result >= 1) {
 				addItemtoChecklist(checklist, item, result);
 				updateTextArea(checklist);
@@ -296,8 +252,11 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 				updateTextArea(checklist);
 				view.tfAmount.setText("");
 			}
-		}
-		
+		} 
+
+
+
+
 		if(src == view.btnDeleteChecklist) {
 			ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString(), daofactory.getCurrent_user_name());
 			checklist.setChecklistID(checklistDao.getChecklistID(checklist));
@@ -310,7 +269,7 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent evt) {
 		Object src = evt.getSource();
-		
+
 		if(src == view.panMenBack) {
 			MenuView mView = new MenuView();
 			mView.setVisible(true);
@@ -330,31 +289,31 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			ItemView iView = new ItemView(view);
 			iView.setVisible(true);
 		}
-		
+
 	}
-	
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
