@@ -77,7 +77,7 @@ public class ItemDao_DB implements IDaoItem {
 	
 	@Override
 	public void insertCategory(String category) {
-		String query = "INSERT INTO item (name) VALUES (?)";
+		String query = "INSERT INTO category (name) VALUES (?)";
 		try {
 			PreparedStatement stmt = daofactory.getCon().prepareStatement(query);
 			stmt.setString(1, category);

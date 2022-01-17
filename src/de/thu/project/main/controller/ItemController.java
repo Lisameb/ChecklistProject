@@ -36,7 +36,7 @@ public class ItemController implements MouseListener, ActionListener {
 	public void setComboBoxCat() {
 		ArrayList<CategoryVo> catList = new ArrayList<>(); 
 		catList = itemDao.getAllCategories();
-
+		view.comboBoxCat.removeAllItems();
 		for(CategoryVo category : catList) {
 			view.comboBoxCat.addItem(category.getCategoryName());
 		}
@@ -56,7 +56,7 @@ public class ItemController implements MouseListener, ActionListener {
 		ArrayList<CategoryVo> allCategories = itemDao.getAllCategories();
 
 		for (int i = 0; i < allCategories.size(); i++) {
-			if (category.equals(allCategories.get(i))) {
+			if (category.equals(allCategories.get(i).getCategoryName())) {
 				return false;
 			}
 		}
@@ -87,13 +87,13 @@ public class ItemController implements MouseListener, ActionListener {
 			if (view.tfAddCategory.getText().toString().equals("")) {
 				JOptionPane.showMessageDialog(null,"Type in a category!");
 			}
-			else if (checkCategory(newCategory)){
+			else if (checkCategory(newCategory)) {
 				itemDao.insertCategory(newCategory);
 				JOptionPane.showMessageDialog(null,"Category " + newCategory +" added to database");
 				view.tfAddCategory.setText("");
 				setComboBoxCat();
 			} else {
-				JOptionPane.showMessageDialog(null,"Item " + newCategory +" already exists in database :(");
+				JOptionPane.showMessageDialog(null,"Category " + newCategory +" already exists in database :(");
 				view.tfAddCategory.setText("");
 			}
 		}
@@ -102,7 +102,7 @@ public class ItemController implements MouseListener, ActionListener {
 			
 			if (view.tfAddCategory.getText().toString().equals("")) {
 				JOptionPane.showMessageDialog(null,"Type in an item!");
-			}else if (checkCategory(category)){
+			}else if (!checkCategory(category)){
 				if(checkCatItems(category)) {
 					itemDao.deleteCategory(category);
 					view.tfAddCategory.setText("");

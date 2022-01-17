@@ -169,7 +169,6 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 					view.setVisible(true);
 					newView.dispose();
 					tempView.dispose();
-					
 					saveAllTempItems(temp_id);
 					setComboBoxCat();
 					updateTextArea(name);
