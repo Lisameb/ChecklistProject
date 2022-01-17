@@ -27,12 +27,11 @@ public class TemplateController implements MouseListener, ActionListener {
 	
 	
 	TemplateView tempview;
-	private TemplateVo template;
+	//private TemplateVo template;
 	
 	private DaoFactory daofactory = DaoFactory.getInstance();
 	private TemplateDao_DB tempDao;
 	private Item_tempDao_DB item_tempDao;
-	private TemplateVo tempVo;
 	
 	public TemplateController(TemplateView view) {
 		this.tempview = view;
@@ -65,7 +64,7 @@ public class TemplateController implements MouseListener, ActionListener {
 			if(template.equals("")) {
 				JOptionPane.showMessageDialog(null, "Please select a template!");
 			} else {
-				tempVo = new TemplateVo(template);
+				TemplateVo tempVo = new TemplateVo(template);
 				tempVo.setTemplateID(tempDao.getTemplateID(tempVo));
 
 				ArrayList<String> allItems = item_tempDao.getItemsT(tempVo.getTemplateID());
@@ -77,13 +76,16 @@ public class TemplateController implements MouseListener, ActionListener {
 		}
 		
 		if(src == tempview.btnSelect) {
+			String template = tempview.group.getSelection().getActionCommand().toString();
 			
-			if(tempVo.getTemplateID() != 0) {
+			if(template.equals("")) {
+				JOptionPane.showMessageDialog(null, "Please select a template!");
+			} else {
+				TemplateVo tempVo = new TemplateVo(template);
+				tempVo.setTemplateID(tempDao.getTemplateID(tempVo));
 				CreateChecklistController createCheckContro = new CreateChecklistController(tempview, tempVo.getTemplateID());
-			}else {
-				JOptionPane.showMessageDialog(null, "Select a template!");
-			}
-		} 
+			} 
+		}
 	}
 	
 	@Override

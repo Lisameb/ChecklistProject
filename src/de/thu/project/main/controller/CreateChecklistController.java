@@ -157,19 +157,25 @@ public class CreateChecklistController implements ActionListener,MouseListener {
 		Object src = e.getSource();
 		
 		if(src == newView.btnNew) {
-
 			if(newView.tfName.getText().equals("")) {
 				newView.lblNameError.setText("Type in a name first!");
 			} else {
-				createNewChecklist();
 				String name = newView.tfName.getText().toLowerCase();
-				view.lblName.setText(name);
-				view.setVisible(true);
-				newView.dispose();
-				tempView.dispose();
-				saveAllTempItems(temp_id);
-				setComboBoxCat();
-				updateTextArea(name);
+				ChecklistVo checkVo = new ChecklistVo(name, daofactory.getCurrent_user_name());
+				
+				if(checklistDao.getChecklistID(checkVo) == 0) {
+					createNewChecklist();
+					view.lblName.setText(name);
+					view.setVisible(true);
+					newView.dispose();
+					tempView.dispose();
+					
+					saveAllTempItems(temp_id);
+					setComboBoxCat();
+					updateTextArea(name);
+				} else {
+					newView.lblNameError.setText("Name already exists");
+				}
 			}	
 		}
 		

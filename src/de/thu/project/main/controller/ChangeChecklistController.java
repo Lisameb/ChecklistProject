@@ -145,11 +145,19 @@ public class ChangeChecklistController implements ActionListener, MouseListener{
 			if(view.tfName.getText().equals("")) {
 				JOptionPane.showMessageDialog(null,"Type in a new name first!");
 			} else {
-				ChecklistVo checklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user_name());
-				checklistDao.changeChecklistName(checklist, view.tfName.getText());
-				setComboBoxCheck();
-				view.tfName.setText("");
-				view.comboBoxChecklist.setSelectedItem(view.tfName.getText());
+				ChecklistVo oldChecklist = new ChecklistVo(view.comboBoxChecklist.getSelectedItem().toString().toLowerCase(), daofactory.getCurrent_user_name());
+				String newName = view.tfName.getText().toString().toLowerCase();
+				ChecklistVo newNameChecklist = new ChecklistVo(newName, daofactory.getCurrent_user_name());
+				
+				if(checklistDao.getChecklistID(newNameChecklist) == 0) {
+					checklistDao.changeChecklistName(oldChecklist, newName);
+					setComboBoxCheck();
+					view.tfName.setText("");
+					view.comboBoxChecklist.setSelectedItem(newName);
+					JOptionPane.showMessageDialog(null,"Name successfully changed");
+				} else {
+					JOptionPane.showMessageDialog(null,"Name already exists");
+				}
 			}
 		}
 		
