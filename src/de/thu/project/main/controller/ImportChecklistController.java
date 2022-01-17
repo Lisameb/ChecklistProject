@@ -84,34 +84,36 @@ public class ImportChecklistController implements ActionListener{
 				JOptionPane.showMessageDialog(null,"Type in a name first!");
 			} else {
 				ChecklistVo check = new ChecklistVo(view.tfName.getText(), daofactory.getCurrent_user_name());
-				checklistDao.insert(check);
-				Document document;
-				try {
-					document = fileReader(fileToSave);
-					NodeList nList = document.getElementsByTagName("item");
-					for (int i = 0; i < nList.getLength(); i++) {
-						Node nNode = nList.item(i);
-						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-							Element eElement = (Element) nNode;
-							ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
-							for(int j = 0; j < itemsByC.size(); j++) {
-								if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
-									addItemtoChecklist(view.tfName.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
+				if(checklistDao.getChecklistID(check) == 0) {
+					checklistDao.insert(check);
+					Document document;
+					try {
+						document = fileReader(fileToSave);
+						NodeList nList = document.getElementsByTagName("item");
+						for (int i = 0; i < nList.getLength(); i++) {
+							Node nNode = nList.item(i);
+							if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+								Element eElement = (Element) nNode;
+								ArrayList<String> itemsByC = itemDao.getCategoryItems(eElement.getElementsByTagName("category").item(0).getTextContent());
+								for(int j = 0; j < itemsByC.size(); j++) {
+									if(itemsByC.get(j).equals(eElement.getElementsByTagName("name").item(0).getTextContent())) {
+										addItemtoChecklist(view.tfName.getText().toLowerCase(), eElement.getElementsByTagName("name").item(0).getTextContent(), Integer.parseInt(eElement.getElementsByTagName("amount").item(0).getTextContent()));
+									}
 								}
 							}
 						}
+					} catch (ParserConfigurationException e1) {
+						e1.printStackTrace();
+					} catch (SAXException e1) {
+						e1.printStackTrace();
 					}
-				} catch (ParserConfigurationException e1) {
-					e1.printStackTrace();
-				} catch (SAXException e1) {
-					e1.printStackTrace();
+					view.dispose();
+					UseChecklistView use = new UseChecklistView();
+					use.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null,"Name already exists!");
 				}
-				view.dispose();
-				UseChecklistView use = new UseChecklistView();
-				use.setVisible(true);
 			} 
-			
-			
 		}
 		if (src == view.btnCancel) {
 			view.dispose();

@@ -71,6 +71,7 @@ public class ItemController implements MouseListener, ActionListener {
 	}
 	public void setGloballist() {
 		ArrayList<String> allItems = itemDao.getAllItems();
+		view.taGloballist.setText("");
 		for (int i = 0; i < allItems.size(); i++) {
 			view.taGloballist.append("-" + allItems.get(i) + "\n");
 		}	
