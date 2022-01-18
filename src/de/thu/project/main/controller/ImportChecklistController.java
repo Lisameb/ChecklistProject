@@ -114,6 +114,7 @@ public class ImportChecklistController implements ActionListener{
 					JOptionPane.showMessageDialog(null,"Name already exists!");
 				}
 			} 
+			JOptionPane.showMessageDialog(null,"Warning: Categories and items which are not in our database are excluded from the imported checklist!");
 		}
 		if (src == view.btnCancel) {
 			view.dispose();
