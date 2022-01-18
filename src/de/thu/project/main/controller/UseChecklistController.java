@@ -75,7 +75,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 			
 			checklistItems = new ArrayList<String>();
 			checklistItems = checklist_itemDao.getItemsC(checklistID);
-			ArrayList<String> itemInfo = new ArrayList<>();
+			ArrayList<String> itemInfo = new ArrayList<String>();
 			
 			for(int i = 0; i < checklistItems.size(); i++) {
 				ItemVo itemVO = new ItemVo(checklistItems.get(i));
@@ -134,12 +134,12 @@ public class UseChecklistController implements ActionListener, MouseListener {
 		
 		for(int k = 0; k < view.boxes.size(); k++) {
 			if (src == view.boxes.get(k)) {
-				String name;
+				String[] name;
 				String checklistName;
 				int checklistID;
 				for(int i = 0; i < view.boxes.size(); i++) {
 					if(view.boxes.get(i).isSelected()) {
-						name = view.boxes.get(i).getText();
+						name = view.boxes.get(i).getText().split("x ");
 						checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 						ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 						checklistID = checklistDao.getChecklistID(checklistVO);
@@ -147,7 +147,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 						checklistItems = checklist_itemDao.getItemsC(checklistID);
 						
 						for(int j = 0; checklistItems.size() > j; j++) {
-							if(checklistItems.get(j).equals(name)) {
+							if(checklistItems.get(j).equals(name[1])) {
 								ItemVo itemVO = new ItemVo(checklistItems.get(j));
 								itemVO.setItemID(itemDao.getItemID(itemVO));
 								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
@@ -155,7 +155,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 							}
 						}
 					} else {
-						name = view.boxes.get(i).getText();
+						name = view.boxes.get(i).getText().split("x ");
 						checklistName = (String) view.comboBoxChecklist.getSelectedItem();
 						ChecklistVo checklistVO = new ChecklistVo(checklistName, daofactory.getCurrent_user_name());
 						checklistID = checklistDao.getChecklistID(checklistVO);
@@ -163,7 +163,7 @@ public class UseChecklistController implements ActionListener, MouseListener {
 						checklistItems = checklist_itemDao.getItemsC(checklistID);
 
 						for(int j = 0; checklistItems.size() > j; j++) {
-							if(checklistItems.get(j).equals(name)) {
+							if(checklistItems.get(j).equals(name[1])) {
 								ItemVo itemVO = new ItemVo(checklistItems.get(j));
 								itemVO.setItemID(itemDao.getItemID(itemVO));
 								Checklist_itemVo finalItem = new Checklist_itemVo(checklistID, itemVO.getItemID());
